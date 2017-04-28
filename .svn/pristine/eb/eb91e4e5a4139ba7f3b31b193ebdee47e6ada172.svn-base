@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>名企详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+          html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+    	 .item-list{
+            height: 60px;
+            background-color: #FFFFFF;
+            padding: 0 1rem;
+            border-bottom: 1px #f1f2f3 solid;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+   		.item-list:first-child{
+   			margin-top: 10px;
+   		}
+        .leftIcon{
+            width: 25px;
+            margin-top: 10px;
+            float: left;
+            margin-right: 0.5rem;
+        }
+        .nextIcon{width:20px;}
+        .leftMsg{    
+        	display: inline-block;
+            height: 3rem;
+            vertical-align: middle;
+            line-height: 3rem;
+            color: #3d3d3d;
+            }
+		.header{
+			height:95px;
+			display: flex;
+			align-items: center;
+			background-color: #FFFFFF;
+			border-bottom: 1px #f1f2f3 solid;
+			}
+			.photo_head{
+				width: 60px;
+				height: 60px;
+				border-radius: 100px;
+				margin-left: 4%;
+			}
+			#com_name{
+				margin-left: 5%;
+			}
+			.item{
+                height: 60px;
+                background-color: #FFFFFF;
+                margin-top: 10px;
+                color: #41c136;
+                display: flex;
+                align-items: center;
+                justify-content:center;
+                display: -webkit-flex;
+                -webkit-align-items: center;
+                -webkit-justify-content: center;
+
+			}
+    </style>
+</head>
+<body>
+	<div class="header">
+			<img class="photo_head" src="../icon/images.png"/>	
+			<span id="com_name">
+				<!-- 常德万科房地产公司 -->
+			</span>
+	</div>
+<div class="item-list">
+        <span class="leftMsg">官方认证</span>
+       		<img class="nextIcon"  src="../icon/icon_right_normal.png">
+    </div>
+    <div class="item-list" onclick="openAllSpecia()">
+        <span class="leftMsg">查看所有专场</span>
+       		<img class="nextIcon"  src="../icon/icon_right_normal.png">
+    </div>
+    <div class="item-list" onclick="openAllAuction()">
+        <span class="leftMsg">查看所有拍品</span>
+       		<img class="nextIcon"  src="../icon/icon_right_normal.png">	
+    </div>
+    <div id="main"></div>
+</body>
+    <script type="text/html" id="scriptDiv">
+        <%if(list.follow == false){%>
+        <div class="item" onclick="follow()">
+            关注
+        </div>
+        <%}else{%>
+        <div class="item" onclick="unFollow()">
+            取消关注
+        </div>
+        <%}%>
+
+    </script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<scri   pt type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+apiready = function(){
+    //corporate 企业信息
+    corporate = api.pageParam;
+    document.getElementById('com_name').innerHTML = corporate.enterpriseName;
+    // alert(JSON.stringify(corporate))
+    ajaxGetWithProgress(enterPriseUrl,{eid:corporate.eid},function(ret,err){
+        if(isNotBlack(ret)){
+            alert(JSON.stringify(ret))
+            var data = {list: ret};
+            var html = template('scriptDiv', data);
+            document.getElementById('main').innerHTML = html;
+        }else{
+            alert(1)
+        }
+    
+    })
+    
+}
+//关注
+function follow(){
+    ajaxGetWithProgress(followUrl,{eid:corporate.eid},function(ret,err){
+        if(isNotBlack(ret)){
+            toast('关注成功');
+            reloadHtml();
+        }
+    })
+}
+//取消关注
+function unFollow(){
+    ajaxGetWithProgress(unFollowUrl,{eid:corporate.eid},function(ret,err){
+        if(isNotBlack(ret)){
+            toast('已取消关注')
+            reloadHtml();
+        }
+    })
+}
+function openAllSpecia (){
+    openNewWindow('all_session','all_session.html',corporate)
+}
+function openAllAuction (){
+    openNewWindow('all_auction','all_auction.html',corporate)
+}
+</script>
+</html>

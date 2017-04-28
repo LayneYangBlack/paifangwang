@@ -1,0 +1,66 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分享</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <style>
+        body{font-family: '微软雅黑'}
+        .all{width:100%;height:auto;background: #fff;}
+        .all-center{width:90%;height:100%;margin: 0 auto;}
+        .dyamicUl{width:100%;height:auto;}
+        .dyamicUl li{width:100%;height:auto;padding:10px 0;border-bottom: 1px solid #f8f8f8;}
+        .dt-int{font-size: 11px; color: #83868f;margin-bottom: 12px;}
+        .dyamicUl h1{font-size: 14px;color: #3c3f46;line-height: 22px;max-height: 44px;font-weight: bold;overflow: hidden;}
+        .dtCon>p{font-size: 12px;line-height: 23px;color: #565c67;max-height: 46px; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;word-wrap: break-word;}
+    </style>
+</head>
+<body>
+<div class="all">
+    <div class="all-center">
+        <ul class="dyamicUl" id="dyamicList">
+            <!--<li>-->
+                <!--<p class="dt-int">2017-01-12</p>-->
+                <!--<h1>富力红树湾1月14日加推A02区郁林郡</h1>-->
+                <!--<div class="dtCon">-->
+                    <!--<p>富力红树湾1月14日加推A02区郁林郡7#楼71—106㎡2—3居，享成交特惠折扣。</p>-->
+                <!--</div>-->
+            <!--</li>-->
+        </ul>
+    </div>
+</div>
+<script type="text/html" id="scriptDiv">
+        <% for(var i =0; i < list.length; i++){%>
+        <li>
+            <p class="dt-int"><%=list[i].time%></p>
+            <h1><%=list[i].title%></h1>
+            <div class="dtCon">
+                <p><%=list[i].content%></p>
+            </div>
+        </li>
+
+        <%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript">
+    var userInfo = null;
+    apiready = function () {
+        userInfo = getUserInfo();
+        var data = {list:api.pageParam};
+        var html = template('scriptDiv', data);
+        document.getElementById('dyamicList').innerHTML = html;
+    };
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>直播详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/mui.css" />
+    <style type="text/css">
+    	#live{width: 100%;height: 220px;}
+    	.tabList{position: relative;}
+    	 #move{
+	    	width: 27.67%;height: 2px;
+	    	background: #39bc30;position: absolute;
+	    	bottom: 0;left: 3.5%;
+	    	border-radius: 2px;
+	    }
+	    	#live_list{
+	    	overflow: hidden;
+	    	border: 1px solid #efefef;
+	    	background: #fff;
+	    }
+	    #live_list li{
+	    	height: 38px;
+	    	width:33%;
+	    	float: left;
+	    	text-align: center;
+	    	line-height: 38px;
+	    	font-size: 16px;
+	    	color: #565656;
+	    }
+	     #box_bottom{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    	z-index: 999;
+    }
+    #input_box{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    }
+    .input{width:200px;padding-left:10px;height: 35px;background-color: #fff;font-size: 14px;outline:none;border:none;}
+    .img_span{width: 35px;height: 35px;background-color: #fff;display: flex;align-items: center;justify-content: center;}
+   	 #bg_1{
+            display: block;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+            display: none;
+        }
+        #show_1{
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            height: 200px;
+            z-index: 1002;
+            overflow: auto;
+            display: none;
+            background-color: #FFF;
+        }
+        .button_cancel{
+            width: 50%;
+            background-color: #f1f2f3;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 43px;
+            font-size: 16px;
+            float: left;
+            position: absolute;
+            bottom: 0;
+        }
+        .button_firm{
+            width: 50%;
+            background-color: #80CD82;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 43px;
+            font-size: 16px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            color: #FFFFFF;
+        }
+        #live video {width:100%;height:100%;display: none;}
+        #liveImg{display: block;width:100%;height:100%;}
+    </style>
+</head>
+<body>
+
+<div id="main">
+	<div id="live" >
+			<video id="liveVideo"  controls="controls"></video>
+			<img id="liveImg" src="" alt="">
+	</div>
+	<div class="tabList">
+		<ul id="live_list">
+						<li style="color: #39bc30;" onclick="switchFrameGroupIndex(0)">拍卖信息</li>
+						<li onclick="switchFrameGroupIndex(1)">出价记录</li>
+						<li onclick="switchFrameGroupIndex(2)">在线聊天</li>
+		</ul>
+		<div id="move"></div>
+	</div>
+	<div id="input_box" style="display: none;">
+		<span class="img_span" onclick="priceShow()">
+				<img style="width:20px;height: 20px;" src="../icon/Shape.png"/>
+			</span>	
+			<input class="input" type="text" placeholder="我也说一句..." />
+			<button style="color: #39BD2F;font-weight: bold;height: 35px;" id="" class="mui-btn" style="padding: 7px 12px;">发送</button>
+	</div>
+	<div id="box_bottom" >
+		<span class="img_span" onclick="talkShow()">
+			<img style="width:20px;height: 20px;" src="../icon/forum.png"/>
+		</span>			
+		<div class="mui-numbox" >
+				<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+				<input style="color: #39BD2F; font-weight: bold;background-color: #fff;" id="box" class="mui-input-numbox" type="number" />
+				<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+		</div>
+				<button style="color: #39BD2F;font-weight: bold;height: 35px;" id="btn" onclick="confirm()" class="mui-btn" style="padding: 7px 12px;">出价</button>
+	</div>
+</div>
+</body>
+<script src="../script/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script src="../script/mui.min.js"></script>
+<script>
+		  var window_width;
+		  var sentJson;
+		    apiready = function(){
+		        window_width = api.winWidth;
+		        var result = api.pageParam;
+		        var user = api.pageParam.user;
+		        // alert(JSON.stringify(api.pageParam))
+		        ajaxGetWithProgress(liveVideoUrl,{hid:result.hid},function(ret,err){
+		            if(isNotBlack(ret)){
+		            	sentJson = ret;
+		            	alert(JSON.stringify(ret))
+						document.getElementById('liveVideo').src = ret.liveStreamPlayUrl;
+						document.getElementById('liveImg').src = ret.liveStreamCover;
+		            }else{
+		                alert(1)
+		            }
+		        });
+		        api.openFrameGroup ({
+		            name: 'unitRoomGroup',
+		            background:'#fff',
+		            scrollEnabled:true,
+		            rect : {
+		                x : 0,
+		                y : 304,
+		                w : 'auto',
+		                h : api.winHeight - 317-44
+		            },
+		            index:0,
+		            frames: [{
+		                name: 'roolist',
+		                url: 'liveDetail_auctionMsg.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:sentJson
+		            },{
+		            	 name: 'roolist',
+		                url: 'liveDetail_priceMsg.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:sentJson
+		            },{
+		                 name: 'roolist',
+		                url: 'liveDetail_talkMsg.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:sentJson
+		            }
+		            ]
+		        }, function(ret, err){
+		            switchFrameCallback(ret.index);
+		        });
+		        
+		        
+		    };
+		    document.getElementById('live').onclick=function(){
+		    	document.getElementById('liveVideo').style.display = "block";
+		    	document.getElementById('liveVideo').play();
+		    	document.getElementById('liveImg').style.display = "none";
+		    }
+		    function switchFrameGroupIndex(index){
+		        _index=index;
+			        api.setFrameGroupIndex({
+		            name : "unitRoomGroup",
+		            index : index,
+		            scroll : true
+		        });
+		    }
+		    function switchFrameCallback(index){
+		        var width = (window_width / 3) * index;
+		        var lis=document.querySelector("#live_list").querySelectorAll("li");
+		        $api.css(document.getElementById("move"), "-webkit-transform:translate(" + width + "px,0)");
+		        for(var i=0;i<lis.length;i++){
+		            if(i==index){
+		            	lis[i].style.color="#39bc30";
+		                
+		            }else{
+		                lis[i].style.color="#000";
+		            }
+		        }
+		    }
+		   	
+			var talkIput = document.getElementById('input_box');
+			var priceBox = document.getElementById('box_bottom');
+ 			function talkShow(){
+				talkIput.style.display = "flex";
+				priceBox.style.display = "none";
+			}
+ 			function priceShow(){
+ 				talkIput.style.display = "none";
+				priceBox.style.display = "flex";
+ 			}
+ 			//弹出框
+ 			var price =document.getElementById('box').value;
+ 			function confirm(){
+ 				api.confirm({
+				    title: '',
+				    msg: '确定出价吗?',
+				    buttons: ['确定', '取消']
+				}, function(ret, err) {
+				    var index = ret.buttonIndex;
+				});
+ 			}
+</script>
+</html>

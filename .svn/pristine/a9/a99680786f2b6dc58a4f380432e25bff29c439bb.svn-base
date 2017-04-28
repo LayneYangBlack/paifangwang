@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <style>
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+        .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+        .anchor_listTitle{
+            width: 100%;
+            height:40px;
+            line-height: 40px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px #ECECEC solid;
+        }
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 87px;
+
+        }
+        .content_title li{
+            width: 33%;
+            height:100%;
+            text-align: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            margin-top: 10px;
+            background-color: #FFFFFF;
+            width: 100%;
+            /*height: 87px;*/
+        }
+        .item_first{
+            font-size: 16px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+        .item_list{
+            width: 100%;
+            height: 40px;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width: 33%;
+            height: 40px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+        .no2_item{
+            width: 100%;
+            /*height: 137px;*/
+            margin-top: 10px;
+            background-color: #FFFFFF;
+        }
+        .no3_item{
+            width: 100%;
+            /*height: 87px;*/
+            margin-top: 10px;
+            background-color: #FFFFFF;
+        }
+        .item_list2{
+            width: 100%;
+            height: 82px;
+        }
+        .item_list2 li{
+            width: 33%;
+            height: 40px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .item_list3{
+            width: 100%;
+            height: 40px;
+        }
+        .item_list3 li{
+            width: 49.6%;
+            height: 40px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .item_list3 li:last-child{
+            border-right: none;
+        }
+        #nav{
+            width: 100%;
+            height: 50px;
+            background-color:#FCFCFC;
+            position: fixed;
+            bottom: 0;
+        }
+        .nav_bottom{
+            width: 100%;
+            height: 50px;
+        }
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .container{
+            overflow: hidden;
+            width: 80%;
+            height: 100%;
+            position: absolute;
+            float: right;
+            left: 25%;
+            top: 0px;
+
+        }
+        .container li{height: 40px;line-height: 40px;font-size: 14px;}
+        .leftTitle{float: left;width: 20%;height: 20px;line-height: 20px;border-right:1px solid #000;margin-top:10px;}
+    </style>
+</head>
+<body>
+<div id="slider" class="mui-slider" >
+    <div class="mui-slider-group mui-slider-loop">
+        <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+        <!-- 第一张 -->
+        <div class="mui-slider-item">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+        <!-- 第二张 -->
+        <div class="mui-slider-item">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+        <!-- 第三张 -->
+        <div class="mui-slider-item">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+        <!-- 第四张 -->
+        <div class="mui-slider-item">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+        <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#">
+                <img src="../image/banner.jpg">
+            </a>
+        </div>
+    </div>
+    <div class="mui-slider-indicator">
+        <div class="mui-indicator mui-active"></div>
+        <div class="mui-indicator"></div>
+        <div class="mui-indicator"></div>
+        <div class="mui-indicator"></div>
+    </div>
+</div>
+<!--轮播结束-->
+<div class="anchor_list">
+    <div class="anchor_listTitle">
+        <span class="leftTitle"><span style="color: red;margin:0 20px;">公告</span></span>
+
+        <ul class="container" id="main">
+
+        </ul>
+    </div>
+    <ul class="content_title">
+        <li onclick="openAuction()">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/fapai.png" alt=""><br>
+            拍卖
+        </li>
+        <li onclick="openNewWindow('onePrice','./onePrice.html')">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/yikoujia.png" alt=""><br>
+            一口价
+        </li>
+        <li onclick="openLive()">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/zhibo.png" alt=""><br>
+            直播
+        </li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first"style="text-indent: 16px;">
+			拍卖 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="houseDetail()">法拍房</li>
+        <li onclick="houseDetail()">投资房</li>
+        <li onclick="famousHouse()">名企房</li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first" >
+			一口价 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="openNewWindow('user_auctioning','./user_auctioning.html')">看房期</li>
+        <li onclick="openNewWindow('user_auctioned','./user_auctioned.html')">进行中</li> 
+        <li onclick="openNewWindow('user_auctionOver','./user_auctionOver.html')">已结束</li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first" style="text-indent: 16px;">
+			直播 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="openWeekendLive()">直播间</li>
+        <li onclick="openLawAuctionLive()">法拍现场</li>
+        <li onclick="openEnterpriseHouseLive()">名企专场</li>
+
+    </ul>
+</div>
+<div class="no2_item">
+	<span class="item_first" style="text-indent: 16px;">
+			服务
+		</span>
+    <ul class="item_list2">
+        <li>贷款</li>
+        <li>过户</li>
+        <li>评估</li>
+        <li>保险</li>
+        <li></li>
+        <li></li>
+
+    </ul>
+</div>
+<div class="no3_item">
+	<span class="item_first">
+			委托与合作
+		</span>
+    <ul class="item_list3">
+        <li onclick="openCooperat()">我要合作</li>
+        <li onclick = 'openAuthorize()'>我要委托</li>
+    </ul>
+</div>
+<div class="no3_item" style="margin-bottom: 80px">
+	<span class="item_first">
+			定制房
+		</span>
+    <ul class="item_list3">
+        <li>项目</li><li>我的需要</li>
+
+    </ul>
+</div>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script src="../script/jquery-1.8.2.min.js"></script>
+<script type="text/html" id="scriptDiv">
+    <%for(var i = 0;i < list.length;i++){%>
+            <li><%=list[i].title%></li>
+    <%}%>
+    <li><%=list[0].title%></li>
+</script>
+<script type="text/javascript">
+    var cityData = {};
+    apiready = function(){
+        var cityList =$api.getStorage("cityTypes");
+        var cityName = $api.getStorage("cityName");
+
+        if(cityName.type ==1){
+            for(var i=0;i<cityList.citys.length;i++){
+                if(cityList.citys[i].city ==cityName.city.replace('市','')){
+                    cityData.id =(cityList.citys[i].id);
+                    cityData.city =cityName.city.replace('市','');
+
+                }
+            }
+        }else if(cityName.type ==2){
+            cityData.id = cityName.cityInfo.id;
+            cityData.city =cityName.cityInfo.city;
+        }
+        ajaxGet(advertUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret){
+             //   alert(JSON.stringify(ret));
+                var data ={list:ret};
+                var html = template("scriptDiv",data);
+                document.getElementById('main').innerHTML =html;
+            }else{
+                alert(JSON.stringify(err));
+            }
+        });
+        //广告
+        ajaxGet(announcementUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret){
+                //alert(JSON.stringify(ret)+111);
+            }
+        })
+
+
+
+    }
+
+    //******************公告轮播**************
+    var index = 0;
+    var len = $(".container>li").length;
+    setInterval(function(){
+
+        if(index ==len){
+            index =1;
+            $(".container").css("top",0);
+        }
+        interval(index)
+        index++;
+    },3000);
+    function interval(index){
+        var adHeight = $(".container>li").height();
+        $(".container").animate({
+            top:-adHeight*index+'px'
+        });
+
+    }
+
+    mui.init({
+//				swipeBack:true //启用右滑关闭功能
+    });
+    var slider = mui("#slider");
+    slider.slider({
+        interval:2000
+    });
+function openAuthorize(){
+    openNewWindow('authorize','./authorize.html')
+}
+function openCooperat(){
+    openNewWindow('cooperation','./cooperation.html')
+}
+function openAuction(){
+	api.execScript({
+		name:rootWindowName,
+		script:"openTab('auction')"
+	});
+}
+function openLive(){
+	api.execScript({
+		name:rootWindowName,
+		script:"openTab('live')"
+	});
+}
+    function houseDetail(){
+        openNewWindow("houseDetail","./houseDetail.html",{});
+    }
+    function lawAuction(){
+        openNewWindow("lawAuction","./lawAuction.html",{});
+    }
+    function famousHouse(){
+        openNewWindow('famousHouse','famousHouse.html',{});
+    }
+    function openWeekendLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveWeekendUrl;
+        liveListJson.videoLiveListUrl =liveWeekendBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveWeekendLoadUrl;
+        liveListJson.bidUrl =liveWeekendBidUrl;
+        liveListJson.bidPagerUrl =liveWeekendBidPager;
+        liveListJson.submitEnsureGoldUrl =liveWeekendSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    function openLawAuctionLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveVideoLawAuctionHouseUrl;
+        liveListJson.videoLiveListUrl =liveVideoBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveVideoUrl;
+        liveListJson.bidUrl =liveBidUrl;
+        liveListJson.bidPagerUrl =liveBidPager;
+        liveListJson.submitEnsureGoldUrl =liveSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    function openEnterpriseHouseLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveEnterpriseHouseUrl;
+        liveListJson.videoLiveListUrl =liveEnterpriseHouseBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveEnterpriseHouseLoadUrl;
+        liveListJson.bidUrl =liveEnterpriseHouseBidUrl;
+        liveListJson.bidPagerUrl =liveEnterpriseHouseBidPager;
+        liveListJson.submitEnsureGoldUrl =liveEnterpriseHouseSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    //保险
+    function openSafe(){
+        openNewWindow('safe','safe.html');
+    }
+</script>
+</body>
+</html>

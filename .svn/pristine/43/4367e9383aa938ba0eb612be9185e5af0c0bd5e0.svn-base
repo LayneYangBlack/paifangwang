@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>拍房网</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/commonWindow.css" />
+    <style>
+        html, body {
+            height: 100%
+        }
+        body {
+            background-color: #F4F5F5;
+            font-size: 14px;
+        }
+        /**页面高度**/
+        #wrap {
+            height: 100%;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-flex-flow: column;
+            flex-flow: column;
+        }
+
+        /**页面高度铺满**/
+        #main {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        /**========头部标签（开始）=====**/
+        #header{
+            width: 100%;
+            height:48px;
+            background-color: #39bc30;
+            color: #FFFFFF;
+            font-size: 18px;
+        }
+        #city_add{
+            text-align: center;
+            display: block;
+            font-size: 16px;
+            overflow: hidden;
+            float: left;;
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            width: 70%;
+        }
+        #input{
+            background-color: #FFFFFF;
+            width: 54%;
+            height:24px ;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .input_search{
+            border: none ;
+            width: 80% ;
+            font-size: 12px ;
+            outline: none;
+            line-height: 24px;
+        }
+        .city{
+            width: 25%;float: left;position: relative;height: 48px;line-height: 48px;
+        }
+        #header .header {
+            display: none;
+            position: relative;
+            text-align: center;
+            line-height: 48px;
+        }
+        .header1{
+            display: inline-block;
+            margin: 0 auto;
+        }
+        #header .active {
+            display:flex;
+            align-items: center;
+            -webkit-align-items: center;
+        }
+        /**========头部标签（结束）=====**/
+
+        /**========底部菜单（开始）=====**/
+        #nav {
+            background-color: rgb(248,248,248);
+            /*border-top: 1px solid #DADDE0;*/
+            width: 100%;
+            text-align: center;
+            position: relative;
+            font-size: 10px;
+            height:50px;
+        }
+
+        #nav ul {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+        }
+        #nav ul li {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        #nav li a {
+            -webkit-background-size:30px 30px !important;
+            background-size: 30px 30px !important;
+            color: #707070;
+            display: block;
+            padding-top: 34px;
+            line-height: 14px;
+            font-size: 12px;
+        }
+
+        #nav li.active a, #nav a.active {
+            color: #08BA06;
+        }
+        /*.header{text-align: center;}*/
+        /**========底部菜单（结束）=====**/
+   /**========底部菜单各个按钮详细的菜单图片样式（开始）=====**/
+
+        #nav .home {
+            background: url("./icon/home-1.png") no-repeat center 5px;
+        }
+
+        #nav .home.active, #nav li.active .home {
+            background: url("./icon/home.png") no-repeat center 5px;
+        }
+
+        #nav .auction {
+            background: url(./icon/paimai-1.png) no-repeat center 5px;
+        }
+
+        #nav .auction.active, #nav li.active .auction {
+            background: url(./icon/paimai.png) no-repeat center 5px;
+        }
+        #nav .live {
+            background: url(./icon/live.png) no-repeat center 5px;
+        }
+
+        #nav .live.active, #nav li.active .live {
+            background: url(./icon/live-1.png) no-repeat center 5px;
+        }
+        #nav .msg {
+            background: url(./icon/msg-1.png) no-repeat center 5px;
+        }
+
+        #nav .msg.active, #nav li.active .msg {
+            background: url(./icon/msg.png) no-repeat center 5px;
+        }
+        #nav .user {
+            background: url(./icon/user-1.png) no-repeat center 5px;
+        }
+
+        #nav .user.active, #nav li.active .user {
+            background: url(./icon/user.png) no-repeat center 5px;
+        }
+
+        /**========底部菜单各个按钮详细的菜单图片样式（借宿）=====**/
+        #leftButton img{
+            width: 8px;
+            height: 14px;
+        }
+  </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="header">
+        <div class="home header" style="width: 100%;" >
+            <div class="city" onclick="selectCity()">
+			<span id="city_add">
+
+			</span>
+            <img src="./icon/Fill_243.png" style="width: 15%;" alt="" />
+            </div>
+            <div id="input" onclick="openSearch()">
+                <img src="icon/search_icon.png" style="width: 14px;margin-right: 3%;">
+                <input type="text" class="input_search" readonly="readonly" name="" id="" placeholder="请输入楼盘名称/区域等">
+            </div>
+            <img src="icon/share_icon.png" onclick="openShare()" alt="" style="width: 20px;position: absolute;right: 8%;top:15px;" >
+        </div>
+
+
+        <div class="auction header">
+            <span class="header1">拍卖</span>
+        </div>
+        <div class="live header">
+            <span class="header1">直播</span>
+        </div>
+        <div class="msg header">
+            <span class="header1">消息中心</span>
+        </div>
+        <div class="user header">
+           <img style="position: absolute; right:30px; width: 25px;top:10px;" onclick="openSet()"  src="icon/set.png" alt="" />
+        </div>
+		
+    </div>
+    <div id="main">
+
+    </div>
+    <div id="nav">
+        <ul>
+            <li>
+                <a class="home" tapmode="active" onclick="openTab('home')">首页</a>
+            </li>
+            <li>
+                <a class="auction" tapmode="active" onclick="openTab('auction')">拍卖</a>
+            </li>
+            <li>
+                <a class="live" tapmode="active" onclick="openTab('live')">直播</a>
+            </li>
+            <li>
+                <a class="msg" tapmode="active" onclick="openTab('msg')">消息</a>
+            </li>
+            <li>
+                <a class="user" tapmode="active" onclick="openTab('user')">我的</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/user.js"></script>
+<script type="text/javascript" src="./script/util.js"></script>
+<script type="text/javascript" src="./script/kv.js"></script>
+<script type="text/javascript" src="./script/apiCloud.js"></script>
+<script type="text/javascript" src="./script/public.js"></script>
+<script type="text/javascript" src="./script/template-native.js"></script>
+<script type="text/javascript" src="./script/data.js"></script>
+<script type="text/javascript" src="./script/init.js"></script>
+<script type="text/javascript" src="./script/message.js"></script>
+<script type="text/javascript" src="./script/chatBoxHelp.js"></script>
+<script>
+
+    var user;
+    var tabs;
+    var window_width;
+    var winHeadHeight;
+    apiready = function () {
+        setJpushListener();
+        api.setStatusBarStyle({
+            style:'light'
+        });
+
+        // var header = $api.dom('#header');
+        // // $api.fixStatusBar(header);
+        // header.style.display = 'block';
+        // winHeadHeight = header.offsetHeight;
+        var cityData = {};
+        systemInit(function(){
+            var cityName = $api.getStorage("cityInfo");
+            document.getElementById('city_add').innerHTML = cityName.city;
+            window_width = api.winWidth;
+            //配置tab选项卡 各个页面
+            tabs= {
+                home: {
+                    isGroup: false,
+                    frame: {
+                        name: 'home',
+                        url: './html/index_tab.html',
+                        pageParam: {},
+                        rect: {
+                            x: 0,
+                            y: 44,
+                            w: 'auto',
+                            h: api.winHeight - 44 - bottomHeight
+                        },
+                        bounces: false,
+                        opaque: false,
+                        //bgColor:'#EDEDED',
+                        bgColor: '#fff',
+                        allowEdit: true,
+                        vScrollBarEnabled: true,
+                        showProgress: false,
+                        hScrollBarEnabled: false,
+                        reload: false
+                    }
+                },
+                auction: {
+                    isGroup: false,
+                    frame: {
+                        name: 'auction',
+                        url: './html/auction_tab.html',
+                        pageParam:{} ,
+                        rect: {
+                            x: 0,
+                            y: 44,
+                            w: 'auto',
+                            h: api.winHeight - 44 - bottomHeight
+                        },
+                        bounces: false,
+                        opaque: false,
+                        //bgColor:'#EDEDED',
+                        bgColor: '#fff',
+                        allowEdit: true,
+                        vScrollBarEnabled: true,
+                        showProgress: false,
+                        hScrollBarEnabled: false,
+                        reload: false
+                    }
+                },
+                live: {
+                    isGroup: false,
+                    frame: {
+                        name: 'live',
+                        url: './html/live_tab.html',
+                        pageParam: {},
+                        rect: {
+                            x: 0,
+                            y: 44,
+                            w: 'auto',
+                            h: api.winHeight - 44 - bottomHeight
+                        },
+                        bounces: false,
+                        opaque: false,
+                        //bgColor:'#EDEDED',
+                        bgColor: '#fff',
+                        allowEdit: true,
+                        vScrollBarEnabled: true,
+                        showProgress: false,
+                        hScrollBarEnabled: false,
+                        reload: false
+                    }
+                },
+                msg: {
+                    isGroup: false,
+                    frame: {
+                        name: 'msg',
+                        url: './html/msg_tab.html',
+                        pageParam: {},
+                        rect: {
+                            x: 0,
+                            y: 44,
+                            w: 'auto',
+                            h: api.winHeight - 44 - bottomHeight
+                        },
+                        bounces: false,
+                        opaque: false,
+                        //bgColor:'#EDEDED',
+                        bgColor: '#fff',
+                        allowEdit: true,
+                        vScrollBarEnabled: true,
+                        showProgress: false,
+                        hScrollBarEnabled: false,
+                        reload: false
+                    }
+                },
+                user: {
+                    isGroup: false,
+                    frame: {
+                        name: 'user',
+                        url: './html/user_tab.html',
+                        pageParam: {},
+                        rect:{
+                            x: 0,
+                            y: 44,
+                            w: 'auto',
+                            h: api.winHeight - 44 - bottomHeight
+                        },
+                        bounces: false,
+                        opaque: false,
+                        bgColor: '#fff',
+                        allowEdit: true,
+                        vScrollBarEnabled: true,
+                        showProgress: false,
+                        hScrollBarEnabled: false,
+                        reload: true
+                    }
+                }
+            };
+            openTab('home');
+        });
+        
+        
+       // systemInit();
+        //添加安卓退出按钮事件
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            closeOnKeyBack();
+        });
+
+        if(getUserInfo() && getUserInfo().id>0){
+            initMessages();
+        }
+    };
+
+    //初始化长连接消息
+    function initMessages(){
+        user = getUserInfo();
+        initTotalUnreadNum(function(totalNum){
+            var message=new Message({});
+           // alert(JSON.stringify(message))
+            message.connect();
+        });
+
+    }
+
+
+    function setPageMessageNum(num){
+        $api.setStorage(Storage_chat_num,num);
+        var messageNumSpans=document.querySelectorAll(".messageNum");
+        for(var i=0;i<messageNumSpans.length;i++){
+            if(num<=0){
+                messageNumSpans[i].style.display='none';
+            }else{
+                messageNumSpans[i].style.display='block';
+            }
+        }
+
+//        api.execScript({
+//            frameName : 'user',
+//            script: 'setPageMessageNum(' + num + ');'
+//        });
+    }
+    function setCityInfo(city){
+        document.getElementById('city_add').innerHTML =city;
+    }
+    function openSearch(){
+        var search = {};
+        search.type = 0;
+        search.url = indexSearchUrl;
+        openNewWindow('search','./html/search.html',search,{},'./html/login/login.html')
+    }
+    var backButtonPress = 0;
+    function closeOnKeyBack() {
+        backButtonPress++;
+        if (backButtonPress > 1) {
+            closeApp();
+        } else {
+            api.toast({msg: '再按一次退出应用'});
+        }
+        setTimeout(function () {
+            backButtonPress = 0;
+        }, 1000);
+    }
+    function switchFrameGroupIndex(index){
+        api.setFrameGroupIndex({
+            name : "homeGroup",
+            index : index,
+            scroll : true
+        });
+    }
+    function removeRedPoint(){
+        document.getElementById('userNoticeDiv').style.display = 'none';
+        $api.setStorage('redPint',false)
+
+    }
+   function selectCity(){
+        var json = {};
+        json.type = 2;
+       openNewWindow("cityList","./html/cityList.html",json,{},'./html/login/login.html');
+//       openNewWindow('cityList','html/cityList.html',json)
+   }
+
+    function showCity(cit){
+        //选择城市
+        document.getElementById('city_add').innerHTML = cit;
+    }
+    //打开消息页
+    function openMsg(){
+        api.execScript({
+            name:rootWindowName,
+            script:"openTab('msg')"
+        })
+    }
+    //打开分享
+    function openShare(){
+		openFrame("share","./html/share.html",{},0,0);
+    }
+    //打开设置
+    function openSet(){
+        openNewWindow("set","./html/set.html");
+    }
+    function setJpushListener(){
+        var ajpush = api.require('ajpush');
+        //恢复推送；
+        ajpush.resumePush(function(ret) {
+            if(ret && ret.status){
+                //success
+            }
+        });
+        ajpush.setListener(
+            function(ret) {
+                var title  = ret.title || " ";
+                api.notification({
+                    notify: {
+                        title:'房直播消息'+title ,              //标题，默认值为应用名称，只Android有效
+                        content:ret.content,             //内容，默认值为'有新消息'
+                        extra:'',                //传递给通知的数据，在通知被点击后，该数据将通过监听函数回调给网页
+                        updateCurrent: false    //是否覆盖更新已有的通知，取值范围true|false。只Android有效
+                    }
+                }, function(ret, err) {
+
+                });
+            }
+        );
+
+    }
+</script>
+</html>

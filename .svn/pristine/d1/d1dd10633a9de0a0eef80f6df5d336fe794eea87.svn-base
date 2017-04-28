@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <style>
+        * {
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            -khtml-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color:transparent;
+        }
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+
+        .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #ececec;
+            
+        }
+
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 89px;
+
+        }
+        .content_title li{
+            height:100%;
+            width: 33%;
+            text-align: center;
+           
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            background-color: #FFFFFF;
+            width: 100%;
+
+        }
+        .item_first{
+            font-size: 16px;
+            height: 49px;
+            line-height: 49px;
+            padding-left: 20px;
+        }
+        .item_list{
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: -webkit-flex;
+            display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            align-items: center;
+            /*justify-content: center;*/
+            border-top: 1px solid #ECECEC;
+            float: left;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: -webkit-flex;
+            display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            padding-top: 30px;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-pack: center;
+            -moz-justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px;
+             margin-left: 5%;
+            float: left;
+            margin-top: 15px;
+        }
+        .right_msg{
+            float: right;
+            width: 50%;
+            height: 100px;
+            padding: 15px 0 ;
+        }
+        .msg_title{
+            width: 100%;
+            display:block;
+            height: auto;
+            line-height: 15px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+            margin-top: 5px
+            
+        }
+    </style>
+</head>
+<body>
+
+<div id="picList" style="height:197px;width:100%;overflow: hidden;"></div>
+<div class="anchor_list">
+
+    <ul class="content_title">
+        <li onclick="lawAuction()">
+            <img style="width: 50px;height: 50px;margin-top: 10px;" src="../icon/fapaiioc.png" alt=""><br>
+            <span style="margin-top:3px;display:block">法拍房</span>
+        </li>
+        <li onclick="houseDetail()">
+            <img style="width: 50px;height: 50px;margin-top: 10px;" src="../icon/touziioc.png" alt=""><br>
+            <span style="margin-top:3px;display:block">投资房</span>
+        </li>
+        <li onclick="famousHouse()">
+            <img style="width: 50px;height: 50px;margin-top: 10px;" src="../icon/mingqi.png" alt=""><br>
+            <span style="margin-top:3px;display:block">名企房</span>
+        </li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first">
+			热力房源推荐
+		</span>
+    <div id="main">
+        <!--<ul class="item_list">-->
+            <!--<li>-->
+                <!--<img class="left_img" src="../icon/images.png" alt="">-->
+                <!--<div class="right_msg">-->
+                <!--<span class="msg_title">-->
+                        <!--6月30日 幸福里2栋1单元-->
+                <!--</span>-->
+               <!--<span class="price">-->
+                    <!--起拍价 <span class="price_num">121</span>万-->
+               <!--</span>-->
+               <!--<span class="msg_gray">-->
+                   <!--出价:  <span >1</span>-->
+               <!--</span>-->
+               <!--<span class="msg_gray">-->
+                   <!--预计<span id="">6月30日</span>结束-->
+               <!--</span>-->
+                <!--</div>-->
+            <!--</li>-->
+        <!--</ul>-->
+
+        <!-- <ul class="item_list">
+            <li>
+                <img class="left_img" src="../icon/images.png" alt="">
+                <div class="right_msg">
+                <span class="msg_title">
+                        6月30日 幸福里2栋1单元
+                </span>
+               <span class="price">
+                    起拍价 <span class="price_num">121</span>万
+               </span>
+               <span class="msg_gray">
+                   出价:  <span >1</span>
+               </span>
+               <span class="msg_gray">
+                   预计<span id="">6月30日</span>结束
+               </span>
+
+                </div>
+            </li>
+        </ul> -->
+
+    </div>
+
+</div>
+<script id="scriptDivPic" type="text/html">
+    <div id="slider" class="mui-slider" style="height:197px">
+        <div class="mui-slider-group mui-slider-loop">
+             <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[list.length-1].redirect%>" style="height:197px;">
+                    <img style="<%=list[list.length-1].style%>" src="<%=list[list.length-1].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[list.length-1].desc%></p>
+                </a>
+            </div>
+            <%for(var i = 0;i < list.length; i++){%>
+                <div class="mui-slider-item">
+                    <a href="" onclick="openWeb('<%=list[i].redirect%>')" style="height:197px;">
+                        <img style="<%=list[i].style%>" src="<%=list[i].picture%>">
+                        <p style="color:#fff"  class="mui-slider-title"><%=list[i].desc%></p>
+                    </a>
+                </div>
+            <%}%>
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[0].redirect%>"  style="height:197px;">
+                    <img style="<%=list[0].style%>" src="<%=list[0].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[0].desc%></p>
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator mui-text-right" style="right:20px">
+            <div class="mui-indicator mui-active"></div>
+            <%for(var i = 0;i < list.length-1; i++){%>
+            <div class="mui-indicator"></div>
+            <%}%>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+
+<script type="text/html" id="scriptDiv">
+    <%for(var i = 0; i< list.length; i++){%>
+    <ul class="item_list" onclick="openDetail('<%=list[i].hid%>')">
+        <li style="border-bottom:1px solid #ececec">
+            <img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].cover%>" alt="">
+            <div class="right_msg">
+				<span class="msg_title">
+					<%=list[i].name%>
+				</span>
+			   	<span class="price">
+					起拍价 ￥<span class="price_num"><%=list[i].reservePrice%></span>
+			   	</span>
+			   	<span class="msg_gray">
+				   出价:￥
+					<%if(list[i].currentPrice == 0){%>
+				   <span ><%=list[i].reservePrice%></span>
+				   <%} else {%>
+				   <span ><%=list[i].currentPrice%></span>
+				   <%}%>
+			   	</span>
+			   	<span class="msg_gray">
+				   预计<span ><%=list[i].endTime%></span>结束
+			   	</span>
+            </div>
+        </li>
+    </ul>
+    <%}%>
+</script>
+<script type="text/javascript">
+    var flag = true;
+    var cityData = {};
+    var results ={};
+apiready =function(){
+    var cityList =$api.getStorage("cityTypes");
+    var cityName = $api.getStorage("cityInfo");
+
+    if(cityName.type ==1){
+        for(var i=0;i<cityList.citys.length;i++){
+            if(cityList.citys[i].city ==cityName.city.replace('市','')){
+                cityData.id =(cityList.citys[i].id);
+                cityData.city =cityName.city.replace('市','');
+            }
+        }
+    }else if(cityName.type ==2){
+        cityData.id = cityName.cityInfo.id;
+        cityData.city =cityName.cityInfo.city;
+    }
+    api.setRefreshHeaderInfo({
+        visible: true,
+        bgColor: 'rgba(0,0,0,0)',
+        textColor: '#666',
+        textDown: '下拉刷新...',
+        textUp: '松开刷新...'
+    },function(ret,err){
+        ajaxGetWithProgress(hotHouselist,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret){
+                // alert(JSON.stringify(ret))
+                for(var i=0;i<ret.data.length;i++){
+                    ret.data[i].endTime = formatTimeToDay(ret.data[i].endTime);
+                    results[ret.data[i].hid]=ret.data[i];
+                }
+                var data = {list:ret.data};
+                var html = template('scriptDiv', data);
+                document.getElementById('main').innerHTML = html;
+            }
+        })
+        ajaxGet(advertUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret&&ret.length>0){
+                for(var i=0;i<ret.length;i++){
+                    var picList = ret[i].picture;
+                    var width = api.winWidth;
+                    var height = 197;
+                    var obj = getImgSizeBySize(picList,width,height);
+                    ret[i].style = obj.style;
+                    // alert(JSON.stringify(ret[i].style));
+
+                }
+                var data ={list:ret};
+                var html = template("scriptDivPic",data);
+                document.getElementById('picList').innerHTML =html;
+
+            }else {
+                document.getElementById('picList').innerHTML ="";
+            }
+            if(flag == true){
+                var body = document.getElementsByTagName('body')[0];
+                var scr = document.createElement('script');//创建一个script节点
+                scr.setAttribute('src','../script/mui.min.js'); //给script节点添加路径
+                body.appendChild(scr);
+                flag = false;
+            }else{
+
+            }
+            mui.init({
+                swipeBack:true //启用右滑关闭功能
+            });
+            var slider = mui("#slider");
+            slider.slider({
+                interval: 3000
+            });
+        })
+        api.refreshHeaderLoadDone();
+    });
+    api.refreshHeaderLoading();
+}
+
+    //打开广告页
+    function openWeb(src){
+        var browser = api.require('webBrowser');
+        browser.open({
+            titleBar:{
+                bg:'#39bc30',
+                textColor:'#fff'
+            },
+            url: src
+        });
+    }
+    /**************打开详情页************/
+    function openDetail(Hid){
+        if(results[Hid].type ==1){
+            var jJson = {};
+            jJson.id = Hid;
+            jJson.url = lawAuctionDetailUrl;
+            jJson.submit = submitEnsureGoldUrl;
+            jJson.ensureGoldLoadUrl = ensureGoldLoadUrl;
+            jJson.bidurl = lawAuctionHouseUrl;
+            jJson.bidPagerUrl = lawAuctionHouseBidPager;
+            jJson.startAlarmUrl = startAlarmUrl;
+            jJson.cancelStartAlarmUrl =cancelStartAlarmUrl;
+            jJson.endAlarmUrl = endAlarmUrl;
+            jJson.cancelEndAlarmUrl = cancelEndAlarmUrl;
+            openNewWindow('auction_detail','auction_detail.html',jJson);
+        }else if(results[Hid].type ==2){
+            var jJson = {};
+            jJson.id = Hid;
+            jJson.url = investmentDetailUrl;
+            jJson.submit = investmentEnsureGoldUrl;
+            jJson.ensureGoldLoadUrl = investmentensureGoldLoadUrl;
+            jJson.bidurl = investmentHouseBidUrl;
+            jJson.bidPagerUrl = investmentHouseHouseBidPager;
+            jJson.startAlarmUrl = investmentHouseStartAlarmUrl;
+            jJson.cancelStartAlarmUrl =investmentHouseCancelStartAlarmUrl;
+            jJson.endAlarmUrl = investmentHouseEndAlarmUrl;
+            jJson.cancelEndAlarmUrl = investmentHouseCancelEndAlarmUrl;
+            openNewWindow('auction_detail','auction_detail.html',jJson)
+        }else if(results[Hid].type ==3){
+            var jJson ={};
+            jJson.id = Hid;
+            jJson.url = enterpriseHouseLoadUrl;
+            openNewWindow('e_room_detail','e_room_detail.html',jJson)
+        }
+
+    }
+	function houseDetail(){
+		openNewWindow("houseDetail","./houseDetail.html",{});
+	}
+	function lawAuction(){
+		openNewWindow("lawAuction","./lawAuction.html",{});
+	}
+    function famousHouse(){
+        openNewWindow('famousHouse','famousHouse.html',{});
+    }
+</script>
+</body>
+</html>

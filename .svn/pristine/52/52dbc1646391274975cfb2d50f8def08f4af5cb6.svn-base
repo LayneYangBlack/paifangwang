@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <style>
+        * {
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            -khtml-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color:transparent;
+        }
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+
+        .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;  
+            border-top: 1px solid #ececec
+        }
+
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 80px;
+        }
+        .content_title li{
+            width: 33%;
+            height: 100%;
+            text-align: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            margin-top: 10px;
+            background-color: #FFFFFF;
+            width: 100%;
+
+        }
+        .item_first{
+            font-size: 16px;
+            height: 49px;
+            display: flex;
+            align-items: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            padding-left: 20px;
+        }
+        .item_list{
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            height:130px;
+            background-color: #FFFFFF;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            /*justify-content: center;*/
+            border-top: 1px solid #ECECEC;
+            float: left;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            -webkit-justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            -webkit-justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+            display: -webkit-flex;
+            -webkit-justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            height: 36px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 13px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+        }
+        .user_header{
+        	height: 80px;
+        	 display: flex;
+            align-items: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            padding: 0 1rem;
+        	background-color: #fff;
+        }
+        #photo_head{
+        	width: 60px;
+        	margin-right: 10px;
+        }
+         .item-list{
+            height: 4rem;
+            background-color: #FFFFFF;
+            padding: 0 1rem;
+            border-bottom: 1px #f1f2f3 solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+            -webkit-justify-content: space-between;
+            /*-webkit-align-items: center;*/
+        }
+   		.item-list:first-child{
+   			margin-top: 10px;
+   		}
+        .leftIcon{
+            width: 25px;
+            margin-top: 10px;
+            float: left;
+            margin-right: 0.5rem;
+        }
+        .nextIcon{width:20px;}
+        .leftMsg{    
+        	display: inline-block;
+            height: 3rem;
+            vertical-align: middle;
+            line-height: 3rem;
+            color: #3d3d3d;
+            }
+
+    </style>
+</head>
+<body>
+<div style="width:100%;height:80px;border-top:0.5px solid #fff">
+<div class="user_header" onclick="openNewWindow('personDeatail','./personDeatail.html')">
+	<img  id="photo_head" src="../image/look.png"/>
+    <span id="user_nick">
+        <span id="name">未填写</span><br>
+        ID:<span id="user_id" ></span>
+    </span>
+</div>
+</div>
+<div class="anchor_list">
+    <ul class="content_title">
+        <li onclick="openNewWindow('user_auctioning','./user_auctioning.html')">
+            <img style="width: 50px;" src="../icon/canpai.png" alt=""><br>
+            看房期
+        </li>
+        <li onclick="openNewWindow('user_auctioned','./user_auctioned.html')">
+            <img style="width: 50px;" src="../icon/yipai.png" alt=""><br>
+            参拍中
+        </li>
+        <li onclick="openNewWindow('user_auctionOver','./user_auctionOver.html')">
+            <img style="width: 50px;" src="../icon/over.png" alt=""><br>
+            已结束/取消
+        </li>
+    </ul>
+</div>
+<div class="item-list" style="margin-top: 10px;" onclick="openRemind()">
+    <span class="leftMsg"><img class="leftIcon" src="../icon/time.png" alt="">我的提醒</span>
+   	<img class="nextIcon"  src="../icon/icon_right_normal.png">
+</div>
+<div class="item-list" onclick="openCash()">
+    <span class="leftMsg"><img class="leftIcon" src="../icon/money.png" alt="">我的保证金</span>
+    <img class="nextIcon"  src="../icon/icon_right_normal.png">
+</div>
+<div class="item-list">
+    <span class="leftMsg"><img class="leftIcon" src="../icon/my.png" alt="">我的小蜜</span>
+    <img class="nextIcon"  src="../icon/icon_right_normal.png">
+</div>
+<div class="item-list" onclick="openCollect()">
+    <span class="leftMsg"><img class="leftIcon" src="../icon/collect.png" alt="">收藏夹</span>
+    <img class="nextIcon"  src="../icon/icon_right_normal.png">
+ </div>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        userInfo = getUserInfo();
+        ajaxGetWithProgress(getUserDetailUrl,{uid:userInfo.id},function(ret,err){
+            if(ret){
+                // alert(JSON.stringify(ret))
+                if(isBlack(ret.nickName)){
+                    ret.nickName = JSON.stringify(ret.phone).substring(1,4)+"****" + JSON.stringify(ret.phone).substring(8,12)
+                }
+                if(isBlack(ret.icon)){
+                    ret.icon = '../image/look.png';
+                }
+                document.getElementById('user_id').innerHTML = userInfo.id;
+                document.getElementById('photo_head').src = ret.icon;
+                document.getElementById('name').innerHTML = ret.nickName;
+
+            }else{
+                alert(JSON.stringify(err))
+            }
+        });
+    }
+    function openCollect(){
+        openNewWindow('user_collect','./user_collect.html')
+    }
+    function openRemind(){
+        openNewWindow('user_remind','./user_remind.html')
+    }
+    function openCash(){
+        openNewWindow('cash_deposit','cash_deposit.html')
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <style>
+        * {
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            -khtml-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color:transparent;
+        }
+
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+        .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+        .anchor_listTitle{
+            width: 100%;
+            height:40px;
+            line-height: 40px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px #ECECEC solid;
+        }
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 87px;
+
+        }
+        .content_title li{
+            width: 33%;
+            height:100%;
+            text-align: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            margin-top: 10px;
+            background-color: #FFFFFF;
+            width: 100%;
+            /*height: 87px;*/
+        }
+        .item_first{
+            font-size: 16px;
+            height: 35px;
+            display: block;
+            line-height: 35px;
+            padding-left: 20px;
+        }
+        .item_list{
+            width: 100%;
+            height: 40px;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width: 33%;
+            height: 40px;
+            font-size: 14px;
+            color: #999999;
+            line-height: 40px;
+            text-align: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+        .no2_item{
+            width: 100%;
+            /*height: 137px;*/
+            margin-top: 10px;
+            background-color: #FFFFFF;
+        }
+        .no3_item{
+            width: 100%;
+            /*height: 87px;*/
+            margin-top: 10px;
+            background-color: #FFFFFF;
+        }
+        .item_list2{
+            width: 100%;
+            height: 82px;
+        }
+        .item_list2 li{
+            width: 33%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            color: #999999;
+            text-align: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .item_list3{
+            width: 100%;
+            height: 40px;
+        }
+        .item_list3 li{
+            width: 49.6%;
+            height: 40px;
+            font-size: 14px;
+            color: #999999;
+            line-height: 40px;
+            text-align: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+        .item_list3 li:last-child{
+            border-right: none;
+        }
+        #nav{
+            width: 100%;
+            height: 50px;
+            background-color:#FCFCFC;
+            position: fixed;
+            bottom: 0;
+        }
+        .nav_bottom{
+            width: 100%;
+            height: 50px;
+        }
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .container{
+            overflow: hidden;
+            width: 75%;
+            position: absolute;
+            float: right;
+            left: 25%;
+            top: 0px;
+
+        }
+        .container li{height: 40px;line-height: 40px;font-size: 14px;padding-left: 10px;}
+        .leftTitle{float: left;width: 25%;height: 20px;line-height: 20px;border-right:1px solid #000;margin-top:10px;}
+    </style>
+</head>
+<body>
+    <!-- <div id="slider" class="mui-slider" style="height:197px">
+        <div class="mui-slider-group mui-slider-loop">
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">静静看这世界</p>
+                </a>
+            </div>
+            <div class="mui-slider-item">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">幸福就是可以一起睡觉</p>
+                </a>
+            </div>
+            <div class="mui-slider-item">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">想要一间这样的木屋，静静的喝咖啡</p>
+                </a>
+            </div>
+            <div class="mui-slider-item">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">Color of SIP CBD</p>
+                </a>
+            </div>
+            <div class="mui-slider-item">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">静静看这世界</p>
+                </a>
+            </div>
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#" style="height:197px;">
+                    <img style="height:100%" src="../icon/images.png">
+                    <p class="mui-slider-title">幸福就是可以一起睡觉</p>
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator mui-text-right">
+            <div class="mui-indicator mui-active"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+        </div>
+    </div> -->
+    <div id="main1" style="height:197px;width:100%"></div>
+<div class="anchor_list">
+   
+    <div class="anchor_listTitle">
+        <span class="leftTitle"><span style="color: red;margin:0 20px;">公告</span></span>
+
+        <ul class="container" id="main">
+         
+        </ul>
+    </div>
+    <ul class="content_title">
+        <li onclick="openAuction()">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/fapai.png" alt=""><br>
+            拍卖
+        </li>
+        <li onclick="openNewWindow('onePrice','./onePrice.html',{status:123})">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/yikoujia.png" alt=""><br>
+            一口价
+        </li>
+        <li onclick="openLive()">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/zhibo.png" alt=""><br>
+            直播
+        </li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first"style="text-indent: 16px;">
+			拍卖 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="lawAuction()">法拍房</li>
+        <li onclick="houseDetail()">投资房</li>
+        <li onclick="famousHouse()">名企房</li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first" >
+			一口价 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="openNewWindow('onePrice','./onePrice.html',{status:1})">看房期</li>
+        <li onclick="openNewWindow('onePrice','./onePrice.html',{status:2})">进行中</li>
+        <li onclick="openNewWindow('onePrice','./onePrice.html',{status:3})">已结束</li>
+    </ul>
+</div>
+<div class="item">
+		<span class="item_first" style="text-indent: 16px;"> 
+			直播 <img style="width:8px;margin-left: 6px;" src="../icon/sanjiao.png" alt="">
+		</span>
+    <ul class="item_list">
+        <li onclick="openWeekendLive()">直播间</li>
+        <li onclick="openLawAuctionLive()">法拍现场</li>
+        <li onclick="openEnterpriseHouseLive()">名企专场</li>
+
+    </ul>
+</div>
+<div class="no2_item">
+	<span class="item_first" style="text-indent: 16px;">
+			服务
+		</span>
+    <ul class="item_list2">
+        <li>贷款</li>
+        <li>过户</li>
+        <li>评估</li>
+        <li>保险</li>
+        <li></li>
+        <li></li>
+
+    </ul>
+</div>
+<div class="no3_item">
+	<span class="item_first">
+			委托与合作
+		</span>
+    <ul class="item_list3">
+        <li onclick="openCooperat()">我要合作</li>
+        <li onclick = 'openAuthorize()'>我要委托</li>
+    </ul>
+</div>
+<!-- <div id="slider" class="mui-slider" style="height:197px">
+    <div class="mui-slider-group mui-slider-loop">
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">静静看这世界</p>
+            </a>
+        </div>
+        <div class="mui-slider-item">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">幸福就是可以一起睡觉</p>
+            </a>
+        </div>
+        <div class="mui-slider-item">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">想要一间这样的木屋，静静的喝咖啡</p>
+            </a>
+        </div>
+        <div class="mui-slider-item">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">Color of SIP CBD</p>
+            </a>
+        </div>
+        <div class="mui-slider-item">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">静静看这世界</p>
+            </a>
+        </div>
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="#" style="height:197px;">
+                <img style="height:100%" src="../icon/images.png">
+                <p class="mui-slider-title">幸福就是可以一起睡觉</p>
+            </a>
+        </div>
+    </div>
+    <div class="mui-slider-indicator mui-text-right">
+        <div class="mui-indicator mui-active"></div>
+        <div class="mui-indicator"></div>
+        <div class="mui-indicator"></div>
+        <div class="mui-indicator"></div>
+    </div>
+</div> -->
+<script id="scriptDiv1" type="text/html">
+    <div id="slider" class="mui-slider" style="height:197px">
+        <div class="mui-slider-group mui-slider-loop">
+             <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[list.length-1].redirect%>" style="height:197px;">
+                    <img style="height:100%" style="<%=list[list.length-1].style%>" src="<%=list[list.length-1].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[list.length-1].desc%></p>
+                </a>
+            </div>
+            <%for(var i = 0;i < list.length; i++){%>
+                <div class="mui-slider-item">
+                    <a href="" onclick="openWeb('<%=list[i].redirect%>')" style="height:197px;">
+                        <img style="height:100%" style="<%=list[i].style%>" src="<%=list[i].picture%>">
+                        <p style="color:#fff"  class="mui-slider-title"><%=list[i].desc%></p>
+                    </a>
+                </div>
+            <%}%>
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[0].redirect%>"  style="height:197px;">
+                    <img style="height:100%" style="<%=list[0].style%>" src="<%=list[0].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[0].desc%></p>
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator mui-text-right" style="right:20px">
+            <div class="mui-indicator mui-active"></div>
+            <%for(var i = 0;i < list.length-1; i++){%>
+            <div class="mui-indicator"></div>
+            <%}%>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script src="../script/jquery-1.8.2.min.js"></script>
+<script type="text/html" id="scriptDiv">
+    <%for(var i = 0;i < list.length;i++){%>
+        <li onclick="openContent('<%=list[i].content%>')"><%=list[i].title%></li>
+    <%}%>
+    <li onclick="openContent('<%=list[0].content%>')"><%=list[0].title%></li>
+</script>
+<script type="text/javascript">
+    var cityData = {};
+    var flag =true;
+    apiready = function(){
+         //进行下一步操作
+        var cityList =$api.getStorage("cityTypes");
+        var cityName = $api.getStorage("cityInfo");
+
+        if(cityName.type == 1){
+            for(var i=0;i<cityList.citys.length;i++){
+                if(cityList.citys[i].city ==cityName.city.replace('市','')){
+                    cityData.id =cityList.citys[i].id;
+                    cityData.city =cityName.city.replace('市','');
+                }
+            }
+        }else if(cityName.type ==2){
+            cityData.id = cityName.cityInfo.id;
+            cityData.city =cityName.cityInfo.city;
+        }
+        //  公告
+       ajaxGet(announcementUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret&&ret.length >0){
+                var data ={list:ret};
+                var html = template("scriptDiv",data);
+                document.getElementById('main').innerHTML =html;
+                //******************公告轮播**************
+                var index = 0;
+                var len = $(".container>li").length;
+                setInterval(function(){
+                    if(index ==len){
+                        index =1;
+                        $(".container").css("top",0);
+                    }
+                    interval(index)
+                    index++;
+                },3000);
+            }else{
+                document.getElementById('main').innerHTML ="";
+            }
+        });
+        //广告
+        ajaxGet(advertUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+            if(ret&&ret.length>0){
+                for(var i=0;i<ret.length;i++){
+                    var picList = ret[i].picture;
+                    var width = api.winWidth*0.9;
+                    var height =width*0.618;
+                    var obj = getImgSizeBySize(picList,width,height);
+                    //alert(JSON.stringify(obj));
+                    ret[i].style = obj.style;
+                }
+                var data ={list:ret};
+                var html = template("scriptDiv1",data);
+                document.getElementById('main1').innerHTML =html;
+
+            }else {
+                document.getElementById('main1').innerHTML ="";
+            }
+            if(flag == true){
+                var body = document.getElementsByTagName('body')[0];
+                var scr = document.createElement('script');//创建一个script节点
+                scr.setAttribute('src','../script/mui.min.js'); //给script节点添加路径
+                body.appendChild(scr);
+                flag = false;
+            }else{
+
+            }
+            mui.init({
+            swipeBack:true //启用右滑关闭功能
+            });
+            var slider = mui("#slider");
+            slider.slider({
+                interval: 3000
+            });
+        })
+    }
+
+
+
+    //打开详细内容
+    function openContent(ret){
+        api.alert({
+            title:'公告',
+            msg:ret
+        },function(ret,err){
+
+        })
+    }
+    function interval(index){
+        var adHeight = $(".container>li").height();
+        $(".container").animate({
+            top:-adHeight*index+'px'
+        });
+
+    }
+
+
+function openAuthorize(){
+    openNewWindow('authorize','./authorize.html')
+}
+function openCooperat(){
+    openNewWindow('cooperation','./cooperation.html')
+}
+function openAuction(){
+	api.execScript({
+		name:rootWindowName,
+		script:"openTab('auction')"
+	});
+}
+function openLive(){
+	api.execScript({
+		name:rootWindowName,
+		script:"openTab('live')"
+	});
+}
+    function houseDetail(){
+        openNewWindow("houseDetail","./houseDetail.html",{});
+    }
+    function lawAuction(){
+        openNewWindow("lawAuction","./lawAuction.html",{});
+    }
+    function famousHouse(){
+        openNewWindow('famousHouse','famousHouse.html',{});
+    }
+    function openWeekendLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveWeekendUrl;
+        liveListJson.videoLiveListUrl =liveWeekendBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveWeekendLoadUrl;
+        liveListJson.bidUrl =liveWeekendBidUrl;
+        liveListJson.bidPagerUrl =liveWeekendBidPager;
+        liveListJson.submitEnsureGoldUrl =liveWeekendSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    function openLawAuctionLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveVideoLawAuctionHouseUrl;
+        liveListJson.videoLiveListUrl =liveVideoBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveVideoUrl;
+        liveListJson.bidUrl =liveBidUrl;
+        liveListJson.bidPagerUrl =liveBidPager;
+        liveListJson.submitEnsureGoldUrl =liveSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    function openEnterpriseHouseLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveEnterpriseHouseUrl;
+        liveListJson.videoLiveListUrl =liveEnterpriseHouseBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveEnterpriseHouseLoadUrl;
+        liveListJson.bidUrl =liveEnterpriseHouseBidUrl;
+        liveListJson.bidPagerUrl =liveEnterpriseHouseBidPager;
+        liveListJson.submitEnsureGoldUrl =liveEnterpriseHouseSubmitEnsureGoldUrl;
+        openNewWindow('live_list','./live_list.html',liveListJson);
+    }
+    //保险
+    function openSafe(){
+        openNewWindow('safe','safe.html');
+    }
+    //打开广告页
+    function openWeb(src){
+        openNewWindow('web','./web.html',{src:src});
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+        .all{width:100%;height:auto;background: #fff;position: relative;}
+        .all-center{width:90%;height:100%;margin: 0 auto;}
+        .addd{width: 100%;height: 50px;position: fixed;bottom: 0;background-color: #fff;z-index: 101}
+        .asss{background-color: red;color: #fff;width: 90%;height: 40px;border: none;border-radius: 5px;font-size: 16px;  margin-left:5%;margin-top:5px}
+        img{
+            width: 100%
+        }
+        #main1{z-index:100}
+        .handleway2{width: 100%;height: 50px;position: fixed;bottom:0;background-color: #fff;z-index: 101}
+        .handleway22{width:45%;height:50px;background: red;color:#fff;font-size:16px;border-radius: 5px;}
+        .detail{width:90%;margin:0 auto;}
+    </style>
+</head>
+<body>
+
+<div style="width:100%;height:auto">
+    <div id="main1" style="width:90%;margin:10px auto;"></div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	apiready = function () {
+        var text = api.pageParam;
+        var pr =  text.pro;
+        document.getElementById('main1').innerHTML = decodeURIComponent(text[pr]);
+	};
+</script>
+</html>
+ 

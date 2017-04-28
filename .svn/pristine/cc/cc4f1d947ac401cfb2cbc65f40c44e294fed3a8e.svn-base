@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>e选房</title>
+		 <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		 <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		 <style type="text/css">
+		 	ul{
+	    	overflow: hidden;
+	    	border: 1px solid #efefef;
+	    	background: #fff;
+	    }
+	    ul li{
+	    	height: 38px;
+	    	width:20%;
+	    	float: left;
+	    	text-align: center;
+	    	line-height: 38px;
+	    	font-size: 16px;
+	    	color: #565656;
+	    }
+	    .head{position: relative;}
+	    #move{
+	    	width: 10.67%;height: 2px;
+	    	background: #39bc30;position: absolute;
+	    	bottom: 0;left: 4.5%;
+	    	border-radius: 2px;
+	    }
+		 </style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="head">
+				<ul id="ul">
+					<li style="color: #39bc30;" onclick="switchFrameGroupIndex(0)">全部</li>
+					<li onclick="switchFrameGroupIndex(1)">房源</li>
+					<li onclick="switchFrameGroupIndex(2)">车位</li>
+					<li onclick="switchFrameGroupIndex(3)">商铺</li>
+					<li onclick="switchFrameGroupIndex(4)">存储库</li>
+				</ul>
+			<div id="move"></div>
+		</div>
+		</div>
+		<script type="text/javascript" src="../script/api.js"></script>
+		<script type="text/javascript" src="../script/user.js"></script>
+		<script type="text/javascript" src="../script/util.js"></script>
+		<script type="text/javascript" src="../script/kv.js"></script>
+		<script type="text/javascript" src="../script/apiCloud.js"></script>
+		<script type="text/javascript" src="../script/public.js"></script>
+		<script type="text/javascript" src="../script/template-native.js"></script>
+		<script type="text/javascript" src="../script/data.js"></script>
+		<script type="text/javascript" src="../script/init.js"></script>
+		<script type="text/javascript">
+				  var window_width;
+				  var result ={} ;
+		    apiready = function(){
+				 result = api.pageParam;
+			//	alert(JSON.stringify(result));
+		        window_width = api.winWidth;
+		        var user = api.pageParam.user;
+		        api.openFrameGroup ({
+		            name: 'changeHouseGroup',
+		            background:'#fff',
+		            scrollEnabled:true,
+		            rect : {
+		                x : 0,
+		                y : 84,
+		                w : 'auto',
+		                h : api.winHeight - 84
+		            },
+		            index:0,
+		            frames: [{
+		                name: 'allList',
+		                url: 'allList_body.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:result
+		            },{
+		            	name: 'allList_house',
+		                url: 'allList_house.html',        
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:result
+		            },{
+		                 name: 'allList_car',
+		                url: 'allList_car.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:result
+		            },{
+		                name: 'allList_shop',
+		                url: 'allList_shop.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:result
+		            },{
+		                name: 'allList_save',
+		                url: 'allList_save.html',
+		                bgColor :'rgba(246,246,246,1)',
+		                pageParam:result
+		            }
+		            ]
+		        }, function(ret, err){
+		            switchFrameCallback(ret.index);
+		        });
+		    };
+		    function switchFrameGroupIndex(index){
+		        _index=index;
+		        api.setFrameGroupIndex({
+		            name : "changeHouseGroup",
+		            index : index,
+		            scroll : true
+		        });
+		    }
+		    function switchFrameCallback(index){
+		        var width = (window_width / 5) * index;
+		        var lis=document.querySelector(".head").querySelectorAll("li");
+		        $api.css(document.getElementById("move"), "-webkit-transform:translate(" + width + "px,0)");
+		        for(var i=0;i<lis.length;i++){
+		            if(i==index){
+		            	lis[i].style.color="#39bc30";
+		                
+		            }else{
+		                lis[i].style.color="#333";
+		            }
+		        }
+		    }
+		</script>
+		<!--<script type="text/javascript">
+			document.getElementsByClassName("shift")[0].onclick=function(){
+				openNewWindow("Studentmember","./Studentmember.html",{},{slidBackEnabled:false});
+			}-->
+		<!--</script>-->
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>楼盘详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+</head>
+<body >
+<div id="topbar">
+    <div id="leftButton" onclick="closeWin()">
+         <img src="../icon/daohang.png" >
+    </div>
+    <div class="left_title">楼盘详情</div>
+    <img src="../icon/reload.png" class="right_img3" onclick="reloadFrame()">
+       <img src="../icon/share_icon.png" alt="" onclick="openShare()" class="right_img2">
+     <img src="../icon/ling.png" class="right_img1" onclick="openMsg()">
+</div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+
+	apiready = function () {
+		initFrameInWin(api.pageParam);
+	};
+    function openMsg(){
+        api.closeWin({
+            name:'famousHouse'
+        });
+        api.closeWin({
+            name:'houses_detail'
+        });
+        api.execScript({
+            name:rootWindowName,
+            script:"openTab('msg')"
+        });
+    }
+    function openShare(){
+        openFrame("share","./share.html",{},0,0);
+    }
+</script>
+</html>

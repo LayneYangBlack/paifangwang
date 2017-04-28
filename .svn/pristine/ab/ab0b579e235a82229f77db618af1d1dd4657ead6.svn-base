@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>直播详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div id="main">
+</div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+  	var window_width;
+  	var result = {};
+    apiready = function(){
+        window_width = api.winWidth;
+        result = api.pageParam;
+        var playModule = api.require('playModule');
+        ajaxGetWithProgress(result.liveLoadUrl,{hid:result.id},function(ret,err) {
+            var playUrl = ret.liveStreamPlayUrl;
+            playModule.init({
+                buffering: "加载中"
+//                background:"../icon/images.png"
+            },function (ret,err) {
+				if(ret){
+                    playModule.play({
+                        pageType:'Window',
+                        rect:
+                            {   x: 0,
+                                y :0,
+                                w : api.winWidth,
+                                h: 220
+                            },
+                        fixedOn: api.frameName,
+                        title: 'test',
+                        url:"http://pullhls6.a8.com/live/1482810400634652/playlist.m3u8",
+                        defaultBtn: true,
+                        enableFull : false
+                    }, function(ret, err) {
+
+                    });
+				}
+            });
+
+        })
+    };
+
+
+</script>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>分类List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+
+	<style>
+		html,body{background-color: #fff;}
+       	body{
+       		width: 100%;
+       		height: auto;
+       	}
+	   .bg{
+	   		display: none;
+	   		width: 100%;
+	   		height: 100%;
+	   		background: #000;
+	   		opacity: 0.3;
+	   		position: fixed;
+	   		top: 38px;
+	   		left: 0;
+	   		z-index: 1;
+	   	}
+	    #gradet li{
+	   		border-left: 1px solid #ebebeb;
+	   	}
+	   	.item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list{
+            width: 100%;
+
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+			position: relative;
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+			position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            max-height: 30px;
+            line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            font-weight: 900;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            color: red;
+            font-size: 13px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+			margin-top: 8px;
+        }
+        .freechoose{
+        	width: 100%;
+        	height: 100px;
+			display: flex;
+			display:-webkit-box;
+			display:-webkit-flex;
+			align-items: center;
+			-webkit-box-align:center;
+			-webkit-align-items:center;
+			justify-content: space-around;
+			-webkit-justify-content: space-around;
+        	word-spacing:8px;
+        }
+        .freechoose input{
+        	width:3.5rem;
+        	height: 28px;
+        	border: 1px solid #ebebeb;
+        	outline: none;
+        	text-align: center;
+        	line-height: 28px;
+
+        }
+        .freechoose span{
+        	color: #353535;
+        }
+        .freechoose button{
+        	width: 56px;
+        	height: 32px;
+        	background: #f54343;
+        	border-radius: 5px;
+        	color: #fff;
+        }
+		.status{    position: absolute;
+				display: block;
+				width: 30px;
+				height: 20px;
+				background-color: #000;
+				color: #fff;
+				text-align: center;
+				line-height: 20px;
+				opacity: 0.6;
+				left: 10px;
+				font-size: 12px;
+				bottom: 16px;
+			}
+    </style>
+    <style>
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+			}
+			.topTitle1,.topTitle2,.topTitle3,.topTitle4{
+				height: 3rem;
+				width: 70%;
+				overflow: hidden;
+				text-align: center;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+	</style>
+</head>
+<body>
+<div id="main1">
+	<!-- 	<div class="item" style="" onclick="openFamous('<%=list[i].id%>')">
+			<ul class="item_list">
+				<li>
+					<img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].cover%>" alt="">
+					<span class="status">待售</span>
+					<div class="right_msg">
+		                <span class="msg_title">
+							<%=list[i].name%>
+		                </span>
+		               <span class="price">
+		                  <span style="color: #999;height: 20px;line-height: 25px;">adsasdasd</span> 
+		                  <span class="price_num" style="display:block">a1231元m<sup>2</sup></span>
+		               </span>
+		               <span class="msg_gray">
+		                  户型面积:54564
+		               </span>
+					</div>
+				</li>
+
+
+			</ul>
+		</div> -->
+</div>
+<script id="scriptDiv1" type="text/html">
+	<%for(var i = 0;i < list.length; i++){%>
+		<div class="item" onclick="clickList('<%=list[i].thirdId%>')">
+			<ul class="item_list">
+				<li>
+					<img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].cover%>" alt="">
+					<%if(list.status=1){%>
+					<span class="status">待售</span>
+					<%}else if(list.status=2){%>
+					<span class="status">在售</span>
+					<%}else if(list.status=3){%>
+					<span class="status">售完</span>
+					<%}
+					%>
+					<div class="right_msg">
+		                <span class="msg_title">
+							<%=list[i].name%>
+		                </span>
+		               	<span class="price">
+			                <span style="display:blcok;color: #999;height: 20px;line-height: 25px;">
+			                	<%=list[i].address%>
+			                </span> 
+		               	</span>
+		               
+					</div>
+				</li>
+			</ul>
+		</div>
+	<%}%>
+</script>
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/mui.picker.all.js"></script>
+
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	var allResult ={};
+	var cityData ={};
+	apiready = function(){
+		var cityList =$api.getStorage("cityTypes");
+		var cityName = $api.getStorage("cityInfo");
+		if(cityName.type ==1){
+			for(var i=0;i<cityList.citys.length;i++){
+				if(cityList.citys[i].city ==cityName.city.replace('市','')){
+					cityData.id =cityList.citys[i].id;
+					cityData.city =cityName.city.replace('市','');
+					//    alert(JSON.stringify(cityData));
+				}
+			}
+		}else if(cityName.type ==2){
+				cityData.id = cityName.cityInfo.id;
+				cityData.city =cityName.cityInfo.city;
+		}
+		var keyValue = api.pageParam;
+		alert(JSON.stringify(keyValue))
+		var key = {};
+		key.word = keyValue.word;
+		key.twoLevelAreaId = cityData.id;
+		
+		new datalistModel(addDataToHtml,indexSearchUrl,key,10,5,100,true);
+	}
+	function addDataToHtml(results,append){
+		// alert(JSON.stringify(results))
+		if(results && results.length > 0){
+			for(var i=0;i<results.length;i++){
+				allResult[results[i].thirdId]=results[i];
+			}
+		}
+
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		if (append) {
+			var div = document.createElement("div");
+			div.innerHTML = html;
+			document.getElementById('main1').appendChild(div);
+		} else {
+			document.getElementById('main1').innerHTML = html;
+		}
+	}
+	function clickList(thirdId){
+		if(allResult[thirdId].searchType == 1){
+			allResult[thirdId].url = onePriceDetailUrl;
+			allResult[thirdId].id = allResult[thirdId].thirdId;
+			allResult[thirdId].submitUrl = onePriceEnsureGoldUrl;
+			openNewWindow('fangc_detail','./fangc_detail.html',allResult[thirdId]);
+		}else if(allResult[thirdId].searchType == 2){
+			allResult[thirdId].url = famousDetailUrl;
+			allResult[thirdId].id = allResult[thirdId].thirdId;
+			openNewWindow('houses_detail','houses_detail.html',allResult[thirdId])
+		}else if(allResult[thirdId].searchType == 3){
+			allResult[thirdId].url = investmentDetailUrl; 
+    		openNewWindow('auction_detail','auction_detail.html',allResult[thirdId])
+		}else if(allResult[thirdId].searchType == 4){
+			allResult[thirdId].url = lawAuctionDetailUrl;
+    		openNewWindow('auction_detail','auction_detail.html',allResult[thirdId])
+		}
+	}
+</script>
+</html>

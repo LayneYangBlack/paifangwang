@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>收藏夹</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+          html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+    	 .item-list{
+            height: 60px;
+            background-color: #FFFFFF;
+            padding: 0 1rem;
+            border-bottom: 1px #f1f2f3 solid;
+            display: flex;
+            align-items: center;
+             display: -webkit-flex;
+             -webkit-align-items: center;
+             -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+   		.item-list:first-child{
+   			margin-top: 10px;
+   		}
+        .leftIcon{
+            width: 25px;
+            margin-top: 10px;
+            float: left;
+            margin-right: 0.5rem;
+        }
+        .nextIcon{width:20px;}
+        .leftMsg{    
+        	display: inline-block;
+            height: 3rem;
+            vertical-align: middle;
+            line-height: 3rem;
+            color: #3d3d3d;
+            }
+		.header{
+            width: 70%;
+            float: left;
+			height:60px;
+			display: flex;
+			align-items: center;
+            display: -webkit-flex;
+            -webkit-align-items: center;
+			background-color: #FFFFFF;
+			border-bottom: 1px #f1f2f3 solid;
+			}
+			.photo_head{
+				width: 40px;
+				height: 40px;
+				border-radius: 100px;
+				margin-left: 4%;
+			}
+			.com_name{
+				margin-left: 5%;
+			}
+			.item{
+                width: 29%;
+                float: right;
+                height: 60px;
+                text-align: center;
+                line-height: 60px;
+                background-color: #FFFFFF;
+                color: #41c136;
+			}
+        .collect_list:first-child{
+            margin: 0;
+        }
+        .collect_list{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+     <!--<div class="collect_list">-->
+        <!--<div class="header">-->
+            <!--<img class="photo_head" src="../icon/images.png"/>-->
+                <!--<span class="com_name">-->
+                    <!--常德万科房地产公司-->
+                <!--</span>-->
+        <!--</div>-->
+        <!--<div class="item" onclick="unFollow('<%=list[i].eid%>')">-->
+            <!--取消关注-->
+        <!--</div>-->
+     <!--</div>-->
+    <div id="main"></div>
+<script id="scriptDiv1" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+    <div class="collect_list">
+        <div class="header" onclick="openDetail('<%=list[i].eid%>')">
+            <img class="photo_head" src="<%=list[i].enterpriseCover%>" onerror="this.src='../icon/default@1x.png' "/>
+                <span class="com_name">
+                    <%=list[i].enterpriseName%>
+                </span>
+        </div>
+        <div class="item" onclick="unFollow('<%=list[i].eid%>')">
+            取消关注
+        </div>
+        <div style="clear: both"></div>
+    </div>
+
+    <% } %> 
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+apiready = function(){
+    new datalistModel(addDataToHtml,followListUrl,{},10,5,100,true);
+}
+var specia;
+var allResult = {};
+function addDataToHtml(results,append) {
+    specia = results;
+    if (results) {
+       // alert(JSON.stringify(results))
+        for(var i=0;i<results.length;i++){
+            results[i].time = formatTimeToDate1(results[i].time)
+            allResult[results[i].eid]=results[i];
+        }
+        // alert(JSON.stringify(results))
+        var data = {list: results};
+        var html = template('scriptDiv1',data);
+        if (append) {
+            var div = document.createElement("div");
+            div.innerHTML = html;
+            document.getElementById('main').appendChild(div);
+        } else {
+            if(results.length > 0){
+                document.getElementById('main').innerHTML = html;
+            }else{
+                document.getElementById('main').innerHTML = "";
+            }
+        }
+    }
+}
+//取消关注
+function unFollow(eid){
+    ajaxGetWithProgress(unFollowUrl,{eid:eid},function(ret,err){
+        if(isNotBlack(ret)){
+            toast('已取消关注')
+            reloadHtml();
+        }
+    })
+}
+function openAllSpecia (id){
+    openNewWindow('all_session','all_session.html',{eid:id})
+}
+function openAllAuction (id){
+   
+    openNewWindow('all_auction','all_auction.html',{eid:id})
+}
+function openDetail(eid) {
+
+   openNewWindow('famous_enterprise','./famous_enterprise.html',allResult[eid])
+}
+</script>
+</html>

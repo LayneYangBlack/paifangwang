@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>看视频</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <link rel="stylesheet" type="text/css" href="../css/photoswipe.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/default-skin.css"/>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+        }
+
+        body {
+            background-color: #000000;
+            width: 100%; /*height: 100%;*/
+            height: 100%;
+        }
+        .rightInfo{
+            height: 31px;
+
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            color: #FA8302;
+            padding: 0 5px;
+        }
+
+        #topbar span {
+
+            padding-left: 3px;
+            font-size: 18px;
+        }
+
+        #leftButton2{
+            position: absolute;
+            margin-top: 2px;
+            height: 42px;
+            z-index: 10;
+        }
+        #leftButton2 img{
+            width: 8px;
+            height: 14px;
+        }
+        /*.rightInfo1{*/
+            /*height: 43px!important;*/
+            /*position: absolute!important;*/
+            /*top:0!important;*/
+            /*right: 0!important;*/
+            /*margin: 0!important;*/
+            /*font-size: 12px;*/
+            /*line-height: 44px!important;*/
+
+            /*color: #ff9900;*/
+            /*padding: 0 12px;*/
+        /*}*/
+        .rightInfo{
+            height: 31px;
+            min-width: 35px;;
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            background-color: #020202;
+            color: #ffffff;
+            padding: 0 5px;
+        }
+        #playBtn{width:60px;height:60px;background:url(../icon/play.png) no-repeat;position: absolute;z-index: 100;background-size:100%;}
+        #counterNum{    font-size: 16px;width: 100%;text-align: center;}
+    </style>
+</head>
+<body style="display:block ;" id="body">
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="playBtn" onclick="playVedio()"></div>
+    <!-- Background of PhotoSwipe.
+         It's a separate element, as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+        <div class="pswp__container">
+            <!-- don't modify these 3 pswp__item elements, data is added later on -->
+            <div class="pswp__item"></div>
+            <div id="photoBox" class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div id="showNum" class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div id="counterNum" class="pswp__counter" style="font-size: 16px;"></div>
+
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center" style="font-size: 15px;"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/photoswipe.js"></script>
+<script type="text/javascript" src="../script/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/photoswipe-ui-default.js"></script>
+<script type="text/javascript" src="../script/photoswipe-ui-default_local.js"></script>
+<script>
+	
+	var picArr;
+    var indexA;
+	apiready = function(){
+        indexA = api.pageParam.index;
+		picArr = api.pageParam.photoarr
+		var openPhotoSwipe = function() {
+            var playBtn = document.getElementById('playBtn');
+            if(picArr[indexA].type == 0){
+                playBtn.style.display = "none"
+            }else{
+                playBtn.style.display = "block"
+            }
+		    var pswpElement = document.querySelectorAll('.pswp')[0];
+		    // build items array
+		    var items = api.pageParam.arr;
+		    // define options (if needed)
+		    var options = {
+					 // history & focus options are disabled on CodePen        
+		      	history: true,
+		      	focus: true,
+		      	index:Number(indexA),
+		        showAnimationDuration: 0,
+		        hideAnimationDuration: 0
+		        
+		    };
+		    
+		    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+		    gallery.init();
+		    
+	    	var h = photoBox.offsetHeight;
+	    	var w = photoBox.offsetWidth;
+	    	var topH  = h/2 -30;
+	    	var leftW  = w/2 -30;
+	    	playBtn.style.top = topH + "px";
+	    	playBtn.style.left = leftW + "px";
+		    gallery.listen('beforeChange', function() {
+		    	
+		    	// alert(gallery.getCurrentIndex());
+		    	if(picArr[gallery.getCurrentIndex()].type == 0){
+		    		playBtn.style.display = "none"
+		    	}else if(picArr[gallery.getCurrentIndex()].type == 1){
+		    		playBtn.style.display = "block";
+		    		indexA = gallery.getCurrentIndex();
+		    	}
+		    });
+		};
+		openPhotoSwipe();
+	}
+
+	function playVedio(){
+
+        openNewWindow('photo2','./photo2.html',{url:picArr[indexA].videoUrl})
+        // api.openFrame({
+        //     name: 'photo2',
+        //     url: './photo2.html',
+        //     rect: {
+        //         x: 0,
+        //         y: 0,
+        //         w: api.winWidth,
+        //         h: api.winHeight
+        //     },
+        //     pageParam: {
+        //         url: picArr[indexA].videoUrl
+        //     },
+        //     bounces: true,
+        //     bgColor: 'rgba(0,0,0,0)',
+        //     vScrollBarEnabled: true,
+        //     hScrollBarEnabled: true
+        // });
+	}
+</script>
+</html>

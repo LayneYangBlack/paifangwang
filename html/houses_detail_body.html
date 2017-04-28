@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no" />
+	<title>楼盘详情</title>
+  	<link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+  	<link rel="stylesheet" href="../css/mui.css">
+	<link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+	<style type="text/css">
+	* {
+		-webkit-touch-callout:none;
+		-webkit-user-select:none;
+		-khtml-user-select:none;
+		-moz-user-select:none;
+		-ms-user-select:none;
+		user-select:none;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color:transparent;
+	}
+	body{background-color: #EFEFEF;}
+	#over_time{z-index: 3;}
+	.title_content{width:100%;height: auto;padding-bottom: 10px;background-color: #FFFFFF;border-bottom: 1px solid #F2F2F2;}
+	.title_item{width: 100%;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: space-between;}
+	#title_address{width: 70%;padding:10px 20px;font-weight: bold;}
+	.over_prompt{width:30%;font-size: 14px;margin-top: 10px;margin-right: 2%;text-align: center;border-left: 1px #F2F2F2 solid;}
+	.price_now{margin:1% 20px;}
+	.price_num{color: red;}
+	.many_people{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: flex-start;-webkit-justify-content:flex-start;color:#999999;padding-left: 20px;    align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;height: 30px;margin-top: 10px;font-size: 12px}
+	.many_people li{line-height: 20px;margin-right:10px ;}
+	.more{background-color:#fff;width:100%;height: 43px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content:space-between;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;color: #39BD2F;margin-bottom: 8px;}
+	.right_icon{ width: 20px;height: 20px;   margin-right: 20px;}
+	.rectangle{display:inline-block;width: 5px;height: 15px;background-color: #39BD2F;margin-right: 10px;font-size: 12px}
+	.item_introduce{width: 92%;background-color: #fff;padding: 4% 4%  2% 4%;margin-bottom: 8px;}
+	.item_title{color: #999999;font-size: 12px;}
+	.item_verticle{display:block;width: 100%;margin-top: 5px;font-size: 12px}
+	#pack_up{width: 100%;height: 30px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;color:#42a927;font-size: 12px}
+	#pack_down{width: 100%;height: 30px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;display: none;color:#42a927;font-size: 12px}
+	.hide_item{margin-bottom: 5px;color:#999999;width:100%;display: block;font-size: 12px}
+	.hide_title{white-space: nowrap;width: 30%;float: left;}
+	.hide_verticle{color: #5B5B5B;display: block;overflow: hidden;}
+	.house_style{width: 115px;height: 115px;border: 1px solid #F2F2F2;    margin-bottom: 5px;}
+	.swiper-container {
+        width: 100%;
+        height: 175px;
+	}
+    .style_list{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;flex-direction: column;text-align: left;font-size: 12px}
+    .style_list span{line-height: 20px;}
+    .comment_content{width: 100%;min-height: 66px;font-size:12px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;justify-content: space-between;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;}
+	.comment_name{color: #999;font-size: 12px}	
+	.content_broker{width: 92%;padding:0 4%;height: 50px;background-color:#fff;font-size:14px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;justify-content: space-between;border-top: 1px #F2F2F2 solid;}
+	.broker_name{display: block;font-size: 12px}
+	.broker_list{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;flex-direction: column;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;font-size: 12px;color:#666;}
+	.broker_img{width: 20px;height: 20px;}
+	.bottom{width: 100%;height: 40px;position: fixed;bottom: 0px; background-color: #efefef;z-index: 999;display: flex;justify-content: space-between;}
+	.button1{background-color:#F5A823;     font-size: 16px;   border: none;color: #fff;width: 49%;height:40px;border-left: 1px solid #F2F2F2;text-align: center;}
+	.button2{background-color:#42a927;      font-size: 16px;  border: none;color: #fff;width: 49%;height:40px;border-right: 1px solid #F2F2F2;text-align: center;}
+	#live{width: 100%;height: 220px;}
+	.address{display: block;margin-top: 6px;}
+	 .swiper-slide{position: relative;}
+	.playBtn{width:60px;height:60px;background:url(../icon/play.png) no-repeat;position: absolute;z-index: 100;background-size:100%;}
+    .swiper-slide>img{width:100%;}
+</style>
+</head>
+<body>
+	<div id="main"></div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script src="../script/jquery-1.8.1.min.js"></script>
+<script type="text/html" id="scriptDiv">
+	<div class="swiper-container">
+		<%if(list.piclist.length<10){%>
+	        <div class="swiper-wrapper">
+	    	  	<%if(list.piclist.length == 1){%>
+	    	  	<div class="swiper-slide" onclick="openSliderInfo('0')">
+		            <img src="<%=list.piclist[0].pictureUrl%>">
+		        </div>
+		        <%}else{%>
+			        <%for(var i = 0;i < list.piclist.length; i++){%>
+			        <!-- 第一张 -->
+			        	<%if(list.piclist[i].type == 0){%>
+			        		<div class="swiper-slide" onclick="openSliderInfo('<%=i%>')">
+					            <img src="<%=list.piclist[i].pictureUrl%>">
+					        </div>
+			        	<%}else if(list.piclist[i].type == 1){%>
+				        	<div class="swiper-slide" id="photoBox" onclick="openSliderInfo('<%=i%>')">
+				        		<div class="playBtn"></div>
+					            <img src="<%=list.piclist[i].videoCover%>">
+					        </div>
+			        	<%}%>
+			        <%}%>
+		        <%}%>
+	        </div>
+	        <div class="swiper-pagination"></div>
+	    <%}else{%>
+        	<div class="swiper-wrapper">
+		        <%for(var i = 0;i < 10; i++){%>
+		        <!-- 第一张 -->
+		        	<%if(list.piclist[i].type == 0){%>
+		        		<div class="swiper-slide" onclick="openSliderInfo('<%=i%>')">
+				            <img src="<%=list.piclist[i].pictureUrl%>">
+				        </div>
+		        	<%}else{%>
+			        	<div class="swiper-slide" id="photoBox"  onclick="openSliderInfo('<%=i%>')">
+			        		<div class="playBtn"></div>
+				            <img src="<%=list.piclist[i].videoCover%>">
+				        </div>
+		        	<%}%>
+		        <%}%>
+	        </div>
+	        <div class="swiper-pagination"></div>
+	   	<%}%>
+    </div>
+	<div class="title_content">
+		<div class="title_item">
+			<span id="title_address">
+				<%=list.name%>
+			</span>
+		</div>
+		<div class="price_now">
+			<span class="price_num">均价<strong><%=list.averagePrice%>元</strong><strong>/平</strong></span>
+		</div>
+		<span class="many_people">
+			<span style="width:20%;float:left;display: block;">开发商</span>
+			<span style="color: #5B5B5B;margin-left: 10px;"><%=list.propertyCompany%></span>
+		</span>
+	</div>
+	<div class="item_introduce">
+		<span id="pack_up" onclick="openHideBox()">
+			查看更多信息<img style="width: 20px;height:20px;" src="../icon/down.png"/>
+		</span>
+		<div id="hide_box" style="display: none;">
+			<span class="hide_item">
+				<span class="hide_title">地址:</span><span class="hide_verticle"><%=list.address%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">开盘:</span><span class="hide_verticle"><%=list.opening%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">交房:</span><span class="hide_verticle"><%=list.handing%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">售楼部:</span><span class="hide_verticle"><%=list.sales%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">学校:</span><span class="hide_verticle"><%=list.school%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">物业类型:</span><span class="hide_verticle"><%=list.propertyType%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">住户数:</span><span class="hide_verticle"><%=list.houseNum%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">容积率:</span><span class="hide_verticle"><%=list.afforestRatio%>%</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">绿化率:</span><span class="hide_verticle"><%=list.plotRatio%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">停车位:</span><span class="hide_verticle"><%=list.park%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">产权年限:</span><span class="hide_verticle"><%=list.equity%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">预售许可:</span><span class="hide_verticle"><%=list.preSalePermit%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">物业公司:</span><span class="hide_verticle"><%=list.propertyCompany%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">物业费:</span><span class="hide_verticle"><%=list.propertyFee%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">预售部电话:</span><span class="hide_verticle"><%=list.salesPhone%></span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">每平米价格:</span><span class="hide_verticle"><%=list.averagePrice%></span>
+			</span>
+			<span id="pack_down" style="display: none;" onclick="closeShowBox()">
+				收起<img style="width: 15px;height:15px;" src="../icon/up.png"/>
+			</span>
+		</div>
+	</div>
+	<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;" onclick="openHouseImages()">
+		<span class="rectangle"></span><span class="item_title">户型介绍</span>
+		<img style="width: 20px;height: 20px;margin-right: 10px;float:right;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="item_introduce">
+		<div class="swiper-container">
+	        <div class="swiper-wrapper">
+		        <%for(var i=0;i< list.houseTypeImages.length;i++){%>
+		            <div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="<%=list.houseTypeImages[i].picture%>"/>
+		            		<span ><%=list.houseTypeImages[i].title%></span>
+		            		<span style="font-size: 12px;color: #999999;"><%=list.houseTypeImages[i].desc%></span>
+		            	</span>
+		            </div>
+		        <%}%>
+    		</div>
+    		<div class="swiper-pagination"></div>
+		</div>
+	</div>
+	<div class="item_introduce" style="margin-bottom: 0px;">
+		<span class="rectangle"></span><span class="item_title">项目介绍</span>
+		<span class="item_verticle"><%=list.introduce%></span>
+	</div>
+	<div style="width:100%;height:160px;position: relative;" onclick="openMap('<%=list.address%>')">
+		<span class="item_title" style="position: absolute;top: 10px;  left:2%;">地理位置</span>
+		<img id="mapImg" src="">
+	</div>
+	<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;" onclick="openDynamic();">
+		<span class="rectangle"></span><span class="item_title">最新动态(共<span><%=list.dynamics.length%></span>条)</span>
+		<img style="width: 20px;height: 20px;margin-right: 10px;float:right;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="item_introduce" style="border-bottom: 2px solid #F2F2F2;">
+		<span class="item_verticle"><%=list.dynamics[0].title%></span>
+		<span class="item_verticle" style="color: #999999;max-height: 30px;overflow: hidden;line-height: 15px"><%=list.dynamics[0].content%></span>
+		<span style="font-size: 11px;color:#999;"><%=list.dynamics[0].time%></span>
+	</div>
+	<div class="item_introduce" style="margin: 0;border-bottom: 2px solid #F2F2F2;">
+		<span class="rectangle"></span><span class="item_title">用户评论</span>
+		<%for(var i = 0; i< list.comments.length; i++){%>
+		<div class="comment_content">
+			<img style="width: 30px;height:30px;border-radius: 100px;" src="<%=list.comments[i].userIcon%>">
+			<span style="width: 85%;display: block;">
+				<span class="comment_name" style="float: left;"><%=list.comments[i].userName%></span>
+				<span class="comment_name" style="font-size: 12px;float:right;"><%=list.comments[i].ctime%></span><br />
+				<div style="clear: both"></div>
+				<span class="comment"><%=list.comments[i].content%></span>
+			</span>
+		</div>
+		<%}%>
+	</div>
+	<div class="more" style="margin: 0;" onclick="openComment()">
+		<span style="margin: 0 auto;font-size: 12px">查看全部评论 ></span>
+	</div>
+	<%for(var i = 0; i< list.serviceUsers.length; i++){%>
+	<div class="content_broker" >
+		<img style="width: 30px;height:30px;border-radius: 50%;" src="<%=list.serviceUsers[i].icon%>" onclick="openNewWindow('broker_detail','broker_detail_body.html')">
+		<span style="width: 30%;margin-right: 15%;">
+			<span class="broker_name"><%=list.serviceUsers[i].nickName%></span>
+			<span class="borker_phoneNum"><%=list.serviceUsers[i].phone%></span>
+		</span>
+		<a style="text-decoration: none;color:#666" class="broker_list" href="tel:<%=list.serviceUsers[i].phone%>"><img class="broker_img" src="../icon/phone.png"/>电话</a>
+		<span class="broker_list" onclick="openMsg('<%=i%>')"><img class="broker_img" src="../icon/message.png"/>短信</span>
+		<span class="broker_list" onclick="openChat(1,'<%=list.serviceUsers[i].id%>','<%=list.serviceUsers[i].nickName%>')"><img class="broker_img" src="../icon/msg.png"/>交流</span>
+		<span class="broker_list"  onclick="openChat(2,'<%=list.cgid%>','<%=list.chatGroupName%>')"><img class="broker_img" src="../icon/talk.png"/>讨论</span>
+	</div>
+
+	<%}
+	%>
+
+	<div style="width: 100%;height: 70px;float: left;"></div>
+	<div class="bottom">
+		<button class="button1" onclick="openNewWindow('e_change','e_change.html',{ehid:<%=list.id%>})">e选房</button>
+		<button class="button2" onclick="openSell()">专场拍卖</button>
+	</div>
+</script>
+<script type="text/javascript">
+    var eid={};
+	var results;
+	var piclist = [];
+    var phoneList = [];
+	var dataJson;
+    var userInfo = getUserInfo();
+	var coordinate;
+	var dynamicData;
+	var houseName;
+	var ItemsArr=[];
+    // function swiperStart() {
+    //     //swiper动画
+    //     var swiper = new Swiper('.swiper-container', {
+    //         slidesPerView: 2,
+    //         paginationClickable: true,
+    //         spaceBetween: 30,
+    //         freeMode: true
+    //     })
+    // }
+	apiready = function(){
+		var ret = api.pageParam;
+        houseName = ret.name;
+		if(isNotBlack(ret)){
+			coordinate = ret.coordinate;
+		   	dynamicData = ret.dynamics;
+		   	for(var i = 0; i<ret.serviceUsers.length; i++){
+                phoneList.push(ret.serviceUsers[i].phone);
+		   	}
+		   	if(isNotBlack(ret.shuffleFigureItems)){
+				ret.piclist = ret.shuffleFigureItems;
+				for(var i =0;i<ret.piclist.length;i++){
+					piclist.push(ret.piclist[i]);
+				}
+				for(var i =0;i<piclist.length;i++){
+					if(piclist[i].type == 0){
+						var WidthAndHeight = getWidthAndHeightByImageSrc(piclist[i].pictureUrl,800)
+						ItemsArr.push({src:piclist[i].pictureUrl,w:WidthAndHeight.w,h:WidthAndHeight.h}) 
+					}else{
+						var WidthAndHeight = getWidthAndHeightByImageSrc(piclist[i].videoCover,800)
+						ItemsArr.push({src:piclist[i].videoCover,w:WidthAndHeight.w,h:WidthAndHeight.h}) 
+					}
+				}
+			}
+			ret.piclist = piclist
+			for(var i=0;i<ret.dynamics.length;i++){
+				ret.dynamics[i].time = formatTimeToDate(ret.dynamics[i].time)
+			}
+			results = ret;
+			for (var i = 0; i <ret.comments.length; i++){
+	       		ret.comments[i].ctime = formatTimeToDate(ret.comments[i].ctime);
+	         }
+			var data = {list:ret,piclist:piclist};
+			var html = template('scriptDiv', data);
+			document.getElementById('main').innerHTML = html;
+			var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true
+		    });
+			var playBtn = document.querySelectorAll('.playBtn')
+			var topH  = 197/2 -30;
+	    	var leftW  =api.winWidth/2 -30;
+			for(var i=0;i<playBtn.length;i++){
+				playBtn[i].style.top = topH + "px";
+	    		playBtn[i].style.left = leftW + "px";
+			}
+			var winWidth = api.winWidth;
+            var mapUrl = 'http://api.map.baidu.com/staticimage?width=' + winWidth +'&height=160&zoom=13&markers='+ ret.coordinate;
+            document.getElementById('mapImg').src = mapUrl;
+		}
+	}
+	function openSliderInfo(index) {
+		var photoJson = {};
+		photoJson.arr = ItemsArr;
+		photoJson.index = index;
+		photoJson.photoarr = piclist;
+		openNewWindow('photo','./photo.html',photoJson)
+    	// openPhotoSwipe(index);
+    }
+	function openHideBox(){
+		var hideButton = document.getElementById('pack_up');
+		var showButton =document.getElementById('pack_down');
+		var hideBox = document.getElementById('hide_box');
+		hideBox.style.display = "block";
+		hideButton.style.display = "none";
+		showButton.style.display = "flex";
+	}
+	function closeShowBox(){
+		var hideButton = document.getElementById('pack_up');
+		var showButton =document.getElementById('pack_down');
+		var hideBox = document.getElementById('hide_box');
+		hideBox.style.display = "none";
+		hideButton.style.display = "flex";
+		showButton.style.display = "none";
+	}
+	function openHouseImages(){
+    	api.execScript({
+            name:'houses_detail',
+            script:"switchFrameGroupIndex(1)"
+        });
+    }
+    function openComment(){
+    	api.execScript({
+            name:'houses_detail',
+            script:"switchFrameGroupIndex(2)"
+        });
+    }
+    function openDynamic(){
+    	openNewWindow('houseDynamic','./houseDynamic.html',dynamicData)
+    }
+	//发送短信需要把电话号码组成一个数组
+	//若干个联系人 就需要若干个数组组成一个大数组
+	//传一个下标 取大数组里第index个小数组 放到方法里
+
+
+	function openMsg(index){
+    	api.sms({
+            numbers:[phoneList[index]],
+			text:'您好:我对您在拍房网发布的"'+houseName+'"很感兴趣，想详细了解一下。'
+        }, function(ret, err) {
+            if (ret && ret.status) {
+                toast('发送成功');
+            } else {
+                toast('发送失败，请稍后重试');
+            }
+        });
+    }
+	function openEhouse(id){
+		openNewWindow('e_change','e_change.html',results);
+	}
+	function openSell(){
+		openNewWindow('famous_enterprise','./famous_enterprise.html',results)
+	}
+	function openMap(address){
+		var mapJson = {};
+		var lonlat = coordinate.split(',');
+		mapJson.coordinate = lonlat;
+		mapJson.address = address;
+		openNewWindow('map','./map.html',mapJson)
+	}
+	//打开聊天
+    function openChat(type,thirdId,thirdNick){
+        if(type ==1){
+            openNewWindow("chat"+type+"_"+thirdId,"./chat.html",{type:type,thirdId:thirdId,thirdNick:thirdNick});
+        }else if(type ==2){
+            ajaxGet(joinChatGroupUrl,{cgid:thirdId,uid:userInfo.id},function (ret,err) {
+                if(ret.success == true){
+                    openNewWindow("chat"+type+"_"+thirdId,"./chat.html",{type:type,thirdId:thirdId,thirdNick:thirdNick});
+                }else if(err){
+                    toast("聊天出错")
+                }
+            })
+        }
+
+    }
+</script>
+</html>

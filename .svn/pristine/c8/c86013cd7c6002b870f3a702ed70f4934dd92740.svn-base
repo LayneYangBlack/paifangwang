@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>我要委托</title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	html,body  {
+    		background: #f2f2f2;
+    	}
+        #main{width:100%;height: auto;}
+        .center-all{width:90%;height:100%;margin: 0 auto;font-size: 14px;}
+        .items1{color:#999999;}
+        .items2{color:#383838;margin-left: 4%}
+        .ul li {margin-top: 16px;}
+        .bgImg span{background: url(../icon/asker.png) no-repeat 0px 0px;background-size: 100%}
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <div class="center-all">
+        <ul class="ul">
+            <li>
+                <span class="items1">物业地址:</span><span class="items2">北京市中关村南大街3号</span>
+            </li>
+            <li>
+                <span class="items1">楼盘名称:</span><span class="items2">南山一号幸福里小区</span>
+            </li>
+            <li>
+                <span class="items1">楼栋房号:</span><span class="items2">5号楼一单元</span>
+            </li>
+            <li>
+                <span class="items1">户型:</span><span class="items2">3居室</span>
+            </li>
+            <li>
+                <span class="items1">建筑面积:</span><span class="items2">125平米</span>
+            </li>
+            <li>
+                <span class="items1">楼层:</span><span class="items2">18层</span>
+            </li>
+            <li>
+                <span class="items1">朝向:</span><span class="items2">南</span>
+            </li>
+            <li>
+                <span class="items1">年限:</span><span class="items2">70年</span>
+            </li>
+            <li>
+                <span class="items1">产证情况:</span><span class="items2">无</span>
+            </li>
+            <li>
+                <span class="items1">付款方式:</span><span class="items2">按揭付款</span>
+            </li>
+            <li>
+                <span class="items1">装修情况:</span><span class="items2">精装修</span>
+            </li>
+            <li>
+                <span class="items1">房源说明:</span><span class="items2">精装修</span>
+            </li>
+            <li style="margin-top:50px;">
+                <span class="items1">联系人:</span><span class="items2">王先生</span>
+            </li>
+            <li>
+                <span class="items1">联系方式:</span><span class="items2">15032858821</span>
+            </li>
+            <li class="bgImg">
+                <span style="display:block;float:right;width:58px;height:58px;"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript">
+</script>
+</html>

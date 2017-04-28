@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+        <title>Title</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <style>
+        * {
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            -khtml-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color:transparent;
+        }
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+
+
+        .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 89px;
+
+        }
+        .content_title li{
+            width: 33%;
+            height:100%;
+            text-align: center;
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_first{
+            font-size: 16px;
+            height: 49px;
+            position: relative;
+           line-height: 49px;
+            padding-left: 20px;
+
+        }
+        .item_list{
+            width: 100%;
+            height:130px;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -moz-align-items: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+
+            display: -webkit-flex;
+            display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+
+            -moz-align-items: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-align: center;
+
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-pack: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height:50px;
+            font-size:13px;
+            float:left;
+
+            display: -webkit-flex;
+            display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            padding-top: 30px;
+
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-pack: center;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            max-height: 30px;
+            line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 32px;
+            color: red;
+            font-size: 13px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            margin-top: 20px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+        }
+        .imggg{width:40%;height:100px; float: left;overflow: hidden;margin-left: 10px;}
+    </style>
+</head>
+<body>
+
+<div id="picList" style="height:197px;width:100%;overflow: hidden;"></div>
+<!--轮播结束-->
+<div class="anchor_list">
+
+    <ul class="content_title">
+        <li id="investment ">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/zhoumo.png" alt=""><br>
+            投资房直播
+        </li>
+        <li id="lawauction">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/fapaixianc.png" alt=""><br>
+            法拍现场
+        </li>
+        <li id="enterprise">
+            <img style="width: 50px;height: 50px;margin-top:10px" src="../icon/mingqzc.png" alt=""><br>
+            名企专场
+        </li>
+    </ul>
+</div>
+
+
+<div id="main">
+
+</div>
+<div id="main1">
+
+</div>
+<div id="main2">
+
+</div>
+<script id="scriptDivPic" type="text/html">
+    <div id="slider" class="mui-slider" style="height:197px">
+        <div class="mui-slider-group mui-slider-loop">
+             <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[list.length-1].redirect%>" style="height:197px;">
+                    <img style="<%=list[list.length-1].style%>" src="<%=list[list.length-1].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[list.length-1].desc%></p>
+                </a>
+            </div>
+            <%for(var i = 0;i < list.length; i++){%>
+                <div class="mui-slider-item">
+                    <a href="" onclick="openWeb('<%=list[i].redirect%>')" style="height:197px;">
+                        <img style="<%=list[i].style%>" src="<%=list[i].picture%>">
+                        <p style="color:#fff"  class="mui-slider-title"><%=list[i].desc%></p>
+                    </a>
+                </div>
+            <%}%>
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="<%=list[0].redirect%>"  style="height:197px;">
+                    <img style="<%=list[0].style%>" src="<%=list[0].picture%>">
+                    <p  style="color:#fff" class="mui-slider-title"><%=list[0].desc%></p>
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator mui-text-right" style="right:20px">
+            <div class="mui-indicator mui-active"></div>
+            <%for(var i = 0;i < list.length-1; i++){%>
+            <div class="mui-indicator"></div>
+            <%}%>
+        </div>
+    </div>
+</script>
+<script id="scriptDiv1" type="text/html">
+    <div class="item">
+        <span class="item_first" onclick="openLawAuctionWillLive()">
+            法拍房直播预告<img style="width:8px;margin-left: 10px;" src="../icon/sanjiao.png" alt="">
+        </span>
+        <ul class="item_list">
+            <li onclick="openLiveDetail1('<%=list[0].id%>')">
+                <span class="imggg">
+                    <img style="<%=list[0].style%>" class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[0].cover%>" alt="">
+                </span>
+                <div class="right_msg">
+                    <span class="msg_title">
+                    <%=list[0].name%>
+                    </span>
+                    <span class="price">
+                        起拍价 ￥
+                        <%if(list[0].currentPrice == 0){%>
+                        <span class="price_num"><%=list[0].reservePrice%></span>
+                        <%}else{%>
+                        <span class="price_num"><%=list[0].currentPrice%></span>
+                        <%}%>
+                    </span>
+                    <span class="msg_gray">
+                        结束时间<span><%=list[0].endTime%></span>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</script>
+<script id="scriptDiv2" type="text/html">
+    <div class="item">
+        <span class="item_first" onclick="openWeekendWillLive()">
+           投资房直播预告<img style="width:8px;margin-left: 10px;" src="../icon/sanjiao.png" alt="">
+        </span>
+        <ul class="item_list">
+            <li onclick="openLiveDetail2('<%=list[0].id%>')">
+                <span class="imggg">
+                    <img class="left_img" style="<%=list[0].style%>" onerror="this.src='../icon/default@1x.png'" src="<%=list[0].cover%>" alt="">
+                </span>
+                <div class="right_msg">
+                    <span class="msg_title">
+                    <%=list[0].name%>
+                    </span>
+                    <span class="price">
+                        起拍价 ￥
+                        <%if(list[0].currentPrice == 0){%>
+                        <span class="price_num"><%=list[0].reservePrice%></span>
+                        <%}else{%>
+                        <span class="price_num"><%=list[0].currentPrice%></span>
+                        <%}%>
+                    </span>
+                    <span class="msg_gray">
+                      结束时间<span><%=list[0].endTime%></span>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</script>
+<script id="scriptDiv3" type="text/html">
+
+
+    <div class="item">
+        <span class="item_first" onclick="openEnterpriseHouseWillLive()">
+           名企房直播预告<img style="width:8px;margin-left: 10px;" src="../icon/sanjiao.png" alt="">
+        </span>
+        <ul class="item_list">
+            <li onclick="openLiveDetail3('<%=list[0].id%>')">
+                <span class="imggg">
+                    <img class="left_img" style="<%=list[0].style%>" onerror="this.src='../icon/default@1x.png'" src="<%=list[0].cover%>" alt="">
+                </span>
+                <div class="right_msg">
+                    <span class="msg_title">
+                    <%=list[0].name%>
+                    </span>
+                    <span class="price">
+                        起拍价 ￥
+                        <%if(list[0].currentPrice == 0){%>
+                        <span class="price_num"><%=list[0].reservePrice%></span>
+                        <%}else{%>
+                        <span class="price_num"><%=list[0].currentPrice%></span>
+                        <%}%>
+                    </span>
+                    <span class="msg_gray">
+                      结束时间<span><%=list[0].endTime%></span>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript">
+    var result = {};
+    var cityData = {};
+    var allResult ={};
+    var auction = {};
+    var weekend = {};
+    var enterprise ={};
+    var flag = true;
+    apiready = function (){
+        var cityList =$api.getStorage("cityTypes");
+        var cityName = $api.getStorage("cityInfo");
+        if(cityName.type ==1){
+            for(var i=0;i<cityList.citys.length;i++){
+                if(cityList.citys[i].city ==cityName.city.replace('市','')){
+                    cityData.id =cityList.citys[i].id;
+                    cityData.city =cityName.city.replace('市','');
+                }
+            }
+        }else if(cityName.type ==2){
+            cityData.id = cityName.cityInfo.id;
+            cityData.city =cityName.cityInfo.city;
+        }
+        api.setRefreshHeaderInfo({
+            visible: true,
+            bgColor: 'rgba(0,0,0,0)',
+            textColor: '#666',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //法拍房预播放
+            ajaxGetWithProgress(liveVideoLawAuctionHouseUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+                if(ret){
+                    // alert(JSON.stringify(ret))
+                    auction = ret;
+                    result = ret.data;
+                    if(isNotBlack(ret.data)){
+                        for(var i=0;i<ret.data.length;i++){
+                            ret.data[i].endTime = formatTimeToDay(ret.data[i].endTime);
+                            if(isNotBlack(ret.data[i].cover)){
+                                var picIcon =  ret.data[0].cover;
+                                var width = api.winWidth*0.4;
+                                var height =100;
+                                 var obj = getImgSizeBySize(picIcon,width,height);
+                                //alert(JSON.stringify(obj));
+                                ret.data[0].style = obj.style;
+                            }
+                        }
+                        var data = {list:ret.data};
+                        var html = template('scriptDiv1', data);
+                        document.getElementById('main').innerHTML = html;
+                    }else{
+                        document.getElementById('main').innerHTML = "";
+                        toast('您所在地区暂无数据')
+                    }
+                    
+                }else{
+
+                    alert(JSON.stringify(err))
+                }
+            });
+            //投资房预播放
+            ajaxGetWithProgress( liveWeekendUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+                if(ret){
+                    weekend = ret;
+                    result = ret.data;
+                    if(isNotBlack(ret.data)){
+                        for(var i=0;i<ret.data.length;i++){
+                            ret.data[i].endTime = formatTimeToDay(ret.data[i].endTime);
+                            if(isNotBlack(ret.data[i].cover)){
+                                var picIcon =  ret.data[0].cover;
+                                var width = api.winWidth*0.4;
+                                var height =100;
+                                var obj = getImgSizeBySize(picIcon,width,height);
+                                ret.data[0].style = obj.style;
+                            }
+                        }
+                        var data = {list:ret.data};
+                        var html = template('scriptDiv2', data);
+                        document.getElementById('main1').innerHTML = html;
+                    }else{
+                        document.getElementById('main1').innerHTML = "";
+                        toast('您所在地区暂无数据')
+                    }
+                    
+                }else{
+                    alert(JSON.stringify(err))
+                }
+            });
+            //名企房预播放
+            ajaxGetWithProgress( liveEnterpriseHouseUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+                if(ret){
+                    enterprise = ret;
+                    result = ret.data;
+                    if(isNotBlack(ret.data)){
+                        for(var i=0;i<ret.data.length;i++){
+                            ret.data[i].endTime = formatTimeToDay(ret.data[i].endTime);
+                            //截取图片
+                            if(isNotBlack(ret.data[i].cover)){
+                                var picIcon =  ret.data[0].cover;
+                                var width = api.winWidth*0.4;
+                                var height =100;
+                                var obj = getImgSizeBySize(picIcon,width,height);
+                                ret.data[0].style = obj.style;
+                                // alert(obj.style)
+                            }
+                        }
+
+                        // alert(ret.data[0].cover)
+                        var data = {list:ret.data};
+                        var html = template('scriptDiv3', data);
+                        document.getElementById('main2').innerHTML = html;
+                    }else{
+                        document.getElementById('main2').innerHTML = "";
+                        toast('您所在地区暂无数据')
+                    }
+                   
+                    
+                }else{
+                    alert(JSON.stringify(err))
+                }
+            });
+            //获取直播tab轮播图
+            ajaxGet(advertUrl,{twoLevelAreaId:cityData.id},function(ret,err){
+                if(ret&&ret.length>0){
+                    for(var i=0;i<ret.length;i++){
+                        var picList = ret[i].picture;
+                        var width = api.winWidth;
+                        var height = 197;
+                        var obj = getImgSizeBySize(picList,width,height);
+                        ret[i].style = obj.style;
+                        // alert(JSON.stringify(ret[i].style));
+
+                    }
+                    var data ={list:ret};
+                    var html = template("scriptDivPic",data);
+                    document.getElementById('picList').innerHTML =html;
+
+                }else {
+                    document.getElementById('picList').innerHTML ="";
+                }
+                if(flag == true){
+                    var body = document.getElementsByTagName('body')[0];
+                    var scr = document.createElement('script');//创建一个script节点
+                    scr.setAttribute('src','../script/mui.min.js'); //给script节点添加路径
+                    body.appendChild(scr);
+                    flag = false;
+                }else{
+
+                }
+                mui.init({
+                    swipeBack:true //启用右滑关闭功能
+                });
+                var slider = mui("#slider");
+                slider.slider({
+                    interval: 3000
+                });
+            })
+            api.refreshHeaderLoadDone();
+        });
+        api.refreshHeaderLoading();
+    }
+    //打开广告页
+    function openWeb(src){
+        var browser = api.require('webBrowser');
+        browser.open({
+            titleBar:{
+                bg:'#39bc30',
+                textColor:'#fff'
+            },
+            url: src
+        });
+    }
+    //打开三个直播的详情页 >= auction_detail
+    function openLiveDetail1 (id){
+        var hid = {};
+        hid.id = id;
+        hid.url = liveVideoUrl;
+        hid.submit = liveSubmitEnsureGoldUrl;
+        hid.startAlarmUrl = livestartAlarmUrl;
+        hid.cancelStartAlarmUrl =livecancelStartAlarmUrl;
+        hid.endAlarmUrl = liveendAlarmUrl;
+        hid.cancelEndAlarmUrl = livecancelEndAlarmUrl;
+        openNewWindow('auction_detail','./auction_detail.html',hid);
+    }
+    function openLiveDetail2 (id){
+        var hid = {};
+        hid.id = id;
+        hid.url = liveWeekendLoadUrl;
+        hid.submit = liveWeekendSubmitEnsureGoldUrl;
+        hid.startAlarmUrl = liveinvestmentHouseStartAlarmUrl;
+        hid.cancelStartAlarmUrl =liveinvestmentHouseCancelStartAlarmUrl;
+        hid.endAlarmUrl = liveinvestmentHouseEndAlarmUrl;
+        hid.cancelEndAlarmUrl = liveinvestmentHouseCancelEndAlarmUrl;
+        openNewWindow('auction_detail','./auction_detail.html',hid)
+    }
+    function openLiveDetail3 (id){
+        var hid = {};
+        hid.id = id;
+        hid.bidUrl =liveEnterpriseHouseBidUrl;
+        hid.bidPagerUrl =liveEnterpriseHouseBidPager;
+        hid.url = liveEnterpriseHouseLoadUrl;
+        hid.submit = liveEnterpriseHouseSubmitEnsureGoldUrl;
+        hid.startAlarmUrl = liveenterpriseStartAlarmUrl;
+        hid.cancelStartAlarmUrl =liveenterpriseCancelStartAlarmUrl;
+        hid.endAlarmUrl = liveenterpriseCancelEndAlarmUrl;
+        hid.cancelEndAlarmUrl = liveenterpriseCancelEndAlarmUrl;
+        openNewWindow('auction_detail','./auction_detail.html',hid)
+    }
+    function openWeekLiveDetail(id){
+        var hid = {};
+        hid.id = id;
+        hid.liveLoadUrl = liveWeekendLoadUrl;
+        hid.submitEnsureGoldUrl = liveWeekendSubmitEnsureGoldUrl;
+        openNewWindow('live_detail','./live_detail.html',hid)
+    }
+    //======================投资房 法拍房 名企房直播列表=============================
+    function openList(videoLiveListUrl,liveLoadUrl,bidUrl,bidPagerUrl,submit){
+        var liveListJson = {};
+        liveListJson.videoLiveListUrl =videoLiveListUrl;
+        liveListJson.liveLoadUrl =liveLoadUrl;
+        liveListJson.bidUrl =bidUrl;
+        liveListJson.bidPagerUrl =bidPagerUrl;
+        liveListJson.submit =submit;
+        openNewWindow("live_list","./live_list.html",liveListJson);
+    };
+    document.getElementById('investment ').onclick =  function(){
+        openList(liveWeekendBiddingPagerUrl,liveWeekendLoadUrl,liveWeekendBidUrl,liveWeekendBidPager,liveWeekendSubmitEnsureGoldUrl);
+    }
+    document.getElementById('lawauction').onclick =  function(){
+        openList(liveVideoBiddingPagerUrl,liveVideoUrl,liveBidUrl,liveBidPager,liveSubmitEnsureGoldUrl);
+    }
+    document.getElementById('enterprise').onclick =  function(){
+        openList(liveEnterpriseHouseBiddingPagerUrl,liveEnterpriseHouseLoadUrl,liveEnterpriseHouseBidUrl,liveEnterpriseHouseBidPager,liveEnterpriseHouseSubmitEnsureGoldUrl);
+    }
+    //打开三个预播放列表
+    function openEnterpriseHouseWillLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveEnterpriseHouseUrl;
+        liveListJson.videoLiveListUrl =liveEnterpriseHouseBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveEnterpriseHouseLoadUrl;
+        liveListJson.bidUrl =liveEnterpriseHouseBidUrl;
+        liveListJson.bidPagerUrl =liveEnterpriseHouseBidPager;
+        liveListJson.submit =liveEnterpriseHouseSubmitEnsureGoldUrl;
+        liveListJson.startAlarmUrl = liveenterpriseStartAlarmUrl;
+        liveListJson.cancelStartAlarmUrl =liveenterpriseCancelStartAlarmUrl;
+        liveListJson.endAlarmUrl = liveenterpriseEndAlarmUrl;
+        liveListJson.cancelEndAlarmUrl = liveenterpriseCancelEndAlarmUrl;
+        openNewWindow('liveAnnounce_list','./liveAnnounce_list.html',liveListJson);
+    }
+    function openLawAuctionWillLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveVideoLawAuctionHouseUrl;
+        liveListJson.videoLiveListUrl =liveVideoBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveVideoUrl;
+        liveListJson.bidUrl =liveBidUrl;
+        liveListJson.bidPagerUrl =liveBidPager;
+        liveListJson.submit =liveSubmitEnsureGoldUrl;
+        liveListJson.startAlarmUrl = livestartAlarmUrl;
+        liveListJson.cancelStartAlarmUrl =livecancelStartAlarmUrl;
+        liveListJson.endAlarmUrl = liveendAlarmUrl;
+        liveListJson.cancelEndAlarmUrl = livecancelEndAlarmUrl;
+        openNewWindow('liveAnnounce_list','./liveAnnounce_list.html',liveListJson);
+    }
+    function openWeekendWillLive(){
+        var liveListJson = {};
+        liveListJson.willPlayUrl = liveWeekendUrl;
+        liveListJson.videoLiveListUrl =liveWeekendBiddingPagerUrl;
+        liveListJson.liveLoadUrl =liveWeekendLoadUrl;
+        liveListJson.bidUrl =liveWeekendBidUrl;
+        liveListJson.bidPagerUrl =liveWeekendBidPager;
+        liveListJson.submit =liveWeekendSubmitEnsureGoldUrl;
+        liveListJson.startAlarmUrl = liveinvestmentHouseStartAlarmUrl;
+        liveListJson.cancelStartAlarmUrl =liveinvestmentHouseCancelStartAlarmUrl;
+        liveListJson.endAlarmUrl = liveinvestmentHouseEndAlarmUrl;
+        liveListJson.cancelEndAlarmUrl = liveinvestmentHouseCancelEndAlarmUrl;
+        openNewWindow('liveAnnounce_list','./liveAnnounce_list.html',liveListJson);
+    }
+</script>
+</body>
+</html>

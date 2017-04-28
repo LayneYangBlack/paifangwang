@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>看视频</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <link rel="stylesheet" type="text/css" href="../css/photoswipe.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/default-skin.css"/>
+</head>
+<body id="body">
+<div id="topbar">
+    <div id="leftButton" onclick="closeWin()">
+         <img src="../icon/daohang.png" >
+    </div>
+    <div class="left_title">图片浏览</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/photoswipe.js"></script>
+<script type="text/javascript" src="../script/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/photoswipe-ui-default.js"></script>
+<script type="text/javascript" src="../script/photoswipe-ui-default_local.js"></script>
+<script>
+    var dialogBox ;
+    apiready = function () {
+        // initFrameInWin(api.pageParam);
+          var playModule = api.require('playModule');
+          dialogBox = api.require('dialogBox');
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+             playModule.unfull(function(ret, err) {
+            
+        
+            
+            });
+
+        });
+      
+        h = api.farameHeight;
+        w = api.frameWidth;
+        url = api.pageParam.url
+        playModule.play({
+            pageType:'Window',
+            rect:{   
+                x: 0,
+                y :0,
+                w :api.winWidth,
+                h :200
+            },
+            fixedOn: api.frameName,
+            title:"视频",
+            url:url,
+            defaultBtn: true,
+            enableFull : true
+        }, function(ret, err) { 
+            // playModule.full(function(ret, err) {
+                playModule.isFullScreen(function(ret, err) {
+                if(ret && ret.status){
+                    setInterval(function(){
+                        playModule.isFullScreen(function(ret, err) {
+                            if(ret && !ret.status){
+                                showDialog('','','','',function(){
+                                                            
+                                })
+                        
+                                dialogBox.close ({
+                                    dialogName: 'alert'
+                                });
+                                closeWin();
+                            }
+                        });
+                    },100)
+                }else{}
+                
+            });
+            // });
+            
+            
+            playModule.addEventListener({
+                name: 'playEnd'
+            }, function(ret, err) {
+                if(ret.status){ 
+                    playModule.unfull(function(ret, err) {
+                        if(ret.status){
+                          
+                           
+                       
+                       
+                        }
+                    });
+                }else{
+                }
+            });
+        });
+    };
+	
+</script>
+</html>
+ 

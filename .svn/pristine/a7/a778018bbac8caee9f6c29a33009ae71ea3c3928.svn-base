@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>参拍中</title>
+		<link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		<style type="text/css">
+			.item{width: 100%;background-color: #fff;margin-top: 10px;}
+			.over_time{display: flex;width: 100%;height: 33px;align-items: center;justify-content: center;border-bottom: 1px solid #EFEFEF;font-size: 14px;}
+			.item_list{
+						width: 100%;
+						
+						border-top: 1px solid #ECECEC;
+				}
+				.item_list li{
+						width:100%;
+						height:130px;
+						background-color: #FFFFFF;
+						display: flex;
+						align-items: center;
+						/*justify-content: center;*/
+			position: relative;
+						border-top: 1px solid #ECECEC;
+						border-bottom: 1px solid #ECECEC;
+				}
+			 
+				.left_img{
+						width: 100px;height: 100px; margin-left: 10px;
+						float: left;
+				}
+				.right_msg{
+						float: right;
+						width: 70%;
+						height: 100px;
+						margin-left: 10px;
+						display: flex;
+				flex-wrap: wrap;
+				}
+				.msg_title{
+						width: 100%;
+						display: inline-block;
+						 height: 30px;
+					 line-height: 16px;
+						font-size: 14px;
+						overflow:hidden ;
+						text-overflow: ellipsis;
+						/*white-space: nowrap;*/
+				}
+				.price{
+						display: block;
+						height: 16px;
+						line-height: 16px;
+						color: red;
+						font-size: 14px;
+				}
+				.price_num{
+						font-size: 16px;
+				}
+				.msg_gray{
+						height: 18px;
+						line-height: 18px;
+						display: block;
+						color: #999999;
+						font-size: 14px;
+				}
+				.button_status{width: 70px;height: 30px;display:flex;align-items:center;justify-content: center;position: absolute;right: 2%;bottom: 10%;font-size: 18px;background-color: #F5A823;color: #fff;border-radius: 5px;}
+				.over{width: 20%;height: 100%;color: #fff;background-color: #BCBCBC;font-size: 12px;}
+			.bid{margin-left: 10px;}
+			.imggg{width:25%;height:60px; float: left;overflow: hidden;margin-left: 10px;}
+		</style>
+</head>
+<body>
+<div id="main">
+	<!--<div class="item">-->
+		<!--<span class="over_time">已结束</span>	-->
+		<!--<ul class="item_list">-->
+				<!--<li>-->
+						<!--<img class="left_img" src="../icon/images.png" alt="">-->
+						<!--<div class="right_msg">-->
+								<!--<span class="msg_title">-->
+												<!--6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三-->
+								<!--</span>-->
+							 <!--<span class="price">-->
+									 <!--起拍价&nbsp;<span class="price_num">121</span>万 </span>-->
+							 <!--<span class="msg_gray">-->
+									<!--<span class="">保证金:<span>￥500</span></span>-->
+							 <!--</span>-->
+						<!--</div>-->
+						<!--<span class="button_status">领先</span>-->
+				<!--</li>-->
+		<!--</ul>-->
+	<!--</div>-->
+	<!--<div class="item">-->
+		<!--<span class="over_time">已结束</span>	-->
+		<!--<ul class="item_list">-->
+				<!--<li>-->
+						<!--<img class="left_img" src="../icon/images.png" alt="">-->
+						<!--<div class="right_msg">-->
+								<!--<span class="msg_title">-->
+												<!--6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三-->
+								<!--</span>-->
+							 <!--<span class="price">-->
+									 <!--起拍价&nbsp;<span class="price_num">121</span>万 </span>-->
+							 <!--<span class="msg_gray">-->
+									<!--<span class="">保证金:<span>￥500</span></span>-->
+							 <!--</span>-->
+						<!--</div>-->
+						<!--<span class="button_status">出价</span>-->
+				<!--</li>-->
+		<!--</ul>-->
+	<!--</div>-->
+</div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/html" id="scriptDiv">
+		<%for(var i=0;i < list.length; i++){%>
+		<div class="item" onclick="openDetail('<%=list[i].hid%>')">
+			<ul class="item_list">
+				<li>
+					<span class="imggg">
+						<img class="left_img" style="<%=list[i]%>" src="<%=list[i].houseCover%>" onerror="this.src='../icon/default@1x.png' " alt="">
+					</span>
+					<div class="right_msg">
+						<span class="msg_title">
+								<%=list[i].houseName%>
+						</span>
+
+					 	<span class="price"><%=list[i].houseEndTime%>&nbsp;结束</span>
+					</div>
+					<span class="button_status">出价</span>
+				</li>
+			</ul>
+		</div>
+		<%}%>
+
+</script>
+<script>
+
+
+	apiready = function () {
+		new datalistModel(addDataToHtml,bidedHouserUrl,{},10,5,100,true)
+	};
+	allResult = {};
+	function addDataToHtml(results,append) {
+		if (results && results.length>0) {
+			for(var i=0;i<results.length;i++){
+					results[i].houseEndTime = formatTimeToDate(results[i].houseEndTime)
+					allResult[results[i].hid] =results[i];
+			}
+			// alert(JSON.stringify(allResult))
+			var data = {list: results};
+			var html = template('scriptDiv',data);
+			if (append) {
+					var div = document.createElement("div");
+					div.innerHTML = html;
+					document.getElementById('main').appendChild(div);
+			} else{
+					document.getElementById('main').innerHTML = html;
+			}
+		}
+	}
+	function openDetail(hid){
+		 if (allResult[hid].type ==1){
+			allResult[hid].id = hid;
+			allResult[hid].url = lawAuctionDetailUrl;
+			allResult[hid].submit = submitEnsureGoldUrl;
+			allResult[hid].ensureGoldLoadUrl = ensureGoldLoadUrl;
+			allResult[hid].bidurl = lawAuctionHouseUrl;
+			allResult[hid].bidPagerUrl = lawAuctionHouseBidPager;
+			openNewWindow('auction_detail','auction_detail.html',allResult[hid]);
+		 }else if(allResult[hid].type ==2){
+			allResult[hid].id = hid;
+			allResult[hid].url = investmentDetailUrl;
+			allResult[hid].submitUrl = investmentEnsureGoldUrl;
+			allResult[hid].ensureGoldLoadUrl = investmentensureGoldLoadUrl;
+			allResult[hid].bidurl = investmentHouseBidUrl;
+			allResult[hid].bidPagerUrl = investmentHouseHouseBidPager;
+			openNewWindow('auction_detail','auction_detail.html',allResult[hid]);
+		 }else if(allResult[hid].type ==3){
+			allResult[hid].id = hid;
+			allResult[hid].name = allResult.houseName;
+			allResult[hid].bidurl = enterpriseHouseUrl;
+			allResult[hid].bidPagerUrl = enterpriseHouserBidPages;
+			openNewWindow('e_room_detail','./e_room_detail.html',allResult[hid]);
+		 }else  if(allResult[hid].type ==4){
+			allResult[hid].id = hid;
+			allResult[hid].url=onePriceDetailUrl;
+			openNewWindow('fangc_detail','./fangc_detail.html',allResult[hid]);
+		 }else if(allResult[hid].type  == 5 ){
+			allResult[hid].url = liveWeekendLoadUrl;
+			allResult[hid].id = allResult[hid].hid;
+			allResult[hid].bidurl = liveWeekendBidUrl;
+	        allResult[hid].bidPagerUrl = liveWeekendBidPager;
+			openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+		}else if(allResult[hid].type == 6 ){
+			allResult[hid].url = liveVideoUrl;
+			allResult[hid].id = allResult[hid].hid;
+			allResult[hid].bidurl = liveBidUrl;
+	        allResult[hid].bidPagerUrl = liveBidPager;
+			openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+		}else if(allResult[hid].type ==7){ 
+			allResult[hid].url = liveEnterpriseHouseLoadUrl;
+			allResult[hid].id = allResult[hid].hid;
+			allResult[hid].bidurl =liveEnterpriseHouseBidUrl;
+	        allResult[hid].bidPagerUrl =liveEnterpriseHouseBidPager;
+			openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+		}  
+	}
+</script>
+</html>

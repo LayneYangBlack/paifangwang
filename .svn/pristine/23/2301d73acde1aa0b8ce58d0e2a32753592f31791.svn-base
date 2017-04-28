@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>所有专场</title>
+    <link rel="stylesheet" href="../css/mui.css">
+    <style>
+        html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+		.item{width: 100%;}
+		.item_anchor{width: 96%;height:160px;margin: 2%;background-image: url(../image/1.png);background-repeat: no-repeat;background-size: auto;text-align: center;line-height: 260px;}
+		.bg{width: 100%;height: 100%;}
+		.bg_title{color: #fff;}
+		.item_title{width: 94%;height: 37px;margin: 2%;padding: 1%;}
+		.session_status{color: #999;float: right;}
+		.gray_box{color: #999; font-size: 14px;display: block;margin-top: 5px;}
+    </style>
+</head>
+<body>
+<div class="item">
+	<div class="item_anchor" onclick="openNewWindow('session_auction','session_auction.html')">
+		<span class="bg_title">
+			低价起拍卖>
+		</span>
+	</div>
+	<div class="item_title">
+		<span class="session_name">万达限时特惠房专场</span><span class="session_status">已结束</span>
+		<span class="gray_box"><span class="house_num">10</span>套房 <span class="price_num">0</span>人出价</span>
+	</div>
+</div>
+<div class="item">
+	<div class="item_anchor" onclick="openNewWindow('session_auction','session_auction.html')">
+		<span class="bg_title">
+			低价起拍卖>
+		</span>
+	</div>
+	<div class="item_title">
+		<span class="session_name">万达限时特惠房专场</span><span class="session_status">已结束</span>
+		<span class="gray_box"><span class="house_num">10</span>套房 <span class="price_num">0</span>人出价</span>
+	</div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+
+	}
+</script>
+</body>
+</html>

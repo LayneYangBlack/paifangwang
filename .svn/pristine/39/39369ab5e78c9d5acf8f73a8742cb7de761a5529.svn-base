@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>楼盘详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        #live_list{w
+            position: relative;
+            overflow: hidden;
+            width: 129px;
+            height:100%;
+            margin: 0 auto;
+        }
+        #live_list li{
+            height:44px;
+            width:33%;
+            float: left;
+            text-align: center;
+            line-height:44px;
+            font-size: 16px;
+            /*color: #565656;*/
+            color: #000;
+        }
+        #move{
+            width: 27.67%;height: 2px;
+            background: #fff;position: absolute;
+            bottom: 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body >
+<div id="topbar">
+    <div id="leftButton" onclick="closeWin()">
+         <img src="../icon/daohang.png" >
+    </div>
+        <ul id="live_list">
+            <li style="color: #fff;" onclick="switchFrameGroupIndex(0)" >楼盘</li>
+            <li onclick="switchFrameGroupIndex(1)">户型</li>
+            <li onclick="switchFrameGroupIndex(2)">点评</li>
+        </ul>
+       <img src="../icon/share_icon.png" alt="" onclick="openShare()" class="right_img1">
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+    var window_width;
+    var indexFlag = false;
+    var eid={};
+    var dataJson;
+    var retJson;
+	apiready = function () {
+        dataJson = api.pageParam;
+        eid.enterpriseHousesId = dataJson.id;
+        ajaxGetWithProgress(famousDetailUrl,eid,function(ret,err){
+            if(isNotBlack(ret)){
+                retJson = ret;
+                var strDM = api.systemType;//系统
+                var strSV = parseFloat(api.systemVersion,10);//版本
+                var titleHeight=0;
+                if(strDM == 'ios' && strSV >7){
+                    titleHeight=20
+                }else if(strDM == 'android' && strSV>=4.4){
+                    titleHeight = 25;
+                }
+                document.getElementById('topbar').style.paddingTop = titleHeight + 'px';
+                api.openFrameGroup ({
+                    name: 'unitRoomGroup',
+                    background:'#fff',
+                    scrollEnabled:false,
+                    rect : {
+                        x : 0,
+                        y : 44+titleHeight,
+                        w : 'auto',
+                        h : api.winHeight - 44 -titleHeight
+                    },
+                    index:0,
+                    preload:3,
+                    frames: [{
+                        name: 'roolist',
+                        url: 'houses_detail_body.html',
+                        bgColor :'rgba(246,246,246,1)',
+                        pageParam:retJson
+                    },{
+                        name: 'roolist1',
+                        url: 'houseImagelist.html',
+                        bgColor :'rgba(246,246,246,1)',
+                        pageParam:retJson.houseTypeImages
+                    },{
+                        name: 'roolist2',
+                        url: 'houseImageComment.html',
+                        bgColor :'rgba(246,246,246,1)',
+                        pageParam:retJson
+                    }
+                    ]
+                }, function(ret, err){
+                    
+                });
+            }else{
+                alert(JSON.stringify(err))
+            }
+        })
+        
+	};
+    function switchFrameGroupIndex(index){
+        _index=index;
+        api.setFrameGroupIndex({
+            name : "unitRoomGroup",
+            index : index,
+            scroll : true
+        });
+        var width = (window_width / 3) * index;
+        var lis=document.querySelector("#live_list").querySelectorAll("li");
+        for(var i=0;i<lis.length;i++){
+            if(i==index){
+                lis[i].style.color="#fff";
+                if(i ==2){
+                }
+            }else{
+                lis[i].style.color="#000";
+            }
+        }
+        if(index ==2){
+            indexFlag = true;
+        }else{
+        }
+        if(indexFlag == true) {
+            if (index == 2) {
+                api.execScript({
+                    frameName: 'roolist2',
+                    script: 'showChatBox()'
+                })
+            } else {
+                api.execScript({
+                    frameName: 'roolist2',
+                    script: 'hideChatBox()'
+                })
+            }
+        }
+    }
+    function openMsg(){
+        api.closeWin({
+            name:'famousHouse'
+        });
+        api.closeWin({
+            name:'houses_detail'
+        });
+        api.execScript({
+            name:rootWindowName,
+            script:"openTab('msg')"
+        });
+    }
+    function openShare(){
+        openFrame("share","./share.html",{},0,0);
+    }
+</script>
+</html>

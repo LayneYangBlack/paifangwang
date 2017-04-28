@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实名认证</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<!--<link rel="stylesheet" href="../css/mui.min.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{font-family:"黑体";}
+		html{height: auto;width: 100%;background: #f4f4f4;}
+		.border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display: flex;
+			align-items: center;justify-content: space-between;}
+		.mage{line-height:55px;text-align: left;display: block;width:auto;height: 100%;}
+		.border input {width:60%;margin-right: auto;height: 40px;color: #909090;}
+		.border_b{border-bottom: none;}
+		.btn{width: 84%;margin: 45px 8% 0 8%;height: 45px;text-align: center;line-height: 45px;
+			float: left;background: #06c1ae;border-radius: 10px;color: #fff;}
+		.id_cart{  width: 45%;  text-align: center;  margin: 20px 0;  }
+		.id_cart p{  margin: 5px;  font-size: 12px;  }
+		.id_upload{  float: left;  margin-left: 3%;  }
+		.id_img img{  width: 100%;height: 6rem;  }
+		.id_upload_right{  float: right;  margin-right: 3%;  }
+		.selectPhone{  height: 30px;  border: solid 1px #eaeaea;  line-height: 30px;
+			border-radius: 20px;  font-size: 16px;  color: #06c1ae;  margin-left: auto;  width: 80px;
+			margin-top: 10px;  margin-right: auto;  }
+		h4{  color: #9A9A9A;  font-size: 12px;  }
+		.imgarea{width: 100%;height: auto;background: #fff;float: left;}
+	</style>
+</head>
+<body>
+	<div class="li_50 mp_10">
+		<div class="border">
+			<span class="mage">真实姓名：</span>
+			<input  id="name" style="outline:none;">
+		</div>
+	</div>
+
+	<div class="li_50 ">
+		<div class="border">
+			<span class="mage">身份证号：</span>
+			<input type="text"  id="idCard"  style="outline:none;" >
+		</div>
+	</div>
+
+	<div class="imgarea">
+
+	<div class="id_upload id_cart">
+		<div class="id_img">
+			<img src="" id="left" >
+			<!--onerror="this.src='../../image/user-photo.png'"-->
+		</div>
+		<p>正面照</p>
+		<div class="selectPhone" style="color:#39bc30" onclick="getImgUrl('left')">选择照片</div>
+	</div>
+	<div  class="id_upload_right id_cart">
+		<div class="id_img">
+			<img width="50px" src="" id="right" >
+			<!--onerror="this.src='../../image/user-photo.png'"-->
+		</div>
+		<p>本人手持身份证照</p>
+		<div class="selectPhone" style="color:#39bc30" onclick="getImgUrl('right')">选择照片</div>
+	</div>
+
+	</div>
+
+	<div class="btn" id="comm" style="background-color:#39bc30"  onclick="commit()">马上验证</div>
+
+</body>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript">
+	var imgType = null;
+	var idPicFront = null;
+	var idPicBack =null;
+    var userInfo;
+    var idStatus;
+	apiready = function(){
+        idStatus= api.pageParam;
+        userInfo = getUserInfo();
+//        ajaxGetWithProgress(getUserDetailUrl,{uid:userInfo.id},function(ret,err){
+//            if(isNotBlack(ret.idCardName)){
+//                document.getElementById("name").value = ret.idCardName;
+//			}
+//            if(isNotBlack(ret.idCardNo)){
+//                document.getElementById("idCard").value = ret.idCardNo;
+//            }
+//            if(isNotBlack(ret.idCard)){
+//                document.getElementById("left").src = JSON.parse(ret.idCard).front;
+//                document.getElementById("right").src = JSON.parse(ret.idCard).back;
+//            }
+//            if(ret.attestIdCard ==3){
+//                document.getElementById("comm").style.display = "block";
+//			}else  if(ret.attestIdCard ==1||ret.attestIdCard ==2){
+//                document.getElementById("comm").style.display = "none";
+//			}
+//		});
+	}   
+	
+	var typea = null;
+	function getImgUrl(type){
+        typea = type;
+		imgType = type;
+        api.actionSheet({
+            title: '选择图片',
+            cancelTitle: '取消',
+            buttons: ['拍照','从手机相册选择']
+        },function(ret,err) {
+            var index = ret.buttonIndex;
+            var sourceType;
+
+            switch (index) {
+                case 1 :
+                    sourceType = 'camera';
+                    break;
+                case 2 :
+                    sourceType = 'album';
+                    break;
+                default :
+                    return;
+            }
+
+            api.getPicture({
+                sourceType: sourceType,
+                mediaValue: 'pic',
+                destinationType: 'url',
+                allowEdit: false,
+                quality: 100,
+                saveToPhotoAlbum: true
+            }, function(ret, err){
+                if(isNotBlack(ret)&&isNotBlack(ret.data)){
+                    var imgList = [];
+                    imgList.push(ret.data)
+                    compressImageList(imgList,function(ret){
+                        uploadImg(ret);
+                    });
+                    // openNewWindow("imgClip",imgClipUrl,pageParam,{bounces:false});
+                    api.hideProgress();
+                }else{
+                    api.hideProgress();
+                }
+            });
+        })
+	}
+	function setImgUrl(data){
+		if(imgType == 'left'){             
+			idPicFront = data;
+		}else{
+			idPicBack =data;
+		}
+		document.getElementById(imgType).src = data;
+	}
+    function uploadImg(ret) {
+        api.showProgress({title: ' ...',text: '先喝杯茶...'});
+        api.ajax({
+            url: uploadImageUrl,
+            method: 'post',
+            timeout: 120,
+            report: true,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                files: {file:ret}
+            }
+        }, function (ret, err) {
+            if(ret.status == 1){
+                //异步调用
+                document.getElementById(typea).src = "";
+				document.getElementById(typea).src = ret.body.ok;
+				if(typea=="left"){
+                    idPicFront = document.getElementById(typea).src;
+				}else{
+                    idPicBack = document.getElementById(typea).src;
+				}
+            }
+            api.hideProgress();
+        });
+        api.hideProgress();
+    }
+	function commit(){
+	    if(idStatus.idStatus !=1){
+            var realName = document.getElementById("name").value;
+            var idNo = document.getElementById("idCard").value;
+            var check=/\d{15}|\d{17}[0-9Xx]/;
+            var params = {};
+            if(isBlack(realName)){
+                toast("姓名不能为空！");
+                return;
+            }
+            params.idCardName = realName;
+
+            if(isBlack(idNo)){
+                toast("你还没有填写身份证号");
+                return;
+            }
+            if(!check.test(idNo)){
+                toast("请输入正确的身份证号");
+                return;
+            }
+            params.idCardNo = idNo;
+            if(isBlack(idPicFront)){
+                toast("你还没有上传身份证正面照");
+                return;
+            }
+            // params.idPicFront = idPicFront;
+            if(isBlack(idPicBack)){
+                toast("你还没有上传身份证背面照");
+                return;
+            }
+            // params.idPicBack = idPicBack;
+            params.idCard = JSON.stringify({front:idPicFront,back:idPicBack})
+            // $api.setStorage('userId',params)
+            ajaxGetWithProgress(userSubmitIdCardAttestUrl,params, function (ret, err) {
+                if(ret && ret.success){
+//					alert(JSON.stringify(ret))
+                    toast("提交成功！");
+                    api.execScript({
+                        name:"personDeatail",
+                        frameName:'personDeatail_body',
+                        script: 'apiready()'
+                    });
+                    api.execScript({
+                        name:"personDeatail",
+                        frameName:'personDeatail_body',
+                        script: 'toastSuccess()'
+                    });
+                    closeWin();
+                }else{
+                    toast("当前网络不给力！稍后重试");
+                }
+            });
+		}else{
+	        toast("正在审核中")
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>e选房详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <style type="text/css">
+		 ul, li {
+		    list-style: none;
+		    margin: 0;
+		    padding: 0;
+		}
+    	.header{
+    	width:100%;
+		background-color: #FFFFFF;
+		margin-bottom: 12px;
+    	}
+    	.head{
+    			width: 96%;
+		 		height: 70px;
+		 		margin:0 2%;
+		 		display: flex;
+		 		justify-content: space-between;
+		 		border-bottom: 1px solid #f2f2f2;
+    	}
+    	.shop_logo{
+		 		border: 1px #8FD93E solid;
+		 		color: #8FD93E;
+		 	}
+		 	.save_logo{
+		 		border: 1px #9CE2F6 solid;
+		 		color: #9CE2F6;
+		 	}
+		 	.house_logo{border: 1px #FC6061 solid;color: #FC6061;}
+		 	.car_logo{border: 1px #FF9D22 solid;color: #FF9D22;}
+		 	.logo{
+		 		width:44px;
+		 		height:20px ;
+		 		border-radius: 5px;
+		 		
+		 		text-align: center;
+		 		margin-left: 10px;
+		 	}
+    	.list_box{
+		 		width: 80%;
+		 		height: 100%;
+		 	}
+		 	.plot,.address{height: 2rem;    display: flex;align-items: center;}
+		 	.process{width: 60px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: red;margin-top: 10px;}	
+		 	.opening{width: 70px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #FF9D22;margin-top: 10px;} 
+		 	.over{width: 60px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #ccc;margin-top: 10px;}	
+    		.square{
+    			width: 14px;
+    			height: 14px;
+    		}
+    		.white{
+    			background-color: #FFFFFF;
+    			border: 1px solid #CCCCCC;
+    		}
+    		.green{background-color: limegreen;}
+    		.red{background-color: red;}
+    		.color_example{
+    			width: 100%;
+    			height: 30px;
+    			display: flex;
+    			justify-content: space-between;
+    		}
+    		.color_example li{
+    			width: 33%;
+    			display: flex;
+    			align-items: center;
+    			justify-content: center;
+    		}
+    		#house_unit{
+	    	overflow: hidden;
+	    	border: 1px solid #efefef;
+	    	background: #fff;
+	    }
+	    #house_unit li{
+	    	height: 38px;
+	    	width:20%;
+	    	float: left;
+	    	text-align: center;
+	    	line-height: 38px;
+	    	font-size: 16px;
+	    	color: #565656;
+	    }
+	    .unit{position: relative;}
+	     #move{
+	    	width: 13.67%;height: 2px;
+	    	background: #39bc30;position: absolute;
+	    	bottom: 0;left: 3.5%;
+	    	border-radius: 2px;
+	    }
+    </style>
+</head>
+<body>
+<div id="main" style="position: relative">
+
+	</div>
+<div id="main1"></div>
+
+</body>
+		<script type="text/javascript" src="../script/api.js"></script>
+		<script type="text/javascript" src="../script/user.js"></script>
+		<script type="text/javascript" src="../script/util.js"></script>
+		<script type="text/javascript" src="../script/kv.js"></script>
+		<script type="text/javascript" src="../script/apiCloud.js"></script>
+		<script type="text/javascript" src="../script/public.js"></script>
+		<script type="text/javascript" src="../script/template-native.js"></script>
+		<script type="text/javascript" src="../script/data.js"></script>
+		<script type="text/javascript" src="../script/init.js"></script>
+		<script type="text/html" id="scriptDiv">
+			<div class="header">
+				<div class="head">
+					<div class="list_box">
+						<span class="plot">
+							<%=list.name%>
+						<%if(list.type =1){%>
+							<span class="logo house_logo">房源</span>
+						<%}else if(list.type =2){%>
+							<span class="logo car_logo">车位</span>
+						<%}else if(list.type =3){%>
+							<span class="logo shop_logo">商铺</span>
+						<%}else if(list.type =4){%>
+							<span class="logo store_logo">车位</span>
+						<%}
+						%>
+						</span>
+						<span class="address"><%=list.address%></span>
+					</div>
+					<span class="process">
+					<%=list.statusName%>
+				</span>
+				</div>
+				<div class="color_example">
+					<li><span class="square white"></span>可售</li>
+					<li><span class="square green"></span>已选购</li>
+					<li><span class="square red"></span>已流拍</li>
+				</div>
+			</div>
+
+		</script>
+		<script type="text/html" id="scriptDiv2">
+			<div class="unit">
+				<ul id="house_unit">
+					<%if(list.length<=4){%>
+					<%for(var i=0;i< list.length;i++ ){%>
+					<li style="color: #39bc30;" onclick="switchFrameGroupIndex('<%=list.')"><%=list[i].unit%>单元</li>
+					<%}%>
+					<%}else if(list.length>4){%>
+					<li style="color: #39bc30;" onclick="switchFrameGroupIndex(0)">1单元</li>
+					<li onclick="switchFrameGroupIndex(1)">2单元</li>
+					<li onclick="switchFrameGroupIndex(2)">3单元</li>
+					<li onclick="switchFrameGroupIndex(3)">4单元</li>
+					<li id="more" onclick="openMore()">更多</li>
+					<%}
+					%>
+					<%if(list.length ==0){%>
+					<div style="display: none" id="move"></div>
+					<%}else if(list.length !=0){%>
+					<div id="move"></div>
+					<%}
+					%>
+
+				</ul>
+
+				<!--更多	-->
+			</div>
+		</script>
+		<script type="text/javascript">
+				  var window_width;
+				  var result={};
+				  var unit ={};
+				  var datas={};
+		    apiready = function(){
+
+
+		        window_width = api.winWidth;
+		         datas = api.pageParam;
+				var data = {list: datas};
+				var html = template('scriptDiv',data);
+				document.getElementById('main').innerHTML = html;
+				ajaxGetWithProgress(eHouseDetailUrl,{ehgid:datas.id}, function (ret,err) {
+					if(ret){
+						//alert(JSON.stringify(ret));
+						unit =ret;
+						var frames =[];
+						for(var i=0;i<ret.length; i++){
+							result[ret[i].ret] = ret[i];
+							  var obj  ={
+								name: 'roolist'+(i+1),
+								url: 'unit_room.html',
+								bgColor :'rgba(246,246,246,1)',
+								pageParam:{type:i,unit:unit[i],name:datas.name}
+							}
+							frames.push(obj);
+						}
+						var unite =  {list: ret};
+						var html2 = template('scriptDiv2',unite);
+						document.getElementById('main1').innerHTML = html2;
+						api.openFrameGroup ({
+							name: 'unitRoomGroup',
+							background:'#fff',
+							scrollEnabled:true,
+							rect : {
+								x : 0,
+								y : 197,
+								w : 'auto',
+								h : api.winHeight - 197
+							},
+							index:0,
+							frames:frames
+						}, function(ret, err){
+							switchFrameCallback(ret.index);
+						});
+					}
+				})
+
+
+		    };
+		    function switchFrameGroupIndex(index){
+		        _index=index;
+		        api.setFrameGroupIndex({
+		            name : "unitRoomGroup",
+		            index : index,
+		            scroll : true
+		        });
+		    }
+		    function switchFrameCallback(index){
+		        var width = (window_width / 5) * index;
+		        var lis=document.querySelector("#house_unit").querySelectorAll("li");
+		        $api.css(document.getElementById("move"), "-webkit-transform:translate(" + width + "px,0)");
+		        for(var i=0;i<lis.length;i++){
+		            if(i==index){
+		            	lis[i].style.color="#39bc30";
+
+		            }else{
+		                lis[i].style.color="#000";
+		            }
+		        }
+		    }
+				  //打开更多
+			function openMore(){
+			openFrame('more','./more.html','e_change_detail','159','-44');
+			}
+
+
+			function showNewUnite(index){
+				document.getElementById("more").innerHTML = index+"单元";
+				var width = (window_width / 5) * 4;
+				$api.css(document.getElementById("move"), "-webkit-transform:translate(" + width + "px,0)");
+
+			}
+
+		</script>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no" />
+	<title>房产详情</title>
+	<link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+	<link rel="stylesheet" href="../css/mui.css">
+	<style type="text/css">
+		body{background-color: #EFEFEF;}
+		.head{width: 100%;height: 30px;position: relative;overflow: hidden;background: #fff;display: flex;justify-content: space-between;align-items: center;}
+		.head_ing{display: flex;align-items: center;justify-content: center;width: 36%;height: 100%;background-color: #f5a823;color: #fff;}
+		.triangle-left {position: absolute;top: 4px;z-index: 2;width: 40px;height: 40px;left: 40%;-webkit-transform-origin: 0 100%;-moz-transform-origin: 0 100%;-o-transform-origin: 0 100%;-ms-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);background: #fff;}
+		#over_time{z-index: 3;}
+		.title_content{width:100%;height: 9rem;background-color: #FFFFFF;border-bottom: 1px solid #F2F2F2;}
+		.title_item{width: 100%;display: flex;justify-content: space-between;}
+		#title_address{width: 70%;padding: 20px;font-weight: bold;}
+		.over_prompt{width:30%;font-size: 14px;margin-top: 10px;margin-right: 2%;text-align: center;border-left: 1px #F2F2F2 solid;}
+		.price_now{margin:1% 20px;}
+		.price_num{color: red;}
+		.many_people{display: flex;justify-content: flex-start;color:#999999;padding-left: 20px;}
+		.many_people li{line-height: 20px;margin-right:10px ;}
+		#apply_num,#remind_num,#onlookers_num{    display: inline-block;}
+		.margin_money{width: 100%;background-color: #FFFFFF;display: flex;flex-wrap: wrap;align-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.margin_money li{width: 43%;line-height: 25px;color: #999999;padding-left: 20px;font-size: 14px;}
+		.pay_style{width: 98%;padding:0 1%;height: 35px;background-color: #fff;font-size: 14px;  color: #999999;  display: flex;align-items: center;justify-content: space-around;}
+		/*#full_pay,#mortgage_pay,#Unlimited{background: url(../icon/Oval_2_Copy.png) center left no-repeat;color:#999;} */
+		.nochecked{background: url(../icon/Oval_2_Copy.png) center left no-repeat;color:#999;}
+		.checked{background:url(../icon/Oval_2.png) center left no-repeat;color:#5b5b5b}
+		.pay_style a{display: inline-block;width: 15%;padding-left: 18px;}
+		.bidding_record{width: 90%;padding:0 5%;height: 86px;}
+		.bidding_title{width: 100%;height: 40px;display: flex;align-items: center;justify-content: space-between;}
+		.bidding{    height: 46px;display: flex;align-items: center;justify-content: space-around;}
+		.bidder{display: block;}
+		.bidding li{position:relative;text-align: right;font-size: 12px;background-color: #fff;width: 29%;height: 40px;line-height: 20px;padding-right: 5px;}
+		.first{color:red;}
+		.first_logo{background-color: #fba723;color: #fff;position: absolute;top: -4px;left: 0;font-size: 14px;}
+		.out_logo{background-color: #bcbcbc;color: #fff;position: absolute;top: -4px;left: 0;font-size: 14px;}
+		.content_six{width: 96%;padding:2%;background-color: #FFFFFF;display: flex;flex-wrap: wrap;align-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.content_six li{width: 43%;line-height: 25px;color: #999999;padding-left: 20px;font-size: 14px;}
+		.content_six li:last-child{width: 80%;line-height: 25px;color: #999999;padding-left: 20px;font-size: 14px;}
+		.black{color: #5B5B5B;}
+		.content_seven{width: 93%;height: 35px;color:#999999;padding-left:7%;background-color:#fff;display: flex;align-items: center;border-bottom: 2px solid #F2F2F2;border-top:2px solid #F2F2F2;font-size: 14px;}
+		.content_eight{height: 150px;width: 96%;padding:2%;background-color: #FFFFFF;display: flex;flex-wrap: wrap;align-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.content_eight li{width: 43%;line-height: 25px;color: #999999;padding-left: 20px;font-size: 14px;}
+		.content_eight li:first-child{width: 80%;line-height: 25px;color: #999999;padding-left: 20px;font-size: 14px;}
+		.content_nine{width: 100%;height: 100px;background: #fff;margin-top: 8px;}
+		.content_comment{background-color:#fff;width: 86%;padding:0 7%;height: 34px;color:#999;font-size:14px;display: flex;align-items: center;justify-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.comment_name{color: #999;}
+		.comment_content{width: 86%;padding:0 7%;height: 66px;font-size:14px;display: flex;align-items: center;justify-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.comment_time{color: #999;word-wrap: break-word;  word-break: normal;    float: right; }
+		.content_broker{width: 86%;padding:0 7%;height: 55px;background-color:#fff;margin:10px 0 ;font-size:14px;display: flex;align-items: center;justify-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+		.broker_name{display: block;}
+		.broker_list{    display: flex;flex-direction: column;align-items: center;}
+		.broker_img{width: 20px;height: 20px;}
+		.important_tips{width: 100%;background-color: #fff;    padding-bottom: 10px;}
+		.line{display: inline-block;width: 40%;height: 2px;background-color: #ccc;}
+		.tips_title{width: 85%;height: 43px;display: flex;justify-content: space-around;align-items: center;margin: 0 auto;}
+		.bottom{width: 100%;height: 64px;display: flex;align-items: center;justify-content: center;position: fixed;bottom: 0;    background-color: #efefef;}
+		.button{background-color: red;color: #fff;    width: 90%;height: 39px;border: none;border-radius: 5px;font-size: 16px;}
+		#live{width: 100%;height: 220px;}
+		#input_box{
+			width: 100%;
+			height: 57px;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			position: fixed;
+			bottom: 0;background-color: #F2F2F2;
+		}
+		#box_bottom{
+			width: 100%;
+			height: 57px;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			position: fixed;
+			bottom: 0;background-color: #F2F2F2;
+			z-index: 999;
+		}
+	</style>
+</head>
+<body>
+<div id="main">
+	<!--<div class="head">-->
+	<!--<span class="head_ing">正在进行</span>-->
+	<!--<div class="triangle-left"></div>-->
+	<!--<span id="over_time">2016-11-10 14:00</span><span style="margin-right: 12%;">结束</span>-->
+	<!--</div>-->
+	<!--<div id="live">-->
+
+	<!--</div>-->
+
+	<!--<div class="title_content">-->
+	<!--<div class="title_item">-->
+	<!--<span id="title_address">-->
+	<!--泽云幸福里1栋1单元1003房-->
+	<!--</span>-->
+	<!--<span class="over_prompt"><img style="width: 40px;" src="../icon/over_prompt.png"/><br />结束前提醒</span>-->
+	<!--</div>-->
+	<!--<div class="price_now">-->
+	<!--<span class="price_num">当前价<strong>￥500</strong><strong>万</strong></span>-->
+	<!--</div>-->
+	<!--<ul class="many_people">-->
+	<!--<li>-->
+	<!--<span id="apply_num">-->
+	<!--1-->
+	<!--</span>人报名-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--<span id="remind_num">-->
+	<!--1-->
+	<!--</span>人设置提醒-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--<span id="onlookers_num">-->
+	<!--1-->
+	<!--</span>次围观-->
+	<!--</li>-->
+	<!--</ul>-->
+	<!--</div>-->
+	<!--<div class="margin_money">-->
+	<!--<li>-->
+	<!--保证金&nbsp;<span>￥<span>500.00</span></span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--加价幅度&nbsp;<span>￥<span>5000.00</span></span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--评估价&nbsp;<span>￥<span>520000.00</span></span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--保证金&nbsp;<span>3%</span>-->
+	<!--</li>-->
+	<!--</div>-->
+	<!--<div class="pay_style">-->
+	<!--付款方式-->
+	<!--<a id="full_pay" tapmode="active"  onclick="pay_style(1)">全款</a>-->
+	<!--<a id="mortgage_pay" tapmode="active" onclick="pay_style(2)">按揭</a>-->
+	<!--<a id="Unlimited" tapmode="active" onclick="pay_style(3)">不限购</a>-->
+	<!--</div>-->
+	<!--<div class="bidding_record" onclick="openNewWindow('auction_record','auction_record.html')">-->
+	<!--<div class="bidding_title">-->
+	<!--<span>竞买记录(<span>10</span>)</span>-->
+	<!--<span style="display: flex;align-items: center;">全部 <img style="width: 20px;" src="../icon/icon_right_normal.png" alt=""></span>-->
+	<!--</div>-->
+	<!--<div class="bidding">-->
+	<!--<li class="first">-->
+	<!--<span class="first_logo">领先</span>-->
+	<!--<span class="bidder ">业主</span>-->
+	<!--<span class="bidder_price">￥4,151,200</span>-->
+	<!--</li>-->
+	<!--<li >-->
+	<!--<span class="out_logo">出局</span>-->
+	<!--<span class="bidder ">业主</span>-->
+	<!--<span class="bidder_price">￥4,151,200</span>-->
+	<!--</li>-->
+	<!--<li >-->
+	<!--<span class="out_logo">出局</span>-->
+	<!--<span class="bidder ">业主</span>-->
+	<!--<span class="bidder_price">￥4,151,200</span>-->
+	<!--</li>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="content_six">-->
+	<!--<li>-->
+	<!--起拍价&nbsp;<span class="black">￥<span>5200.00</span></span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--保留价&nbsp;<span class="black">有</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--竞拍周期&nbsp;<span class="black">8小时</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--延迟周期&nbsp;<span class="black">5分钟/次</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--类型&nbsp;<span class="black">竞价</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--优先购买权人&nbsp;<span class="black">有</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--竞价资格&nbsp;<span class="black">一个人报名且出价达保留价，即成交。</span>-->
+	<!--</li>-->
+	<!--</div>-->
+	<!--<div class="content_seven">资产单位（个人）<span class="black">张先生</span></div>-->
+	<!--<div class="content_eight">-->
+	<!--<li>-->
+	<!--房源情况-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--户型&nbsp;<span class="black">四室二厅二卫</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--建筑面积&nbsp;<span class="black">125平米</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--楼层&nbsp;<span class="black">10楼/18层</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--朝向&nbsp;<span class="black">南北</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--装修&nbsp;<span class="black">毛坯</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--产权&nbsp;<span class="black">70年</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--年限&nbsp;<span class="black">2009年</span>-->
+	<!--</li>-->
+	<!--<li>-->
+	<!--结构&nbsp;<span class="black">框架</span>-->
+	<!--</li>-->
+	<!--</div>-->
+	<!--<div class="content_seven" style="color: #5B5B5B;">-->
+	<!--<img style="width: 10px;margin-right: 20px;" src="../icon/map.png"/>-->
+	<!--<span id="house_address">-->
+	<!--丰台区丰桥路8号院9号楼6层601号房产-->
+	<!--</span>-->
+	<!--</div>-->
+	<!--<div class="content_seven"style="height: 57px;">-->
+	<!--<span style="height: 55%;margin-right: 10px;white-space: nowrap;">房源描述</span><span class="black"style="width: 80%;">该房源于人民东路中医院对面，学区房，处于中心地带非常适合出行。</span>-->
+	<!--</div>-->
+	<!--<div class="content_seven"><span style="margin-right: 10px;">购房政策</span><span class="black">本地不限购，购本房可落户。</span></div>-->
+	<!--<div class="content_seven"><span style="margin-right: 10px;">手续办理</span><span class="black">本公司可提供全程办理。</span></div>-->
+	<!--<div class="content_nine">-->
+	<!--<span class="content_comment">评论<img style="width: 20px;height: 20px;" src="../icon/icon_right_normal.png" alt="" /></span>-->
+	<!--<div class="comment_content">-->
+	<!--<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png"/>-->
+	<!--<span style="width: 85%;display: block;">-->
+	<!--<span class="comment_name">张女士</span><span class="comment_time">2016-03-03</span><br />-->
+	<!--<span class="comment">这地段真不错</span>-->
+	<!--</span>-->
+
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div class="content_broker">-->
+	<!--<img style="width: 30px;height:30px;" src="../icon/images.png"/onclick="openNewWindow('broker_detail','broker_detail_body.html')">-->
+	<!--<span style="width: 30%;"><span class="broker_name">张山</span><span class="borker_phoneNum">13131313131</span></span>-->
+	<!--<span class="broker_list"><img class="broker_img" src="../icon/phone.png"/>电话</span>-->
+	<!--<span class="broker_list"><img class="broker_img" src="../icon/message.png"/>短信</span>-->
+	<!--<span class="broker_list"><img class="broker_img" src="../icon/msg.png"/>交流</span>-->
+	<!--<span class="broker_list"><img class="broker_img" src="../icon/talk.png"/>讨论</span>-->
+	<!--</div>-->
+	<!--<div class="content_comment" onclick="">-->
+	<!--查看所有标的物<img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />-->
+	<!--</div>-->
+	<!--<div class="content_comment" onclick="">-->
+	<!--竞买广告<img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />-->
+	<!--</div>-->
+	<!--<div class="content_comment" onclick="">-->
+	<!--竞买须知<img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />-->
+	<!--</div>-->
+	<!--<div class="content_comment" onclick="">-->
+	<!--竞买帮助<img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />-->
+	<!--</div>-->
+	<!--<div class="important_tips">-->
+	<!--<div class="tips_title">-->
+	<!--<span class="line"></span><span style="color: #f44442;margin: 0 10px;white-space: nowrap;">重要提示</span><span class="line"></span>-->
+	<!--</div>-->
+	<!--<p style="text-indent: 1rem;margin: 0 20px;">1.拍卖前请参照《竞买公告》、《竞买须知》及《标的物情况介绍表》要求，进行实地看详、调查标的物信息（如过户要求、违章情况等）、了解竞买资质等。</p>-->
+	<!--<p style="text-indent: 1rem;margin: 10px 20px;">2.拍卖前请参照《竞买公告》、《竞买须知》及《标的物情况介绍表》要求，进行实地看详、调查标的物信息（如过户要求、违章情况等）、了解竞买资质等。</p>-->
+	<!--</div>-->
+	<!--<div style="width: 100%;height:64px;float: left;"></div>-->
+	<!--<div class="bottom">-->
+	<!--<button class="button">成交</button>-->
+	<!--</div>-->
+	</div>
+	<div id="input_box" style="display: none;">
+			<span class="img_span" onclick="priceShow()">
+					<img style="width:20px;height: 20px;" src="../icon/Shape.png"/>
+				</span>
+		<input class="input" style="border:none;width:60%;height:30px" type="text" placeholder="我也说一句..." />
+		<button style="color: #39BD2F;font-weight: bold;height: 35px;padding: 7px 12px;border:none;" id="" class="mui-btn" >发送</button>
+	</div>
+	<div id="box_bottom" style="display: none;">
+			<span class="img_span" onclick="talkShow()">
+				<img style="width:20px;height: 20px;" src="../icon/forum.png"/>
+			</span>
+		<div class="mui-numbox" id="addNum" >
+			<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+			<input style="color: #39BD2F; font-weight: bold;background-color: #fff;" id="box" class="mui-input-numbox" type="number" />
+			<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+		</div>
+		<button style="color: #39BD2F;font-weight: bold;height: 35px;border:none;" id="btn" onclick="confirm()" class="mui-btn" style="padding: 7px 12px;">出价</button>
+	</div>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<div class="head">
+		<%if (list.status == 1) {%>
+		<span  class="head_ing">看房中</span>
+		<%}else if(list.status == 2){%>
+		<span  class="head_ing">竞拍中</span>
+		<%}else if(list.status == 3){%>
+		<span  class="head_ing">已结束</span>
+		<%}else if(list.status == 4){%>
+		<span  class="head_ing">中止</span>
+		<%}%>
+		<div class="triangle-left"></div>
+		<span id="over_time"><%=list.endTime%></span><span style="margin-right: 12%;">结束</span>
+	</div>
+	<div id="live">
+
+	</div>
+
+	<div class="title_content">
+		<div class="title_item">
+				<span id="title_address">
+					<%=list.name%>
+				</span>
+			<%if(list.alarmType==0){%>
+
+			<%}else if(list.alarmType==1){%>
+			<%if(list.alarmNum ==true){%>
+					<span class="over_prompt"  onclick="startAlarm()"><img style="width: 40px;" src="../icon/over_prompt.png"/><br />
+				<span id="alarm">开始前提醒</span>
+			</span>
+			<%}else if(list.alarmNum ==false){%>
+					<span class="over_prompt"  onclick="cancelStartAlarm()"><img style="width: 40px;" src="../icon/over_prompt.png"/><br />
+				<span id="alarm">结束提醒</span>
+			<%}%>
+
+			<%}else if(list.alarmType==2){%>
+						<%if(list.alarm ==true){%>
+							<span class="over_prompt"  onclick="startEndAlarm()"><img style="width: 40px;" src="../icon/over_prompt.png"/><br />
+								<span>结束前提醒</span>
+							</span>
+						<%}%>
+			<%}else if(list.alarm ==false){%>
+						<span class="over_prompt"  onclick="cancelEndAlarm()"><img style="width: 40px;" src="../icon/over_prompt.png"/><br />
+								<span>取消</span>
+							</span>
+
+						<%}%>
+		</div>
+		<div class="price_now">
+				<span class="price_num">
+					一口价￥
+					<%if(list.currentPrice !=0){%>
+					<strong id="nowPrice"><%=list.currentPrice%></strong>
+					<%}else{%>
+					<strong id="nowPrice"><%=list.reservePrice%></strong>
+
+					<%}%>
+				</span>
+		</div>
+		<ul class="many_people">
+			<li>
+				<span id="apply_num">
+					<%=list.applyNum%>
+				</span>人报名
+			</li>
+			<li>
+				<span id="remind_num">
+					<%=list.alarmNum%>
+				</span>人设置提醒
+			</li>
+			<li>
+					<span id="onlookers_num">
+						<%=list.browseNum%>
+					</span>次围观
+			</li>
+		</ul>
+	</div>
+	<div class="margin_money">
+		<li>
+			保证金&nbsp;<span>￥<span id="promise"><%=list.ensureGold%></span></span>
+		</li>
+		<li>
+			加价幅度&nbsp;<span>￥<span><%=list.incrementPrice%></span></span>
+		</li>
+		<li>
+			评估价&nbsp;<span><%=list.evaluatePrice%></span>
+		</li>
+		<li>
+			佣金百分比&nbsp;<span><%=list.commission%></span>
+		</li>
+	</div>
+	<div class="pay_style">
+		付款方式
+		<%if(list.buyTypeName == "全款"){%>
+		<a class="payStyleSmall checked" id="full_pay" tapmode="active"  >全款</a>
+		<%} else if(list.buyTypeName == "按揭"){%>
+		<a class="payStyleSmall checked" id="mortgage_pay" tapmode="active" >按揭</a>
+		<%} else if(list.buyTypeName == "不限购"){%>
+		<a class="payStyleSmall checked" id="Unlimited" tapmode="active" >不限购</a>
+		<%}%>
+	</div>
+	<div class="bidding_record" onclick="openBidPages()">
+		<div class="bidding_title">
+			<span>竞买记录(<span><%=list.bidNum%></span>)</span>
+			<span style="display: flex;align-items: center;">全部 <img style="width: 20px;" src="../icon/icon_right_normal.png" alt=""></span>
+		</div>
+		<div class="bidding">
+			<%if(list.bidRecords.length == 1){%>
+			<li class="first">
+				<span class="first_logo">领先</span>
+				<span class="bidder "><%=list.bidRecords[0].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[0].price%></span>
+			</li>
+			<%}else if(list.bidRecords.length == 2){%>
+			<li class="first">
+				<span class="first_logo">领先</span>
+				<span class="bidder "><%=list.bidRecords[0].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[0].price%></span>
+			</li>
+			<li >
+				<span class="out_logo">出局</span>
+				<span class="bidder "><%=list.bidRecords[1].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[1].price%></span>
+			</li>
+			<%}else if(list.bidRecords.length == 3){%>
+			<li class="first">
+				<span class="first_logo">领先</span>
+				<span class="bidder "><%=list.bidRecords[0].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[0].price%></span>
+			</li>
+			<li >
+				<span class="out_logo">出局</span>
+				<span class="bidder "><%=list.bidRecords[1].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[1].price%></span>
+			</li>
+			<li >
+				<span class="out_logo">出局</span>
+				<span class="bidder "><%=list.bidRecords[2].userName%></span>
+				<span class="bidder_price">￥<%=list.bidRecords[2].price%></span>
+			</li>
+			<%}%>
+		</div>
+	</div>
+	<div class="content_six">
+		<li>
+			起拍价&nbsp;<span class="black">￥<span><%=list.reservePrice%></span></span>
+		</li>
+		<li>
+			保留价&nbsp;
+			<%if(list.reservePrice !=0){%>
+			<span class="black">有</span>
+			<%}else{%>
+			<span class="black">无</span>
+			<%}%>
+		</li>
+		<li>
+			竞拍周期&nbsp;<span class="black"><%=list.period%>小时</span>
+		</li>
+		<li>
+			类型&nbsp;<span class="black"><%=list.typeNamn%></span>
+		</li>
+		<!--<li>-->
+			<!--竞价资格&nbsp;<span class="black">一个人报名且出价达保留价，即成交。</span>-->
+		<!--</li>-->
+	</div>
+	<div class="content_seven"style="height: 57px;">
+		<span style="height: 55%;margin-right: 10px;white-space: nowrap;"></span><span class="black"style="width: 80%;"><%=list.around%></span>
+	</div>
+	<div class="content_seven"style="height: 57px;">
+		<span style="height: 55%;margin-right: 10px;white-space: nowrap;"></span><span class="black"style="width: 80%;"><%=list.traffic%></span>
+	</div>
+	<div class="content_seven"style="height: 57px;">
+		<span style="height: 55%;margin-right: 10px;white-space: nowrap;"></span><span class="black"style="width: 80%;"><%=list.environment%></span>
+	</div>
+	<div class="content_seven"style="height: 57px;">
+		<span style="height: 55%;margin-right: 10px;white-space: nowrap;"></span><span class="black"style="width: 80%;"><%=list.visualField%></span>
+	</div>
+	<!--<div class="content_eight">-->
+		<!--<li>-->
+			<!--房源情况<span class="black"><%=list.auctionType%></span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--户型&nbsp;<span class="black"><%=list.houseType%></span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--建筑面积&nbsp;<span class="black">125平米</span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--楼层&nbsp;<span class="black">10楼/18层</span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--视野&nbsp;<span class="black"><%=list.visualField%></span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--装修&nbsp;<span class="black"><%=list.decorateType%></span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--产权&nbsp;<span class="black">70年</span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--年限&nbsp;<span class="black">2009年</span>-->
+		<!--</li>-->
+		<!--<li>-->
+			<!--结构&nbsp;<span class="black">框架</span>-->
+		<!--</li>-->
+	<!--</div>-->
+	<div class="content_seven" style="color: #5B5B5B;">
+		<img style="width: 10px;margin-right: 20px;" src="../icon/map.png"/>
+			<span id="house_address">
+				<%=list.address%>
+			</span>
+	</div>
+	<div class="content_seven"style="height: 57px;">
+		<span class="black" style="width: 80%;"><%=list.desc%></span>
+	</div>
+	<div class="content_seven"><span style="margin-right: 10px;">购房政策</span><span class="black"><%=list.policy%></span></div>
+	<!--<div class="content_seven"><span style="margin-right: 10px;">手续办理</span><span class="black">本公司可提供全程办理。</span></div>-->
+	<div class="content_seven">
+		<span class="content_comment" onclick="openComment()">评论<img style="width: 20px;height: 20px;" src="../icon/icon_right_normal.png" alt="" /></span>
+		<!--<div class="comment_content">-->
+			<!--<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png"/>-->
+				<!--<span style="width: 85%;display: block;">-->
+					<!--<span class="comment_name">张女士</span><span class="comment_time">2016-03-03</span><br />-->
+				<!--<span class="comment">这地段真不错</span>-->
+				<!--</span>-->
+
+		<!--</div>-->
+	</div>
+	<div class="content_broker">
+		<img style="width: 30px;height:30px;" src="../icon/images.png"/onclick="openNewWindow('broker_detail','broker_detail_body.html')">
+		<span style="width: 30%;"><span class="broker_name">张山</span><span class="borker_phoneNum">13131313131</span></span>
+		<span class="broker_list"><img class="broker_img" src="../icon/phone.png"/>电话</span>
+		<span class="broker_list"><img class="broker_img" src="../icon/message.png"/>短信</span>
+		<span class="broker_list"><img class="broker_img" src="../icon/msg.png"/>交流</span>
+		<span class="broker_list"><img class="broker_img" src="../icon/talk.png"/>讨论</span>
+	</div>
+	<div class="content_comment" onclick="">
+		查看所有标的物<img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="content_comment" onclick="">
+		 <%=list.announcement%><img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="content_comment" onclick="">
+		 <%=list.instruction%><img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="content_comment" onclick="">
+		<%=list.help%><img style="width: 25px;height: 25px;" src="../icon/icon_right_normal.png" alt="" />
+	</div>
+	<div class="important_tips">
+		<div class="tips_title">
+			<span class="line"></span><span style="color: #f44442;margin: 0 10px;white-space: nowrap;">重要提示</span><span class="line"></span>
+		</div>
+		<p style="text-indent: 1rem;margin: 0 20px;">1.拍卖前请参照《竞买公告》、《竞买须知》及《标的物情况介绍表》要求，进行实地看详、调查标的物信息（如过户要求、违章情况等）、了解竞买资质等。</p>
+		<p style="text-indent: 1rem;margin: 10px 20px;">2.拍卖前请参照《竞买公告》、《竞买须知》及《标的物情况介绍表》要求，进行实地看详、调查标的物信息（如过户要求、违章情况等）、了解竞买资质等。</p>
+	</div>
+	<div style="width: 100%;height:64px;float: left;"></div>
+
+	<%if((list.status == 1 || list.status == 2) && list.inEnsureGold == false){%>
+	<div class="bottom" onclick="openPayPages()">
+		<button class="button" id="ensureGoldBtn">报名交保证金</button>
+	</div>
+	<%}else if(list.status == 3){%>
+	<div class="bottom" >
+		<button class="button" id="ensureGoldBtn">已结束</button>
+	</div>
+	<%}else if(list.apply == false && list.status == 2 && list.inEnsureGold == true){%>
+	<div class="bottom" onclick="openPayPagesTrue()">
+		<button class="button" id="ensureGoldBtn">去支付</button>
+	</div>
+	<%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript">
+	var flag = true;
+	var hidJson = {};
+	var hid ={};
+	var houseType =$api.getStorage("houseSourceTypes");
+	apiready = function () {
+	//	alert(JSON.stringify($api.getStorage("houseSourceTypes")))
+		hidJson	= api.pageParam;
+		hid.hid = hidJson.id;
+//	alert(JSON.stringify(hidJson));
+		ajaxGetWithProgress(hidJson.url,{hid:hidJson.id},function(ret,err){
+			if(isNotBlack(ret)){
+				alert(JSON.stringify(ret))
+
+				loadJson = ret;
+				document.getElementById('addNum').setAttribute("data-numbox-step",ret.incrementPrice);
+				if(ret.currentPrice == 0){
+					document.getElementById('box').value = ret.reservePrice;
+				}else{
+					document.getElementById('box').value = ret.currentPrice;
+
+				}
+				if(ret.apply == true && ret.status == 2){
+					document.getElementById('input_box').style.display = "flex";
+					document.getElementById('box_bottom').style.display = "flex";
+				}
+				egid = ret.egid
+				results = ret;
+				var endTime = ret.endTime;
+				ret.endTime = formatTimeToDate(ret.endTime);
+				ret.typeNamn = houseType[ret.auctionType].name;
+
+				var data = {list: ret};
+				var html = template('scriptDiv1', data);
+				document.getElementById('main').innerHTML = html;
+				if(flag == true){
+					var body = document.getElementsByTagName('body')[0];
+					var scr = document.createElement('script');//创建一个script节点
+					scr.setAttribute('src','../script/mui.min.js'); //给script节点添加路径
+					body.appendChild(scr);
+					flag = false;
+				}else{
+				}
+			}else{alert(JSON.stringify(err))};
+		});
+	}
+	//提交报名保证金验证有没有实名
+	function openPayPages(){
+		var promise = {};
+		promise.hid = hidJson.id;
+		promise.fee = document.getElementById('promise').innerHTML;
+		promise.egid = loadJson.egid;
+		user = getUserInfo();
+		if(user.attestIdCard != 2){
+			ajaxGetWithProgress(userLoadUrl,{},function(ret,err){
+				if(isNotBlack(ret)){
+					// alert(JSON.stringify(ret))
+					if(ret.attestIdCard != 2){
+						dialogBox = api.require('dialogBox');
+						showDialog('未实名认证','您的实名认证还没有通过，是否先去认证？','取消','去认证',function(){
+							openNewWindow('auth','./auth.html')
+						})
+					}else{
+						ret.fee = document.getElementById('promise').innerHTML;
+						ret.hid = hidJson.id;
+						ret.egid = loadJson.egid;
+						// alert(JSON.stringify(ret))
+						openNewWindow('auctionPayPages','./auctionPayPages.html',ret);
+					}
+				}else{
+					alert(JSON.stringify(err))
+				};
+			})
+		}else{
+			// alert(JSON.stringify(promise))
+			openNewWindow('auctionPayPages','./auctionPayPages.html',promise);
+
+		}
+	}
+
+	//已验证实名
+	function openPayPagesTrue(){
+		var egidjson = {};
+		egidjson.hid = hidJson.id;
+		egidjson.egid = loadJson.egid;
+		egidjson.fee = document.getElementById('promise').innerHTML;
+		// promise.egid = results.egid;
+		openNewWindow('auctionPayPages','./auctionPayPages.html',egidjson);
+
+	}
+	function openBidPages(){
+		var bidHid = {};
+		bidHid.hid = loadJson.id;
+		openNewWindow('enterprise_record','./enterprise_record.html',bidHid)
+	}
+	//弹出框
+	var nowPrice = document.getElementById('nowPrice');
+	function confirm(){
+		var price =document.getElementById('box').value;
+		if(loadJson.currentPrice == 0){
+			if(price < loadJson.reservePrice){
+				toast('低于或等于当前价不能出价');
+			}else{
+				dialogBox = api.require('dialogBox');
+				showDialog('出价','确定出价吗？','取消','确定',function(){
+					var newCurrentPrice={};
+					newCurrentPrice.hid = loadJson.id;
+					newCurrentPrice.price = price;
+					ajaxGetWithProgress(enterpriseHouseUrl,newCurrentPrice,function(){
+						reloadHtml();
+					})
+				})
+			}
+		}else{
+			if(price <= loadJson.currentPrice){
+				toast('您出的价格必须高于当前价');
+			}else{
+				dialogBox = api.require('dialogBox');
+				showDialog('出价','确定出价吗？','取消','确定',function(){
+					var newCurrentPrice={};
+					newCurrentPrice.hid = loadJson.id;
+					newCurrentPrice.price = price;
+					ajaxGetWithProgress(enterpriseHouseUrl,newCurrentPrice,function(){
+						reloadHtml();
+					})
+					var t = setTimeout("toast('出价成功')",1500)
+
+				})
+			}
+		}
+	}
+	//显示隐藏我也说一句
+	function talkShow(){
+		var talkIput = document.getElementById('input_box');
+		var priceBox = document.getElementById('box_bottom');
+		talkIput.style.display = "flex";
+		priceBox.style.display = "none";
+	}
+	//显示隐藏加价
+	function priceShow(){
+		var talkIput = document.getElementById('input_box');
+		var priceBox = document.getElementById('box_bottom');
+		talkIput.style.display = "none";
+		priceBox.style.display = "flex";
+	}
+
+	//打开评论页
+	function openComment(){
+		openNewWindow('comment','comment.html',hid);
+	};
+
+</script>
+</html>

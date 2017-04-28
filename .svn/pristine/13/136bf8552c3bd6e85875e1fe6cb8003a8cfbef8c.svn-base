@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>已结束</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <style type="text/css">
+    	.item{
+            width: 100%;
+            height: 70px;
+            background-color: #fff;
+            margin-top: 5px;
+            padding-top: 10px;
+        }
+
+        .img{
+            width: 25%;
+            height: 60px;
+            float: left;
+            margin-left: 20px;
+        }
+        .money,.time{
+            line-height: 20px;
+            display: block;
+            
+        }
+        .time{margin-top: 3px;color:#999;}
+        .money{color: red;font-size: 14px;font-weight: bold;}
+        .house_name{display: block;height:30px;width:100%;overflow: hidden;font-size: 16px}
+    </style>
+</head>
+<body>
+<div id="main">
+	<!-- <div class="item">
+        <img src="../icon/images.png" class="img" alt="">
+        <div style="float: right;width: 60%;margin-right:5%;">
+            <span class="house_name" >幸福里2栋1单元幸福里2栋1单元</span>
+            <span class="time">结束时间:08月19日10:00</span>
+        </div>
+    </div> -->
+	
+</div>
+</body>
+<script id="scriptDiv1" type="text/html">
+<%for(var i= 0; i< list.length;i++){%>
+    <div class="item" onclick="openDetail('<%=list[i].hid%>')">
+        <img src="../icon/images.png" class="img" alt="">
+        <div style="float: right;width: 60%;margin-right:5%;">
+            <span class="house_name" ><%=list[i].houseName%></span>
+            <span class="time">结束时间:<%=list[i].houseEndTime%></span>
+        </div>
+    </div>
+<%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	apiready = function () {
+        new datalistModel(addDataToHtml,endHouseUrl,{},10,5,100,true)
+    };
+        
+    function openDetail(hid){
+        if(allResult[hid].type == 1){
+            allResult[hid].id = allResult[hid].hid;
+            allResult[hid].url = lawAuctionDetailUrl;
+            openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+        }else if(allResult[hid].type == 2 ){
+            allResult[hid].id = allResult[hid].hid;
+            allResult[hid].url = investmentDetailUrl;
+            allResult[hid].bidurl = investmentHouseBidUrl;
+            allResult[hid].bidPagerUrl = investmentHouseHouseBidPager;
+            openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+        }else if(allResult[hid].type == 3 ){
+            allResult[hid].id = allResult[hid].hid;
+            allResult[hid].url = famousDetailUrl;
+            allResult[hid].bidurl = enterpriseHouseBidUrl;
+            allResult[hid].bidPagerUrl = enterpriseHouseHouseBidPager;
+            openNewWindow('auction_detail','./auction_detail.html',allResult[hid])
+        }else if(allResult[hid].type == 4){
+            allResult[hid].id = allResult[hid].hid;
+            allResult[hid].url = onePriceDetailUrl;
+            openNewWindow('fangc_detail','./fangc_detail.html',allResult[hid])
+        }else if(allResult[hid].type  == 5 ){
+            allResult[hid].liveLoadUrl = liveWeekendLoadUrl;
+            allResult[hid].id = allResult[hid].hid;
+            openNewWindow('live_detail','./live_detail.html',allResult[hid])
+        }else if(allResult[hid].type == 6 ){
+            allResult[hid].liveLoadUrl = liveVideoUrl;
+            allResult[hid].id = allResult[hid].hid;
+            openNewWindow('live_detail','./live_detail.html',allResult[hid])
+        }else if(allResult[hid].type ==7){
+            allResult[hid].liveLoadUrl = liveEnterpriseHouseLoadUrl;
+            allResult[hid].id = allResult[hid].hid;
+            openNewWindow('live_detail','./live_detail.html',allResult[hid])
+        }
+    }
+    var allResult = {};
+    function addDataToHtml(results,append) {
+        //alert(JSON.stringify(results))
+        if (results && results.length>0) {
+            for(var i=0;i<results.length;i++){
+                results[i].houseEndTime = formatTimeToDate1(results[i].houseEndTime)
+                allResult[results[i].hid]=results[i];
+            }
+            // alert(JSON.stringify(allResult))
+            var data = {list: results};
+            var html = template('scriptDiv1',data);
+            if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('main').appendChild(div);
+            } else{
+                document.getElementById('main').innerHTML = html;
+            }
+        }
+    }
+</script>
+</html>

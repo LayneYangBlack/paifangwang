@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>e选房全部分类</title>
+		 <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		 <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		 <style type="text/css">
+		 	.house_list{
+		 		width:100%;
+		 		background-color: #FFFFFF;
+		 	}
+		 	.house_list li{
+		 		width: 94%;
+		 		min-height: 100px;
+		 		padding: 3%;
+		 		display: flex;
+				display:-webkit-flex;
+				display:-webkit-box;
+		 		justify-content: space-between;
+				-webkit-justify-content: space-between;
+		 		border-bottom: 1px solid #f2f2f2;
+		 	}
+		 	.plot{
+		 		font-weight: bold;
+				display: block;
+				max-height: 56px;
+				line-height: 18px;
+				font-size: 16px
+		 	}
+		 	.shop_logo{
+		 		border: 1px #8FD93E solid;
+		 		color: #8FD93E;
+		 	}
+		 	.house_logo{border: 1px #FC6061 solid;color: #FC6061;}
+		 	.car_logo{border: 1px #FF9D22 solid;color: #FF9D22;}
+			.store_logo{border: 1px #58ceed solid;color: #58ceed;}
+		 	.logo{
+		 		height:15px ;
+		 		border-radius: 2px;
+		 		text-align: center;
+		 		margin-left: 10px;
+		 		font-size: 12px;
+		 		line-height: 15px
+		 	}
+		 	.list_box{
+		 		width: 80%;
+		 		height: 100%;
+		 	}
+		 	
+		 	.address{margin-top: 5px;font-size: 14px}
+		 	.num{color: #FC6061;display: block;margin-top: 5px;font-size: 14px}
+		 	.time{color: #999999;margin-top: 5px;font-size: 12px}
+		 	.process{width: 50px;border-radius: 4px;  text-align: center;height: 20px;line-height:20px;color: #FFFFFF;background-color: #fc4e4f;margin-top: 10px;font-size: 12px}	
+		 	.opening{width: 70px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #FF9D22;margin-top: 10px;} 
+		 	.over{width: 60px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #ccc;margin-top: 10px;}	
+			/*.plot{display: block}*/
+		  </style>
+	</head>
+	<body>
+		<div>
+			<ul class="house_list"  id="main">
+				<!-- <li onclick="openActiveDetail()">
+					<div class="list_box">
+						<span class="plot">活动一今日开盘<span class="logo house_logo">房源</span></span>
+						<span class="address">[亦庄-大兴]亦庄经济开发区东路</span>
+						<span class="num">房源数<span id="house_num">140</span></span>
+						<span class="time">结束时间 <span id="over_time">2016-09-09  12:00</span></span>
+					</div>
+					<span class="process">
+						进行中
+					</span>
+				</li> -->
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/user.js"></script>
+	<script type="text/javascript" src="../script/util.js"></script>
+	<script type="text/javascript" src="../script/kv.js"></script>
+	<script type="text/javascript" src="../script/apiCloud.js"></script>
+	<script type="text/javascript" src="../script/public.js"></script>
+	<script type="text/javascript" src="../script/template-native.js"></script>
+	<script type="text/javascript" src="../script/data.js"></script>
+	<script type="text/javascript" src="../script/init.js"></script>
+	<script type="text/html" id="scriptDiv">
+		<%for(var i= 0; i< list.length;i++){%>
+			<li onclick="openActiveDetail(<%=list[i].id%>)">
+				<div class="list_box">
+					<span class="plot">
+						<%=list[i].name%>
+						<%if(list[i].type == 1){%>
+							<span class="logo house_logo">
+								房源
+							</span>
+						<%}else if(list[i].type==2){%>
+							<span class="logo house_logo">
+								车位
+							</span>
+						<%}else if(list[i].type==3){%>
+							<span class="logo house_logo">
+								商铺
+							</span>
+						<%}else if(list[i].type==4){%>
+							<span class="logo house_logo">
+								储存库
+							</span>
+						<%}%>
+					</span>
+					<span class="address"><%=list[i].address%></span>
+					<span class="num">房源数<span id="house_num"><%=list[i].houseNum%></span></span>
+					<span class="time">结束时间 <span id="over_time"><%=list[i].endTime%></span></span>
+				</div>
+				<span class="process">
+					<%=list[i].statusName%>
+				</span>
+			</li>
+		<%}%>
+
+	</script>
+	<script>
+		apiready = function(){
+			var result = api.pageParam;
+			ajaxGetWithProgress(eHousesActivityUrl,result,function(ret,err){
+				if(ret){
+					for(var i=0;i<ret.length;i++){
+						ret[i].endTime = formatTimeToDate(ret[i].endTime)
+					}
+					var data =  {list: ret};
+					var html = template('scriptDiv',data);
+					document.getElementById('main').innerHTML = html;
+				}else{
+					alert(JSON.stringify(err))
+				}
+			})
+			// var data = api.pageParam;
+			// var address = data.address;
+		// 	ajaxGetWithProgress(allEhouseUrl,{enterpriseHousesId:data.id},function(ret,err){
+		// 		if(ret){
+		// 			for(var i=0;i<ret.length;i++){
+		// 				results[ret[i].id] = ret[i];
+		// 				ret[i].endTime = formatTimeToDate(ret[i].endTime);
+		// 			}
+		// 			var data = {list: ret};
+		// 			var html = template('scriptDiv',data);
+		// 			document.getElementById('main').innerHTML = html;
+		// 		}
+		// 	})
+		}
+	</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>协议</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <style type="text/css">
+    	p{padding: 0 10px;}
+    </style>
+</head>
+<body>
+<div>
+	<p>拍房网的各项服务和所有权归湖南拍房网络科技有限公司所有。拍房网提供的服务将完全按照其发布的章程、服务条款和操作规则严格执行。用户完全完成注册程序，便成为拍房网的注册用户，将得到一个密码和帐号，同时此协议即时生效。用户有义务保证密码和帐号的安全。用户对利用该密码和帐号所进行的一切活动负全部责任；因此所衍生的任何损失或损害，拍房网无法也不承担任何责任。</p>
+<p style="font-size: 20px;">注册义务</p>
+<p>拍房网运用自己的操作系统通过国际互联网为用户提供网络服务。同时，用户必须：</p>
+<p>(1) 自行配备上网的所需设备，包括个人电脑、调制解调器或其他必备上网装置；</p>
+<p>(2) 自行负担个人上网所支付的与此服务有关的电话费用、网络费用。</p>
+<p>(3) 拍房网为用户提供服务，用户在使用拍房网提供的服务时需提供真实身份信息，并对自己在拍房网的行为、言论负责。</p>
+<p>为了能使用本服务，您同意以下事项：</p>
+<p>(1) 依本服务注册表的提示提供您本人真实、正确、最新及完整的资料；</p>
+<p>(2) 维持更新您个人用户信息，确保其真实、正确、最新及完整。若您提供任何错误、不实、过时或不完整的资料，并为拍房网所确知，或者拍房网有合理的理由怀疑前述资料为错误、不实、过时或不完整，拍房网有权暂停或终止您的帐号，并拒绝您于现在和未来使用拍房网全部或部分的服务。</p>
+<p>(3) 您提供的注册信息不得冒用他人信息或侵犯他人合法权益。拍房网有权暂停或终止帐号，并有权追究相关责任人的法律责任。</p>
+<p>(4) 您注册的用户名不能侵犯他人合法权益，不能对他人名誉权造成侵犯。拍房网有权收回对拍房网或者他人合法权益有侵犯嫌疑的帐号。</p>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script>
+	apiready = function () {
+	};
+</script>
+</html>

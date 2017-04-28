@@ -1,0 +1,419 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>常德市人民法院</title>
+     <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/demo.css">
+    <style>
+	    html,body{background-color: #fff;}
+	    .top img{
+	    	width: 100%;
+	    	height: 120px;
+	    }
+	   .bg{	   	
+	   		display: none;
+	   		width: 100%;
+	   		height: 100%;
+	   		background: #000;
+	   		opacity: 0.3;
+	   		position: fixed;
+	   		top:0;
+	   		left: 0;
+	   		z-index: 1;
+	   	}
+	    #gradet li{
+	   		border-left: 1px solid #ebebeb;
+	   	}	   	
+	   	.item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;         
+        }
+         
+        .item_list{
+            width: 100%;
+            
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+             height: 30px;
+           line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 13px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+        }
+        div.screening{
+        	top: 100px;
+        }
+        .Moreul,.Sortul,.Brandul{
+		    position:absolute;
+		    left: -200%;
+		    top: 165px;
+		    width: 100%;
+		    height: auto;
+		    z-index: 1;
+		    -webkit-transition-duration: 0.4s;
+		    background: #fff;		    
+		}
+		
+		.grade-eject ul li,.Brandul li,.Moreul li{
+			width: 100%;
+			height: 50px;
+			font-size: 14px;
+			line-height: 50px;
+			background: #fff;
+			border: none.;
+			border-bottom: 1px solid #ebebeb;
+			text-align: inherit;
+			text-indent: 30px;
+			padding: 0;
+		}
+		.grade-eject li span,.Brandul li span,.Moreul li span{
+			float: right;
+			margin-right: 15px;
+		}
+		body .screening ul li{
+			width:32.6%;
+			/*border: 1px solid red;*/
+		}
+		.grade-eject::before{
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 25%;
+			border-bottom: 10px solid #fff;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+		
+		.Brandul::before{
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 56%;
+			border-bottom: 10px solid #fff;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+		.place{
+			width:50%;
+			height: 200px;
+			background: #f4f4f4;
+		}
+    </style>
+</head>
+<body style="display: block" id="body">
+	<!--<div id="main">-->
+		<div id="" style="position: fixed;top: 0;left: 0;background: #fff; width: 100%;z-index:1000 ;">			
+			<div class="top">
+				<img src="../image/photo_02.png" alt="" />
+			</div>
+			<div class="screening">
+			    <ul>
+			        <li class="Regional">类型</li>
+			        <li class="Brand">所在地</li>
+			        <li class="more">状态</li>
+			        <!--<li class="more">更多</li>-->
+			    </ul>
+			</div>
+		</div>
+	    <div style="margin-top: 150px;">
+	    	<div class="item">
+		    <ul class="item_list">
+		       <li>
+		           <img class="left_img" src="../icon/images.png" alt="">
+		           <div class="right_msg">
+		                <span class="msg_title">
+		                        6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三
+		                </span>
+		               <span class="price">
+		                    起拍价 <span class="price_num">121</span>万
+		               </span>
+		               <span class="msg_gray">
+		                   出价:  <span >1</span>
+		               </span>
+		               <span class="msg_gray">
+		                   预计<span >6月30日</span>结束
+		               </span>
+		           </div>
+		       </li>
+		    </ul>
+		</div>
+		<div class="item">
+		    <ul class="item_list">
+		       <li>
+		           <img class="left_img" src="../icon/images.png" alt="">
+		           <div class="right_msg">
+		                <span class="msg_title">
+		                        6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三
+		                </span>
+		               <span class="price">
+		                    起拍价 <span class="price_num">121</span>万
+		               </span>
+		               <span class="msg_gray">
+		                   出价:  <span >1</span>
+		               </span>
+		               <span class="msg_gray">
+		                   预计<span >6月30日</span>结束
+		               </span>
+		           </div>
+		       </li>		
+		    </ul>
+		</div>
+		<div class="item">
+		    <ul class="item_list">
+		       <li>
+		           <img class="left_img" src="../icon/images.png" alt="">
+		           <div class="right_msg">
+		                <span class="msg_title">
+		                        6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三
+		                </span>
+		               <span class="price">
+		                    起拍价 <span class="price_num">121</span>万
+		               </span>
+		               <span class="msg_gray">
+		                   出价:  <span >1</span>
+		               </span>
+		               <span class="msg_gray">
+		                   预计<span >6月30日</span>结束
+		               </span>
+		           </div>
+		       </li>
+		
+		
+		    </ul>
+		</div>
+	    </div>
+		<div id="bg_1" class="bg"></div>
+		<div class="grade-eject" style="top: 165px;">
+		  <ul id="types">
+				<li ><span onclick="reset()" style="font-size: 35px;color: #969696;">×</span></li>
+		        <li>房产<span>(729)</span></li>
+				<li>机动车<span>(20)</span></li>
+				<li>其他<span>(30)</span></li>
+				<li>林权<span>(15)</span></li>
+				<li>资产<span>(78)</span></li>
+				<li>土地<span>(728)</span></li>
+		    </ul>
+		</div>	
+		<div class="Brandul" style="padding-bottom: 20px;">
+			<ul id="Sort-Sort">
+				<li><span onclick="reset()" style="font-size: 35px;color: #969696;">×</span></li>
+		        <li style="border: none;">福建<span style="float: right;margin-right: 55%;">(754)</span></li>
+		    </ul>
+		    <div class="place">
+		    	
+		    </div>
+		</div>
+	    <div class="Moreul Moreuls">
+	    	<div class="way" style="height: auto;margin: 0;">    		
+	    		<ul>
+	    			<li ><span onclick="reset()" style="font-size: 35px;color: #969696;">×</span></li>
+			        <li>已结束<span>(729)</span></li>
+					<li>即将开始<span>(20)</span></li>
+					<li>撤回<span>(30)</span></li>
+					<li>正在进行<span>(15)</span></li>
+					<li>终止<span>(78)</span></li>
+			    </ul>
+	    	</div>
+	    </div>
+	<!--</div>-->
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.1.min.js"></script>
+<!--<script type="text/javascript" src="../script/demo.js"></script>-->
+<script>
+	/*****************点击选择类型的时候   把选中的项  改变字体颜色*********/
+	var types = document.getElementById("types");
+	var liseleceta = types.getElementsByTagName("li");
+	for (var i = 0;i < liseleceta.length;i++) {
+		liseleceta[i].onclick=function(){
+			for (var i = 0;i < liseleceta.length;i++) {
+				if (liseleceta[i] == this) {
+					liseleceta[i].style.color = "red";
+				} else{
+					liseleceta[i].style.color = "";
+				}
+			}
+		}
+	}; 
+
+document.getElementById("bg_1").addEventListener("touchmove",function(e){
+        e.preventDefault();
+    });
+	/************** 将页面的样式初始化******************/
+	function reset(){
+		document.getElementsByClassName("bg")[0].style.display = "none";
+		document.getElementsByClassName("Brandul")[0].style.left = -450+"px";
+		document.getElementsByClassName("Moreul")[0].style.left = -450+"px";
+		if ($('.grade-eject').hasClass('grade-w-roll')){
+	        $('.grade-eject').removeClass('grade-w-roll');
+	    }
+	}
+
+
+/*************************点击所在地*************/
+	document.getElementsByClassName("Brand")[0].onclick = function(){
+		reset();
+		document.getElementsByClassName("bg")[0].style.display = "block";
+		var i = -450;
+		var time = setInterval(function(){
+			if(i >= 0){
+				i = 0;
+				clearInterval(time);
+				return;
+			}
+			i+=75;
+			document.getElementsByClassName("Brandul")[0].style.left = i+'px';
+		},10)	
+	}
+
+/*****************点击类型**************/
+	$(document).ready(function(){
+	    $(".Regional").click(function(){
+    		reset();
+	    	document.getElementsByClassName("bg")[0].style.display = "block";
+	        if ($('.grade-eject').hasClass('grade-w-roll')) {
+	            $('.grade-eject').removeClass('grade-w-roll');
+	        } else {
+	            $('.grade-eject').addClass('grade-w-roll');
+	        }
+	    });
+	});
+	/****************点击类型**************/
+	
+	
+	/****************点击状态**************/
+	document.getElementsByClassName("more")[0].onclick = function(){
+		reset();
+		document.getElementsByClassName("bg")[0].style.display = "block";
+		var i = -450;
+		var time = setInterval(function(){
+			if(i >= 0){
+				i = 0;
+				clearInterval(time);
+				return;
+			}
+			i+=75;
+			document.getElementsByClassName("Moreul")[0].style.left = i+'px';
+		},10)			
+	}
+	/****************点击状态**************/
+	
+	
+//	/****************点击选择 状态 里面的项  将选中的改变字体颜色***********/
+	var typea = document.getElementsByClassName("Moreuls")[0];
+	var liselecets = typea.getElementsByTagName("li");
+	for (var i = 0;i < liselecets.length;i++) {
+		liselecets[i].onclick=function(){
+			for (var i = 0;i < liselecets.length;i++) {
+				if (liselecets[i] == this) {
+					liselecets[i].style.color = "red";
+				} else{
+					liselecets[i].style.color = "";
+				}
+			}
+		}
+	};
+
+</script>
+</body>
+</html>

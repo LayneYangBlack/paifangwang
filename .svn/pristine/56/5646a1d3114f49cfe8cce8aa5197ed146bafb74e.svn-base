@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		<title>楼层房间状态</title>
+		<style type="text/css">
+			.item{
+				width: 92%;
+				min-height: 100px;
+				background-color: #FFFFFF;
+				padding: 4%;
+				border-bottom: 1px solid #F2F2F2;
+			}
+			.floor{
+					display: block;
+		    		margin-bottom: 10px;
+			}
+			.room{
+				width: 64px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				border: 1px solid #F2F2F2;
+				border-radius: 6px;
+				    margin-bottom: 10px;
+			}
+			.type_one{background-color: #fb4e4e;color: #fff;}
+			.type_two{background-color: #39bd2f;color: #fff;}
+			.type_three{background-color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<!--<div class="item">-->
+				<!--<span class="floor">一楼房间</span>-->
+				<!--<button class="room type_one">101</button>-->
+				<!--<button class="room type_two">102</button>-->
+				<!--<button class="room type_three" onclick="openNewWindow('e_room_detail','e_room_detail.html')">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<span class="floor">二楼房间</span>-->
+				<!--<button class="room type_one">101</button>-->
+				<!--<button class="room type_two">102</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<span class="floor">三楼房间</span>-->
+				<!--<button class="room type_one">101</button>-->
+				<!--<button class="room type_two">102</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<span class="floor">四楼房间</span>-->
+				<!--<button class="room type_one">101</button>-->
+				<!--<button class="room type_two">102</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+				<!--<button class="room type_three">103</button>-->
+			<!--</div>-->
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+		<script type="text/javascript" src="../script/user.js"></script>
+		<script type="text/javascript" src="../script/util.js"></script>
+		<script type="text/javascript" src="../script/kv.js"></script>
+		<script type="text/javascript" src="../script/apiCloud.js"></script>
+		<script type="text/javascript" src="../script/public.js"></script>
+		<script type="text/javascript" src="../script/template-native.js"></script>
+		<script type="text/javascript" src="../script/data.js"></script>
+		<script type="text/javascript" src="../script/init.js"></script>
+	<script type="text/html" id="scriptDiv">
+		<%for(var i=0;i< list.floors.length;i++){%>
+		<div class="item">
+			<span class="floor"><%=list.floors[i].floor%>楼房间</span>
+				<%for(var j=0;j< list.floors[i].rooms.length;j++){%>
+			<%if(list.floors[i].rooms[j].status == 0){%>
+			<button class="room type_three" onclick="openDetail('<%=list.floors[i].rooms[j].ehid%>')"><%=list.floors[i].rooms[j].roomNum%></button>
+			<%}else if(list.floors[i].rooms[j].status == 1){%>
+			<button class="room type_two" onclick="openDetail('<%=list.floors[i].rooms[j].ehid%>')"><%=list.floors[i].rooms[j].roomNum%></button>
+			<%}else if(list.floors[i].rooms[j].status == 2){%>
+			<button class="room type_one" onclick="openDetail('<%=list.floors[i].rooms[j].ehid%>')"><%=list.floors[i].rooms[j].roomNum%></button>
+			<%}
+			%>
+
+			<%}%>
+		</div>
+		<%}%>
+	</script>
+		<script type="text/javascript">
+			var result ={};
+			var ehid ;
+			var hname ={};
+			apiready =function(){
+				var ehg=api.pageParam;
+			//	alert(JSON.stringify(ehg));
+				result =ehg;
+				for(var i=0;i<result.unit.floors.length;i++){
+					for (var j=0;j<result.unit.floors[i].rooms.length;j++){
+						ehid = result.unit.floors[i].rooms[j].ehid;
+					hname.name= result.name+ JSON.stringify(result.unit.floors[i].floor)+"楼"+result.unit.floors[i].rooms[j].roomNum;
+					//	alert(JSON.stringify(result.unit.floors[i].rooms[j].roomNum));
+					}
+				}
+				var data = {list:ehg.unit};
+				var html =template("scriptDiv",data);
+				document.getElementById('main').innerHTML = html;
+			}
+			function openDetail(id){
+				var obj={};
+				obj.id = id;
+				obj.url=enterpriseHouseLoadUrl;
+				obj.name = hname.name;
+				openNewWindow('e_room_detail','./e_room_detail.html',obj);
+			}
+		</script>
+</html>

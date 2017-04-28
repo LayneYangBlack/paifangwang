@@ -1,0 +1,802 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>法拍房</title>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/demo.css">
+    <style>
+	    html,body{background-color: #fff;}
+       	body{
+       		width: 100%;
+       		height: auto;
+       	}
+	   .bg{
+	   		display: none;
+	   		width: 100%;
+	   		height: 100%;
+	   		background: #000;
+	   		opacity: 0.3;
+	   		position: fixed;
+	   		top: 38px;
+	   		left: 0;
+	   		z-index: 1;
+	   	}
+	    #gradet li{
+	   		border-left: 1px solid #ebebeb;
+	   	}
+	   	.item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list{
+            width: 100%;
+
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+            align-items: center;
+			-webkit-align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+            align-items: center;
+			-webkit-align-items: center;
+			-webkit-box-align:center;
+            justify-content: center;
+			-webkit-justify-content: center;
+			-webkit-box-pack:center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+            align-items: center;
+			-webkit-align-items: center;
+			-webkit-box-align:center;
+			justify-content: center;
+			-webkit-justify-content: center;
+			-webkit-box-pack:center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+            justify-content: center;
+			-webkit-justify-content: center;
+			-webkit-box-pack:center;
+			padding-top: 30px;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            height: 30px;
+            line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            font-weight: 900;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 14px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .freechoose{
+        	width: 100%;
+        	height: 100px;
+        	display: flex;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+			-webkit-justify-content:space-around;
+        	align-items: center;
+			-webkit-align-items: center;
+			-webkit-box-align:center;
+        	justify-content: space-around;
+        	word-spacing:8px;
+        }
+        .freechoose input{
+        	width:3.5rem;
+        	height: 28px;
+        	border: 1px solid #ebebeb;
+        	outline: none;
+        	text-align: center;
+        	line-height: 28px;
+
+        }
+        .freechoose span{
+        	color: #353535;
+        }
+        .freechoose button{
+        	width: 56px;
+        	height: 32px;
+        	background: #f54343;
+        	border-radius: 5px;
+			color: #fff;
+        }
+		.item:first-child{margin-top: 50px;}
+		.topTitle1,.topTitle2,.topTitle3,.topTitle4{
+			height: 3rem;
+			width: 70%;
+			overflow: hidden;
+			text-align: center;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+    </style>
+</head>
+<body style="display: block" id="body">
+		<div id="" style="position: fixed;top: 0;left: 0;background: #fff; width: 100%;z-index:1000 ;">
+
+			<div class="screening">
+			    <ul>
+			        <li class="Regional"><span class="topTitle1">附近</span></li>
+			        <li class="Brand"><span class="topTitle2">总价</span></li>
+			        <li class="Sort"><span class="topTitle3">户型</span></li>
+			        <li class="more"><span class="topTitle4">更多</span></li>
+			    </ul>
+			</div>
+		</div>
+		<div class="bg"></div>
+		<div id="con">
+			<div class="grade-eject">
+				<div class="bottom">
+					<span class="bottom_left" onclick="reset()">取消</span>
+					<span class="bottom_right"  onclick="reload()">确定</span>
+				</div>
+				<ul class="grade-w" id="gradew">
+				</ul>
+				<ul class="grade-t" id="gradet" style="width: 49.5%;">
+				</ul>
+			</div>
+			<div class="Brandul">
+				<div style="text-align: right;border-bottom: 1px solid #ECECEC; "><span onclick="reset()" style="font-size: 25px;color: #969696;margin-right: 20px;">×</span></div>
+				<ul id="Sort-Sorts">
+					<li>全部</li>
+					<li>30万以下</li>
+					<li>30-50万</li>
+					<li>50-80万</li>
+					<li>80-100万</li>
+					<li>100-150万</li>
+					<li>150-200万</li>
+					<li>200-250万</li>
+					<li>250-300万</li>
+					<li>300万以上</li>
+				</ul>
+				<div class="freechoose">
+					<span>自定义</span>
+					<input type="number" id="minPrice" placeholder="最小" />
+					<span style="color: #999;">——</span>
+					<input type="number" id="maxPrice" placeholder="最大" />
+					<button onclick="sendPrice()">确定</button>
+				</div>
+			</div>
+			<div class="Sortul">
+				<div style="text-align: right;border-bottom: 1px solid #ECECEC; "><span onclick="reset()" style="font-size: 25px;color: #969696;margin-right: 20px;">×</span></div>
+
+				<ul id="Sort-Sorta">
+				</ul>
+			</div>
+			<div class="moreul">
+				<div class="bottom">
+					<span class="bottom_left" onclick="reset()">取消</span>
+					<span class="bottom_right" onclick="reload()">确定</span>
+				</div>
+				<div class="title">拍卖/变卖</div>
+				<ul class="buy" id="autionTypes">
+					<!--<li>一拍</li>-->
+					<!--<li>二拍</li>-->
+					<!--<li>三拍</li>-->
+					<!--<li>变卖</li>-->
+
+				</ul>
+				<div class="way">
+					<div class="title">
+						购买方式
+					</div>
+					<ul id="buyTypes">
+						<!--<li>按揭</li>-->
+						<!--<li>全款</li>-->
+						<!--<li>不限购</li>-->
+					</ul>
+				</div>
+				<div class="way">
+					<div class="title">
+						拍卖状态
+					</div>
+					<ul >
+						<li>正在进行</li>
+						<li>看房期</li>
+						<li>已结束</li>
+					</ul>
+				</div>
+				<div class="way ways" style="height: 145px;">
+					<div class="title">
+						房源类型
+					</div>
+					<ul id="houseSourceTypes">
+						<!--<li>土地</li>-->
+						<!--<li>新房</li>-->
+						<!--<li>二手房</li>-->
+						<!--<li>写字楼</li>-->
+						<!--<li>商铺</li>-->
+						<!--<li>别墅</li>-->
+						<!--<li>车位</li>-->
+						<!--<li>存藏室</li>-->
+					</ul>
+				</div>
+				<div class="way">
+					<div class="title">
+						装修情况
+					</div>
+					<ul  id="decorateTypes">
+						<!--<li>毛坯房</li>-->
+						<!--<li>精装房</li>-->
+						<!--<li>简装房</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="main">
+	    	 <!--<div class="item" style="margin-top: 50px;" onclick="openNewWindow('auction_detail','auction_detail.html')">-->
+			    <!--<ul class="item_list">-->
+			       <!--<li>-->
+			           <!--<img class="left_img" src="../icon/images.png" alt="">-->
+			           <!--<div class="right_msg">-->
+			                <!--<span class="msg_title">-->
+			                        <!--6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三-->
+			                <!--</span>-->
+			               <!--<span class="price">-->
+			                    <!--起拍价 <span class="price_num">121</span>万-->
+			               <!--</span>-->
+			               <!--<span class="msg_gray">-->
+			                   <!--出价:  <span >1</span>-->
+			               <!--</span>-->
+			               <!--<span class="msg_gray">-->
+			                   <!--预计<span >6月30日</span>结束-->
+			               <!--</span>-->
+			           <!--</div>-->
+			       <!--</li>-->
+
+
+			    <!--</ul>-->
+			<!--</div>-->
+	 <!--<div class="item" onclick="openNewWindow('auction_detail','auction_detail.html')">-->
+			    <!--<ul class="item_list">-->
+			       <!--<li>-->
+			           <!--<img class="left_img" src="../icon/images.png" alt="">-->
+			           <!--<div class="right_msg">-->
+			                <!--<span class="msg_title">-->
+			                        <!--6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三-->
+			                <!--</span>-->
+			               <!--<span class="price">-->
+			                    <!--起拍价 <span class="price_num">121</span>万-->
+			               <!--</span>-->
+			               <!--<span class="msg_gray">-->
+			                   <!--出价:  <span >1</span>-->
+			               <!--</span>-->
+			               <!--<span class="msg_gray">-->
+			                   <!--预计<span >6月30日</span>结束-->
+			               <!--</span>-->
+			           <!--</div>-->
+			       <!--</li>-->
+
+
+			    <!--</ul>-->
+			<!--</div>-->
+
+	</div>
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="../script/demo.js"></script>
+	<!--动态添加房列表-->
+	<script id="houseItems" type="text/html">
+		<%for(var i = 0;i < list.length; i++){%>
+		<div class="item" onclick="openAuction('<%=list[i].id%>')">
+			<ul class="item_list">
+				<li>
+					<img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].cover%>" alt="">
+					<div class="right_msg">
+						<span class="msg_title">
+							<%=list[i].name%>
+						</span>
+					   	<span class="price">
+							起拍价 ￥<span class="price_num"><%=list[i].reservePrice%></span>
+					   	</span>
+					   	<span class="msg_gray">
+						   出价:￥
+							<%if(list[i].currentPrice == 0){%>
+						   <span ><%=list[i].reservePrice%></span>
+						   <%} else {%>
+						   <span ><%=list[i].currentPrice%></span>
+						   <%}%>
+					   	</span>
+					   	<span class="msg_gray">
+						   预计<span ><%=list[i].endTime%></span>结束
+					   	</span>
+					</div>
+				</li>
+
+
+			</ul>
+		</div>
+		<%}%>
+
+	</script>
+		<!--区域列表-->
+<script type="text/html" id="areaList">
+		<%for(var i = 0; i < list.length;i++){%>
+			<li onclick="openShopArea('<%=list[i].id%>','<%=list[i].name%>')"><%=list[i].name%></li>
+
+		<%}%>
+		</script>
+		<!--商圈列表-->
+<script	type="text/html" id="ShopArea">
+			<%for(var i = 0; i < list.length;i++){%>
+			<li onclick="changed('<%=list[i].id%>','<%=list[i].name%>')"><%=list[i].name%></li>
+			<%}%>
+</script>
+		<!--房屋类型-->
+<script type="text/html" id="Sort-SortaDiv">
+	<%for(var i=0;i < list.length; i++){%>
+			<li onclick="Hchanged('<%=list[i].id%>','<%=list[i].name%>')"><%=list[i].name%></li>
+	<%}%>
+		</script>
+		<!--拍卖类型-->
+<script type="text/html" id="autionTypesDiv">
+	<%for(var i=0;i < list.length; i++){%>
+			<li onclick="selectAuctionType('<%=list[i].id%>')"><%=list[i].name%></li>
+	<%}%>
+
+		</script>
+		<!--购买类型-->
+<script type="text/html" id="buyTypesDiv">
+	<%for(var i=0;i < list.length; i++){%>
+			<li><%=list[i].name%></li>
+	<%}%>
+
+		</script>
+		<!--房源类型-->
+<script type="text/html" id="houseSourceTypesDiv">
+	<%for(var i=0;i < list.length; i++){%>
+			<li><%=list[i].name%></li>
+	<%}%>
+
+		</script>
+		<!--装修类型-->
+<script type="text/html" id="decorateTypesDiv">
+	<%for(var i=0;i < list.length; i++){%>
+		<li><%=list[i].name%></li>
+
+	<%}%>
+
+		</script>
+
+<script>
+	var pageParm ={};
+	var allResult = {};
+	var cityData ={};
+	var houseSourceTypes =$api.getStorage("houseSourceTypesList");//房屋资源类型
+	var decorateTypes = $api.getStorage("decorateTypesList");//装饰类型
+	var ruleTypes =$api.getStorage("ruleTypesList");//规则类型
+	var houseTypes =$api.getStorage("houseTypesList");//房屋类型
+	var buyTypes =$api.getStorage("buyTypesList");//购买类型
+	var autionTypes =$api.getStorage("autionTypesList");//拍卖类型
+	apiready = function(){
+		var cityList =$api.getStorage("cityTypes");
+		var cityName = $api.getStorage("cityInfo");
+
+		if(cityName.type ==1){
+			for(var i=0;i<cityList.citys.length;i++){
+				if(cityList.citys[i].city ==cityName.city.replace('市','')){
+					cityData.id =(cityList.citys[i].id);
+					cityData.city =cityName.city.replace('市','');
+					//    alert(JSON.stringify(cityData));
+				}
+			}
+		}else if(cityName.type ==2){
+				cityData.id = cityName.cityInfo.id;
+				cityData.city =cityName.cityInfo.city;
+		}
+		pageParm.twoLevelAreaId = cityData.id
+		pageParm.threeAreaId = 0;
+		pageParm.buinessAreaId = 0;
+		pageParm.minTotalPrice = 0;
+		pageParm.maxTotalPrice = 0;
+		pageParm.houseType = 0;
+		pageParm.auctionType = 0;
+		pageParm.buyType = 0;
+		pageParm.decorateType = 0;
+		pageParm.houseSourceType = 0;
+		new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+		//添加房屋类型
+
+		var houseTypesData = {list:houseTypes};
+		var houseTypesHtml = template("Sort-SortaDiv",houseTypesData);
+		document.getElementById('Sort-Sorta').innerHTML =houseTypesHtml;
+		//添加拍卖类型
+		var autionTypesData = {list:autionTypes};
+		var autionTypesHtml = template("autionTypesDiv",autionTypesData);
+		document.getElementById('autionTypes').innerHTML =autionTypesHtml;
+		//添加拍卖类型
+		var buyTypesData = {list:buyTypes};
+		var buyTypesHtml = template("buyTypesDiv",buyTypesData);
+		document.getElementById('buyTypes').innerHTML =buyTypesHtml;
+		//添加房源类型
+		var houseSourceTypesData = {list:houseSourceTypes};
+		var houseSourceTypesHtml = template("houseSourceTypesDiv",houseSourceTypesData);
+		document.getElementById('houseSourceTypes').innerHTML =houseSourceTypesHtml;
+		//添加装修类型
+		var decorateTypesData = {list:decorateTypes};
+		var decorateTypesHtml = template("decorateTypesDiv",decorateTypesData);
+		document.getElementById('decorateTypes').innerHTML =decorateTypesHtml;
+		//alert(JSON.stringify(cityID));
+		ajaxGet(areaOrBusinessAreaUrl,{areaId:cityData.id,level:2},function(ret,err){
+			if(isNotBlack(ret)){
+				//  alert(JSON.stringify(ret));
+				var data ={list:ret};
+				var html=template('areaList',data);
+				document.getElementById('gradew').innerHTML = html;
+			}else if(err){
+				alert(JSON.stringify(err));
+			}
+		});
+
+
+
+	}
+	function addDataToHtml(results,append){
+		if(results){
+			for(var i=0;i<results.length;i++){
+				results[i].endTime = formatTimeToDay(results[i].endTime);
+				allResult[results[i].id]=results[i];
+			}
+		}
+
+		var data = {list: results};
+		var html = template('houseItems',data);
+
+		if (append) {
+			var div = document.createElement("div");
+			div.innerHTML = html;
+			document.getElementById('main').appendChild(div);
+		} else {
+			document.getElementById('main').innerHTML = html;
+		}
+
+		//更多选项点击
+		var us_1=document.getElementById('autionTypes');
+		var lis_1 = us_1.getElementsByTagName("li");
+		for (var i = 0;i < lis_1.length;i++) {
+			lis_1[i].onclick=function(){
+				for (var i = 0;i < lis_1.length;i++) {
+					if (lis_1[i] == this) {
+						pageParm.auctionType = autionTypes[i].id;
+						lis_1[i].className = "first";
+					} else{
+						lis_1[i].className = "";
+					}
+				}
+			}
+		};
+		var us_2=document.getElementById("buyTypes");
+		var lis_2 = us_2.getElementsByTagName("li");
+		for (var j = 0;j < lis_2.length;j++) {
+			lis_2[j].onclick=function(){
+				for (var j = 0;j < lis_2.length;j++) {
+					if (lis_2[j] == this) {
+						lis_2[j].className = "first";
+						pageParm.buyType = buyTypes[j].id;
+					} else{
+						lis_2[j].className = "";
+					}
+				}
+			}
+		};
+
+		var us_3=document.getElementsByClassName("way")[1];
+		var lis_3 = us_3.getElementsByTagName("li");
+		for (var j = 0;j < lis_3.length;j++) {
+			lis_3[j].onclick=function(){
+				for (var j = 0;j < lis_3.length;j++) {
+					if (lis_3[j] == this) {
+						lis_3[j].className = "first";
+						if(j ==0){
+							pageParm.status = 2;
+						}else if(j ==1){
+							pageParm.status = 1;
+						}else  if(j ==2){
+							pageParm.status = 3;
+						}
+					} else{
+						lis_3[j].className = "";
+					}
+				}
+			}
+		};
+
+		var us_4=document.getElementsByClassName("way")[2];
+		var lis_4 = us_4.getElementsByTagName("li");
+		for (var j = 0;j < lis_4.length;j++) {
+			lis_4[j].onclick=function(){
+				for (var j = 0;j < lis_4.length;j++) {
+					if (lis_4[j] == this) {
+						lis_4[j].className = "first";
+						pageParm.houseSourceType =houseSourceTypes[j].id;
+					} else{
+						lis_4[j].className = "";
+					}
+				}
+			}
+		};
+
+		var us_5=document.getElementsByClassName("way")[3];
+		var lis_5 = us_5.getElementsByTagName("li");
+		for (var j = 0;j < lis_5.length;j++) {
+			lis_5[j].onclick=function(){
+				for (var j = 0;j < lis_5.length;j++) {
+					if (lis_5[j] == this) {
+						lis_5[j].className = "first";
+						pageParm.decorateType = decorateTypes[j].id;
+					} else{
+						lis_5[j].className = "";
+					}
+				}
+			}
+		};
+
+
+	}
+	/**************打开详情页************/
+	function openAuction(Hid){
+		var jJson = {};
+		jJson.id = Hid;
+		jJson.url = lawAuctionDetailUrl;
+		jJson.submit = submitEnsureGoldUrl;
+    	jJson.ensureGoldLoadUrl = ensureGoldLoadUrl;
+    	jJson.bidurl = lawAuctionHouseUrl;
+    	jJson.bidPagerUrl = lawAuctionHouseBidPager;
+		jJson.startAlarmUrl = startAlarmUrl;
+		jJson.cancelStartAlarmUrl =cancelStartAlarmUrl;
+		jJson.endAlarmUrl = endAlarmUrl;
+		jJson.cancelEndAlarmUrl = cancelEndAlarmUrl;
+		openNewWindow('auction_detail','auction_detail.html',jJson);
+	}
+
+
+	/****************************下面是选择弹出框里面项的时候  如改变字体颜色等的效果************/
+	var SortSorts = document.getElementById("Sort-Sorts");
+	var liseleceta = SortSorts.getElementsByTagName("li");
+	for (var i = 0;i < liseleceta.length;i++) {
+		liseleceta[i].onclick=function(){
+			for (var i = 0;i < liseleceta.length;i++) {
+				if (liseleceta[i] == this) {
+					liseleceta[i].style.color = "red";
+					if(i ==0){
+						pageParm.minTotalPrice = 0;
+						pageParm.maxTotalPrice = 0;
+					} else if(i ==1){
+						pageParm.maxTotalPrice =30*10000;
+					}else if( i ==2){
+						pageParm.minTotalPrice =30*10000;
+						pageParm.maxTotalPrice =50*10000;
+					}else if( i ==3){
+						pageParm.minTotalPrice =50*10000;
+						pageParm.maxTotalPrice =80*10000;
+					}else if( i ==4){
+						pageParm.minTotalPrice =80*10000;
+						pageParm.maxTotalPrice =100*10000;
+					}else if( i ==5){
+						pageParm.minTotalPrice =100*10000;
+						pageParm.maxTotalPrice =150*10000;
+					}else if( i ==6){
+						pageParm.minTotalPrice =150*10000;
+						pageParm.maxTotalPrice =200*10000;
+					}else if( i ==7){
+						pageParm.minTotalPrice =200*10000;
+						pageParm.maxTotalPrice =250*10000;
+					}else if( i ==8){
+						pageParm.minTotalPrice =250*10000;
+						pageParm.maxTotalPrice =300*10000;
+					}else if( i ==9){
+						pageParm.minTotalPrice =300*10000;
+					}
+					document.getElementsByClassName('topTitle2')[0].innerHTML =liseleceta[i].innerText;
+					new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+					reset();
+				} else{
+					liseleceta[i].style.color = "";
+				}
+			}
+		}
+	}
+
+
+	var SortSorta = document.getElementById("Sort-Sorta");
+		var liselecetb = SortSorta.getElementsByTagName("li");
+		for (var i = 0;i < liselecetb.length;i++) {
+			liselecetb[i].onclick=function(){
+				for (var i = 0;i < liselecetb.length;i++) {
+					if (liselecetb[i] == this) {
+						liselecetb[i].style.color = "red";
+						reset()
+					} else{
+						liselecetb[i].style.color = "";
+					}
+				}
+			}
+		}
+	var gradew = document.getElementById("gradew");
+	var liselecet = gradew.getElementsByTagName("li");
+	for (var i = 0;i < liselecet.length;i++) {
+		liselecet[i].onclick=function(){
+			for (var i = 0;i < liselecet.length;i++) {
+				if (liselecet[i] == this) {
+					liselecet[i].style.color = "red";
+				} else{
+					liselecet[i].style.color = "";
+				}
+			}
+		}
+	}
+
+
+	var gradet = document.getElementById("gradet");
+	var liselecets = gradet.getElementsByTagName("li");
+	for (var i = 0;i < liselecets.length;i++) {
+		liselecets[i].onclick=function(){
+			for (var i = 0;i < liselecets.length;i++) {
+				if (liselecets[i] == this) {
+					liselecets[i].style.color = "red";
+				} else{
+					liselecets[i].style.color = "";
+				}
+			}
+		}
+	}
+
+function openShopArea(id,name){
+	pageParm.threeAreaId = id;
+		document.getElementsByClassName('topTitle1')[0].innerHTML = name;
+		ajaxGet(areaOrBusinessAreaUrl,{areaId:id,level:3},function(ret,err){
+			if(ret){
+				var data ={list:ret};
+				var html =template('ShopArea',data);
+				document.getElementById('gradet').innerHTML =html;
+
+			}else{
+				alert(JSON.stringify(err));
+			}
+		})
+}
+	//商圈点击
+	function changed(id,name){
+		pageParm.buinessAreaId = id;
+		document.getElementsByClassName('topTitle1')[0].innerHTML = name;
+		new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+		reset();
+	}
+	//户型点击
+	function Hchanged(id,name){
+		pageParm.houseType = id;
+		new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+		document.getElementsByClassName('topTitle3')[0].innerHTML = name;
+		reset();
+	}
+	//大小价格
+	function sendPrice(){
+		var min = document.getElementById('minPrice').value;
+		var max = document.getElementById('maxPrice').value;
+		if(min >= max){
+			toast('请输入相应价位');
+		}else{
+			pageParm.minTotalPrice = max;
+			pageParm.maxTotalPrice = min;
+			reset();
+			new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+			if(isNotBlack(min)){
+				document.getElementsByClassName('topTitle2')[0].innerHTML = min;
+			}
+			if(isNotBlack(max)){
+				document.getElementsByClassName('topTitle2')[0].innerHTML = max;
+			}
+		}
+
+
+
+	}
+	function reload(){
+		new datalistModel(addDataToHtml,lawAuctionUrl,pageParm,10,5,100,true);
+		reset();
+	}
+
+
+</script>
+
+</body>
+</html>

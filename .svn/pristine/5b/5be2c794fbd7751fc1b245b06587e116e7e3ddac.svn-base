@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我要委托</title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	html,body  {
+    		background: #f2f2f2;
+    	}
+        #main{width:100%;height: auto;}
+        .center-all{width:90%;height:100%;margin: 0 auto;}
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <div class="center-all">
+        <ul>
+            <li>
+                <span class="items1">物业地址:</span><span class="items2">北京市中关村南大街3号</span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript">
+
+	 
+
+</script>
+</html>

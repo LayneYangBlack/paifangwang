@@ -1,0 +1,560 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>个人信息</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link href="../css/mui.picker.all.css" rel="stylesheet" />
+    <link href="../css/mui.poppicker.css" rel="stylesheet" />
+    <style>
+        textarea {resize:none;}
+        body{background-color: #EFEFEF;}
+        .item{
+            height: 61px;
+            background-color: #fff;
+            line-height: 61px;
+            padding-left: 15px;
+            padding-right:10px;
+            border-bottom: 1px #f1f2f3 solid;
+            color: #000;
+            position: relative;
+        }
+       .input{
+            text-align: right;
+           line-height: 60px;
+            float: right;
+            color: #5B5B5B;
+            width: 65%;
+            height: auto;
+            outline: none;
+            margin-right: 0.5rem;
+           height:100%;
+           font-size: 12px;
+        }
+        .rightIcon{
+            width: 40px;
+            height:40px;
+            margin-top:0.75rem;
+            float: right;
+            border-radius: 100px;
+        }
+        .nextIcon{width:20px;float: right;margin-top:1.3rem;}
+        #bg_1{
+            display:none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+        }
+        #show_1{
+            display:none;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            height: 200px;
+            z-index: 1002;
+            overflow: auto;
+        }
+        #pop-up_input4,#pop-up_input3,#pop-up_input,#pop-up_input2{
+            display: block;
+            width: 80%;
+            height: 11rem;
+            background-color: #FFFFFF;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 10%;
+            text-align: center;
+        }
+        .input_title{
+            border: none;
+            border-bottom: 1px solid #CCCCCC !important;
+            width: 75%;
+            height: 2rem;
+            outline: none;
+            display: block;
+            margin: 20px auto;
+            color: #333;
+        	font-size: 16px;
+        }
+        .button_cancel{
+            width: 50%;
+            background-color:#f1f2f3;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 40px;
+            float: left;
+            position: absolute;
+            bottom: 0;
+        }
+        .button_firm{
+            width: 50%;
+            background-color: #80CD82;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 40px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            color: #FFFFFF;
+            outline: none;
+        }
+        .title{
+            display: block;
+            height: 3rem;
+            line-height: 3rem;
+            color: #76CA78;
+            font-size: 18px;
+            background-color: #FFFFFF;
+        }
+        .item p{
+        	width: 60%;
+        	height: 45px;
+        	position: absolute;
+        	right:38px;
+        	color: #9e9e9e;
+        	line-height: 33px;
+        	bottom: 0;
+        	text-align: right;
+        }
+        #account{float: right;color: #999999;    margin-right: 10px;}
+        #demo4{text-align: right;display: block;float:right;}
+        .mui-poppicker-bottom-left{background: #eee}
+        .status{float: right}
+    </style>
+</head>
+<body style="display: block;" id="body">
+<div id="main">
+    <div class="item" style="height: 60px;line-height: 60px" onclick="getImgUrl('icon')">
+        <span class="leftMsg">修改头像</span>
+            <img class="nextIcon"   style="margin-top: 20px" src="../icon/icon_right_normal.png">
+            <img  id="icon" data-type="show-image" src="../icon/head_photo.png" class="rightIcon" >
+    </div>
+    <div class="item" onclick="">
+        <span class="leftMsg">帐号</span>
+    	<span id="account"></span>
+    </div>
+    <div class="item" onclick="box1_Show()">
+        <span class="leftMsg">昵称</span>
+        <img class="nextIcon"  src="../icon/icon_right_normal.png">
+        <input type="text" data-type="show-value" class="input" value=""  id="name" readonly="readonly">
+    </div>
+    <div class="item" id="sexTab">
+        <span class="leftMsg">性别</span>
+        <img class="nextIcon" src="../icon/icon_right_normal.png">
+        <input type="text" data-type="show-value" class="input" value="" placeholder="请选择" id="sex" readonly="readonly">
+    </div>
+    <div class="item mui-content" data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">
+        <span class="leftMsg">出生日期</span>
+        <img class="nextIcon" src="../icon/icon_right_normal.png">
+        <input  id='demo4' data-options='{"type":"date"}' placeholder="请选择" class="btn input mui-btn mui-btn-block" readonly="readonly">
+    </div>
+    <div class="item"  id="city">
+        <span class="leftMsg" >收货地址</span>
+        <textarea id="cityResult3" data-type="show-inner" class="input" value="" placeholder="请填写归属地"></textarea>
+        <input type="text">
+    </div>
+    <div class="item"  id="city2">
+        <span class="leftMsg" >详细地址</span>
+        <textarea id="cityResult4" data-type="show-inner" class="input" value="" placeholder="请填写详细地址"></textarea>
+        <input type="text">
+    </div>
+    <div class="item" style="margin-top: 10px;" id="openId" onclick="openAuth()">
+        <span class="leftMsg">身份验证</span>
+        <img class="nextIcon" src="../icon/icon_right_normal.png">
+        <span class="status" id="idStatus">未验证</span>
+    </div>
+</div>
+<div id="bg_1"></div>
+<div id="show_1">
+    <div id="pop-up_input">
+        <span class="title">请输入昵称</span>
+        <!--<input type="text" name="" id="" value="" class="input_title" />-->
+        <textarea name="" id="nickNa"  rows="1" cols="12" class="input_title" maxlength="12" onkeyup="input_number(this)"></textarea><br />
+        <small style="position: absolute;color:#CCCCCC;right:4rem;font-size: 0.1rem;"><span id="in_num">12</span>/12</small>
+        <button class="button_cancel"  value="取消" onclick="hide()">取消</button>
+        <button class="button_firm" onclick="nickName()" value="确定">确定</button>
+    </div>
+</div>
+<div id='work_select' class="ui-alert"></div>
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="../script/city.data-3.js"></script>
+<script>
+
+	var imgType = null;
+    var license  =null;
+	var icona;
+    var texta=document.querySelectorAll("textarea");
+    var pop_up_input2=document.getElementById("pop-up_input2");
+    var pop_up_input3=document.getElementById("pop-up_input3");
+    var pop_up_input=document.getElementById("pop-up_input");
+    var bg_1=document.getElementById("bg_1");
+    var show_1=document.getElementById("show_1");
+    var sexId = null;
+    var userInfo = null;
+    var userName = document.getElementById('account');
+    var userInfo;
+    var age = document.getElementById("demo4");
+    var nameText = document.getElementById("name");
+    var icon = document.getElementById("icon");
+    var sex = document.getElementById("sex");
+    var address= document.getElementById('cityResult3');
+    var address2= document.getElementById('cityResult4');
+    var oldDetail;
+    var idStatus;
+    var idName;
+    apiready = function(){
+        $api.setStorage("sexId",1)
+        userInfo = getUserInfo();
+        document.getElementById("body").style.display = 'block';
+        ajaxGetWithProgress(getUserDetailUrl,{uid:userInfo.id},function(ret,err){
+            if(ret){
+                oldDetail = ret;
+                userName.innerHTML = userInfo.phone;
+                if(isBlack(ret.birthDate)){
+                    age.value = "";
+                }else{
+                    age.value = ret.birthDate;
+                }
+                if(isBlack(ret.nickName)){
+                    nameText.value = JSON.stringify(ret.phone).substring(1,4)+"****" + JSON.stringify(ret.phone).substring(8,12)
+                }else{
+                    nameText.value = ret.nickName;
+                }
+                if(isBlack(ret.address)){
+                    address.value ="";
+                    address2.value ="";
+                }else{
+                    address.value = ret.address.split(";")[0];
+                    address2.value = ret.address.split(";")[1];
+                }
+                if(isBlack(ret.icon)){
+                    ret.icon = '../icon/head_photo.png'
+                }else{
+                    icon.src = ret.icon;
+                }
+                idStatus = ret.attestIdCard;
+                if(ret.attestIdCard == 0){
+                    document.getElementById("idStatus").innerHTML = "未验证"
+                }else if(ret.attestIdCard == 1){
+                    document.getElementById("idStatus").innerHTML = "审核中"
+                }else if(ret.attestIdCard == 2){
+                    document.getElementById("idStatus").innerHTML = "已通过"
+                }else if(ret.attestIdCard == 3){
+                    document.getElementById("idStatus").innerHTML = "未通过"
+                }
+//                age.value = ret.birthDate;
+//                nameText.value = ret.nickName;
+                if(ret.address){
+                    address.value = ret.address.split(";")[0];
+                    address2.value = ret.address.split(";")[1];
+                }else{
+                    address.value ="";
+                    address2.value ="";
+                }
+                if(ret.sex == 1){
+                    sex.value = "男"
+                }else{
+                    sex.value = "女 "
+                }
+            }else{
+                alert(JSON.stringify(err))
+            }
+        });
+    };
+    function commit(){
+        $api.getStorage('sexId')
+        var age = document.getElementById("demo4");
+        var name = document.getElementById("name");
+        var icon = document.getElementById("icon");
+        var sex = document.getElementById("sex");
+        var address= document.getElementById('cityResult3');
+        var address2= document.getElementById('cityResult4');
+        var parms = {};
+        //校验数据
+        if(isBlack(name.value)){
+            toast("昵称不能为空");
+            return;
+        }else{
+            parms.nickName = name.value;
+        }
+        if(isBlack(icon.src)){
+            toast("请选择头像");
+            return
+        }else{
+            parms.icon=icon.src;
+        }
+        if(isBlack(sex.value)){
+            toast("请选择性别");
+            return;
+        }else{
+            var sid = $api.getStorage("sexId");
+            parms.sex = sid;
+        }
+        if(isBlack(age.value)){
+            toast("请选择出生年月");
+            return;
+        }else{
+            parms.birthDate = age.value;
+        }
+        if(isBlack(address.value)){
+            toast('请选择所在地');
+            return;
+        }else{
+            parms.address = address.value +";"+ address2.value;
+        }
+        ajaxGet(upLoadUserUrl,parms,function(ret,err){
+            if(ret){
+                toast("提交成功！");
+                setTimeout(function(){
+                    api.execScript({
+                        name:rootWindowName,
+                        frameName:'user',
+                        script:"apiready()"
+                    })
+                    closeWin();
+                },1500);
+            }else{
+                alert(JSON.stringify(err))
+            }
+        })
+    }
+    function openAuth(){
+        if (idStatus ==0){
+            openNewWindow('auth','./auth.html',{idStatus:idStatus})
+        }
+        else if (idStatus ==1){
+
+        }else if(idStatus ==2){
+
+        }else  if(idStatus ==3){
+            openNewWindow('auth','./auth.html',{idStatus:idStatus})
+        }
+
+    }
+    function toastSuccess(){
+        toast('提交成功，请耐心等待')
+    }
+    function getImgUrl(type){
+        typea = type;
+        imgType = type;
+        api.actionSheet({
+            title: '选择图片',
+            cancelTitle: '取消',
+            buttons: ['拍照','从手机相册选择']
+        },function(ret,err) {
+            var index = ret.buttonIndex;
+            var sourceType;
+            switch (index) {
+                case 1 :
+                    sourceType = 'camera';
+                    break;
+                case 2 :
+                    sourceType = 'album';
+                    break;
+                default :
+                    return;
+            }
+            api.showProgress({title: '努力加载中...',text: '先喝杯茶...'});
+            api.getPicture({
+                sourceType: sourceType,
+                mediaValue: 'pic',
+                destinationType: 'url',
+                allowEdit: false,
+                quality: 100,
+                saveToPhotoAlbum: true
+            }, function(ret, err){
+                if(isNotBlack(ret)&&isNotBlack(ret.data)){
+                    var imgList = [];
+                    imgList.push(ret.data)
+                    compressImageList(imgList,function(ret){
+                        uploadImg(ret);
+                    });
+                    // openNewWindow("imgClip",imgClipUrl,pageParam,{bounces:false});
+                    api.hideProgress();
+                }else{
+                    api.hideProgress();
+                }
+            });
+        })
+    }
+    function setImgUrl(data){
+        document.getElementById(imgType).src = data;
+        icona=data;
+    }
+    function uploadImg(reta) {
+        api.showProgress({title: '努力加载中...',text: '先喝杯茶...'});
+        api.ajax({
+            url: uploadImageUrl,
+            method: 'post',
+            timeout: 120,
+            report: true,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                files: {file:reta}
+            }
+        }, function (ret, err) {
+            if(ret.status == 1){
+                //异步调用
+                document.getElementById("icon").src = ret.body.ok;
+                var user = getUserInfo();
+                user.icon = ret.body.ok;
+                setUserInfo(user)
+                api.hideProgress();
+            }
+        });
+        api.hideProgress();
+    }
+    function input_number(num){
+        var max = 12;
+        if(num.value.length <= max)
+        var str = max-num.value.length;
+        document.getElementById("in_num").innerHTML =str.toString();
+    }
+    function box1_Show(){
+    	hide();
+        bg_1.style.display="block";
+        pop_up_input.style.display="block";
+        show_1.style.display="block";
+    }
+    
+    function hide(){
+    	bg_1.style.display="none";
+        pop_up_input.style.display="none";
+
+        show_1.style.display="none";
+        for (var i=0;i< texta.length;i++) {
+        	texta[i].value="";
+        }
+    }
+    
+    function box2_Show(){
+        bg_1.style.display="block";
+        pop_up_input2.style.display="block";
+        show_1.style.display="block";
+        pop_up_input3.style.display="none";
+    }
+
+    function box3_Show(){
+        bg_1.style.display="block";
+        pop_up_input3.style.display="block";
+        show_1.style.display="block";
+    }
+
+    
+    function nickName(){
+        var name = document.getElementById("name");
+        var nickNa = document.getElementById("nickNa");
+        if(isBlack(nickNa.value)){
+            toast("请输入昵称");
+            return;
+        }else {
+            name.value = nickNa.value;
+            hide();
+        }
+    }
+    function age(){
+        var age =document.getElementById("age");
+        var ageA=document.getElementById("input_age");
+        if(ageA.value == ""){
+            toast("请输入年龄");
+            return;
+        }else {
+            age.value = ageA.value;
+            hide();
+        }
+
+    }
+    function openIDAuth(){
+        openNewWindow("IDAuth","./IDAuth.html",userInfo);
+    }
+
+    (function($, doc) {
+        $.init();
+        $.ready(function () {
+            var sexData = [{value: '1', text: '男'},{value: '2', text: '女'}];
+            var sexPicker = new $.PopPicker();
+            sexPicker.setData(sexData);
+            sexPicker.setTitle("性别");
+            var showSexPickerButton = doc.getElementById('sexTab');
+            var sexResult = doc.getElementById('sex');
+            showSexPickerButton.addEventListener('tap', function (event) {
+                sexPicker.show(function (items) {
+                    sex.value = items[0].text;
+                    
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                    sexId  = items[0].value;
+                    $api.setStorage('sexId',sexId)
+                });
+            }, false);
+            //三级选择
+            var cityPicker = new $.PopPicker({
+                layer: 3
+            });
+            cityPicker.setData(cityData3);
+            cityPicker.setTitle("归属地");
+            var showCityPickerButton = doc.getElementById('city');
+            var cityResult = doc.getElementById('cityResult3');
+            var cityResult4 = doc.getElementById('cityResult4');
+            showCityPickerButton.addEventListener('tap', function (event) {
+                cityPicker.show(function (items) {
+                    if(items[2].text){
+                        cityResult.value = items[0].text + items[1].text+items[2].text;
+                    }else{
+                        cityResult.value = items[0].text + items[1].text;
+                    }
+                    cityResult4.focus();
+                });
+            }, false);
+        })
+
+    })(mui, document);
+    //选择日期
+    (function($) {
+        $.init();
+        var result = $('#result')[0];
+        var btns = $('.btn');
+        btns.each(function(i, btn) {
+            btn.addEventListener('tap', function() {
+                var optionsJson = this.getAttribute('data-options') || '{}';
+                var options = JSON.parse(optionsJson);
+                var id = this.getAttribute('id');
+                var t = new Date();
+                var picker = new $.DtPicker({
+                    type:'date',
+                    endDate: new Date(t.getFullYear(), t.getMonth(), t.getDate()),//设置开始日期
+                    beginDate:  new Date(1900, 01, 01)//设置结束日期
+                });
+                picker.show(function(rs) {
+                    age.value = rs.text;
+                    picker.dispose();
+                });
+            }, false);
+        });
+    })(mui);
+</script>
+</body>
+</html>

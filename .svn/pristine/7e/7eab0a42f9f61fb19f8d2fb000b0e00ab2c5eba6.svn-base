@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>评论</title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <style>
+        body{background-color: #fff;}
+        .content_nine{width: 100%;height: 100px;background: #fff;margin-top: 8px;}
+        .comment_name{color: #999;}
+        .comment_content{width: 86%;padding:0 7%;height: 66px;background-color:#fff;font-size:14px;display: flex;display:-webkit-flex;display:-webkit-box;-webkit-align-items:center;align-items: center;-webkit-box-align:center;-webkit-justify-content:space-between;justify-content: space-between;}
+        .content_seven{position:relative;width: 93%;height: 35px;color:#999999;padding-left:7%;background-color:#fff;display: flex;display:-webkit-flex;display:-webkit-box;align-items: center;-webkit-align-items:center;-webkit-box-align:center;border-bottom: 1px solid #F2F2F2;font-size: 14px;}
+        .comment_one{background-color:#fff;width: 86%;padding:0 7%;height: 55px;margin-top:10px;font-size:14px;}
+        .img_list{width: 30px;height:30px;border-radius: 100px;margin-left: 5px;margin-right: 5px;}
+        .one_left{width: 50%;white-space: nowrap;text-overflow:ellipsis;overflow: hidden;float: left;margin-top: 10px;}
+        .comment_two{position:relative;width: 93%;height: 30px;color:#999999;padding-left:7%;background-color:#fff;line-height:30px;border-bottom: 1px solid #F2F2F2;border-top: 1px solid #F2F2F2;font-size: 14px;}
+        .comment_time{color: #999;word-wrap: break-word;  word-break: normal;    float: right; }
+        .commentInput{position:fixed;bottom:0;background-color:#fff;width: 86%;padding:0 7%;height: 56px;display: flex;display:-webkit-flex;display:-webkit-box;-webkit-align-items:center;align-items: center;-webkit-box-align:center;
+-webkit-justify-content: space-between; justify-content: space-between;}
+        .input{width: 70%;  height: 37px;border: solid 1px #39bd2f;border-radius: 10px;margin-right: 10px;}
+        .button{width: 60px;height:37px;border-radius: 8px;background-color: #39bd2f;border: none;color: #fff;}
+
+
+
+         </style>
+</head>
+<body>
+<div id="main">
+
+    <!--<div class="comment_content"style="border-bottom: 1px #F2F2F2 solid;">-->
+    <!--<span style="width: 100%;display: block;">-->
+    <!--<span class="comment_name">张女士:</span><br />-->
+    <!--<span class="comment">这地段真不这地段真不错这这地段真不这地段真不错这这地段真不这地段真不错这</span>-->
+    <!--</span>-->
+
+    <!--</div>-->
+
+    <!--<div class="commentInput">-->
+        <!--<input type="text" id="inputs" class="input"> <button class="button" onclick="commit()">评论</button>-->
+    <!--</div>-->
+</div>
+    <!--<div class="commentInput">-->
+        <!--<input type="text" id="inputs" class="input"> <button class="button" onclick="commit()">评论</button>-->
+    <!--</div>-->
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/chatBoxHelp.js"></script>
+
+<script type="text/html" id="commentContent">
+    <!--<%for(var i=0;i < list.length;i++){%>-->
+    <!--<div class="comment_content"style="border-bottom: 1px #F2F2F2 solid;" onclick="setReply(<%=list[i].uid %>,'<%=list[i].userName %>');">-->
+    <!--<span style="width: 100%;display: block;">-->
+    <!--<span class="comment_name"><%=list[i].userName%>:</span><br />-->
+    <!--<span class="comment"><%=list[i].content%></span>-->
+    <!--</span>-->
+
+    <!--</div>-->
+
+    <!--<%}%>-->
+
+    <% for (var i = 0; i < list.length; i ++) { %>
+    <div style="padding: 15px 5%;display:flex;align-items:center;border-bottom: 1px solid #F0F0F0;" onclick="setReply('<%=list[i].uid %>','<%=list[i].userName %>');">
+
+                <img src="<%=list[i].userIcon%>" onerror="this.src='../icon/default@1x.png' " style="width: 45px;height: 45px; border-radius: 100px;" alt="">
+
+                <% if (list[i].commentType == 1) { %>
+               <span style="margin-left: 10px;">
+                    <span class="comment_name"><%=list[i].userName %></span><br>
+                <span class="comment"><%=list[i].content%></span>
+               </span>
+                <% } else if(list[i].commentType == 2) {%>
+                <span style="margin-left: 10px;">
+                         <span class="comment_name"><%=list[i].userName %></span><br>
+                回复<%=list[i].toUserName%> : <span class="comment"><%=list[i].content%></span>
+                </span>
+
+                <% } %>
+
+        </div>
+
+    <% }%>
+
+</script>
+<script>
+    var hid= {};
+    var param = {};
+    var chatBox;
+    var userName;
+    var user;
+    var type = 1;
+    var toUid = 0;
+    var allResult={};
+	apiready = function () {
+        var Hid = api.pageParam;
+         hid.hid = Hid.hid;
+        initCheckBox();
+        user = getUserInfo();
+        new datalistModel(addDataToHtml,commentPager,hid,10,5,100,true);
+	};
+
+    function addDataToHtml(results,append){
+        if(results && results.length > 0){
+            for(var i=0;i<results.length;i++){
+//                results[i].endTime = formatTimeToDay(results[i].endTime);
+                allResult[results[i].id]=results[i];
+            }
+        }
+        var data = {list: results};
+
+        var html = template('commentContent',data);
+        if (append) {
+            document.getElementById('main').innerHTML =document.getElementById('main').innerHTML + html;
+        } else {
+            document.getElementById('main').innerHTML = html;
+        }
+    }
+
+
+    //评论框
+    function initCheckBox(){
+      chatBox = api.require('UIChatBox');
+        chatBox.open({
+            placeholder: '评论',
+            maxRows: 4,
+            emotionPath: 'widget://image/emotion',
+            styles: {
+                inputBar: {
+                    borderColor: '#F0F0F0',
+                    bgColor: '#FFFFFF'
+                },
+                inputBox: {
+                    borderColor: '#F5F6FA',
+                    bgColor: '#F5F6FA'
+                },
+                emotionBtn: {
+                    normalImg: 'widget://image/chatBox_face1.png'
+                },
+                keyboardBtn: {
+                    normalImg: 'widget://image/chatBox_key1.png'
+                },
+                indicator: {
+                    target: 'both',
+                    color: '#c4c4c4',
+                    activeColor: '#9e9e9e'
+                },
+                sendBtn: {                         //（可选项）JSON对象；发送按钮样式，本参数对 IOS 平台上的键盘内发送按钮无效
+                    bg: '#ffffff',                 //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：#4cc518
+                    titleColor: '#F88125',          //（可选项）字符串类型；发送按钮标题颜色；默认：#ffffff
+                    activeBg: '#ffffff',            //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：无
+                    titleSize: 14                    //（可选项）数字类型；发送按钮标题字体大小；默认：13
+                }
+            }
+        }, function (ret, err) {
+            //点击发送按钮
+            if (ret.eventType == 'send') {
+                if ($api.trimAll(ret.msg).length != 0) {
+                  sendComment(ret.msg);
+                    chatBox.closeKeyboard();
+                } else {
+                    api.toast({
+                        msg: '消息不能为空',
+                        duration: 2000,
+                        location: "top"
+                    });
+                }
+            }
+        });
+
+        //监听弹出事件
+        chatBox.addEventListener({
+            target: 'inputBar',
+            name: 'move'
+        }, function (ret, err) {
+            if(!checkUserLogin()){
+                chatBox.closeKeyboard();
+            }
+        });
+
+        chatBox.addEventListener({
+            target: 'inputBar',
+            name: 'showEmotion'
+        }, function (ret, err) {
+            if(!checkUserLogin()){
+                chatBox.closeBoard();
+            }
+        });
+
+    }
+
+    //回复
+    function setReply(replyUid,replyName){
+        if(user.id == replyUid){
+            return;
+        }
+
+        toUid = replyUid;
+        toUserName = replyName;
+        type = 2;
+
+        chatBox.setPlaceholder({placeholder:"回复"+replyName+":"});
+        chatBox.popupKeyboard();
+    }
+    function sendComment(text){
+        if(isBlack(text)){
+            api.toast({msg:"亲，还没输入内容。"});
+            return;
+        }
+//        if(user.uid == toUid){
+//            chatBox.setPlaceholder({placeholder:"评论"});
+//            return;
+//        }
+//			alert(utf16toEntities(text));
+        var param = {
+            hid:hid.hid,
+            toUid : toUid,
+            type:type,
+            content : text,
+            userName:userName
+        };
+        var params = {
+            hid :hid.hid,
+            content : text,
+            uid:user.id,
+            userName:user.name,
+            commentType:1,
+            userIcon:user.icon
+
+        };
+        var commentUrl1 = commentUrl;
+        if(toUid > 0){
+            commentUrl1 = replyUrl;
+            params.toUid = toUid;
+            params.toUserName = toUserName;
+            params.commentType=2
+        }
+
+        var data = {list: [params]};
+        var html = template('commentContent', data);
+
+
+
+//        if(toUid > 0){
+//            commentUrl = commentUrl;
+//            params.toUid = toUid;
+//            params.toUserName = toUserName;
+//        }
+  //      alert(JSON.stringify(params))
+        ajaxGet(commentUrl1,params,function(ret){
+            if(ret){
+                $api.byId('main').style.display = 'block';
+                $api.byId('main').innerHTML = html + $api.byId('main').innerHTML;
+//                reloadHtml();
+
+            }else{
+                api.toast({msg:"失败,请稍后重试"});
+            }
+        });
+
+        chatBox.setPlaceholder({placeholder:"评论"});
+        toUid = 0;
+        toUserName = "";
+    }
+</script>
+</html>

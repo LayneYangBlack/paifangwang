@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>一口价</title>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        html,body{background-color: #fff;}
+        body{
+            width: 100%;
+            height: auto;
+        }
+        .bg{
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.3;
+            position: fixed;
+            top: 38px;
+            left: 0;
+            z-index: 1;
+        }
+        #gradet li{
+            border-left: 1px solid #ebebeb;
+        }
+        .item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list{
+            width: 100%;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 90px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            max-height: 30px;
+            line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            font-weight: 900;
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 32px;
+            color: red;
+            font-size: 13px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+
+            display: block;
+            color: #999999;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .freechoose{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            word-spacing:8px;
+        }
+        .freechoose input{
+            width:3.5rem;
+            height: 28px;
+            border: 1px solid #ebebeb;
+            outline: none;
+            text-align: center;
+            line-height: 28px;
+
+        }
+        .freechoose span{
+            color: #353535;
+        }
+        .freechoose button{
+            width: 56px;
+            height: 32px;
+            background: #f54343;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .topTitle1,.topTitle2,.topTitle3,.topTitle4{
+            height: 3rem;
+            width: 70%;
+            overflow: hidden;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body style="display: block;" id="body">
+
+<div id="main">
+    <!--  <div class="item" onclick="openNewWindow('fangc_detail','fangc_detail.html')">
+        <ul class="item_list">
+            <li >
+                <img class="left_img" src="../icon/images.png" alt="">
+                <div class="right_msg">
+        <span class="msg_title">
+                6月30日 幸福里2栋1单元  1002房啊谁说的阿三阿三阿斯顿阿斯顿阿三阿三阿斯顿阿斯顿阿三
+        </span>
+       <span class="price">
+            起拍价 <span class="price_num">121</span>万
+       </span>
+       <span class="msg_gray">
+           <span >1</span>人围观
+       </span>
+                </div>
+            </li>
+        </ul>
+    </div> -->
+
+
+</div>
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.1.min.js"></script>
+<script type="text/html" id="scriptDiv">
+    <%for(var i=0;i < list.length; i++){%>
+    <div class="item" onclick="openDetail('<%=list[i].sid%>')">
+        <ul class="item_list">
+            <li >
+                <img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].serviceCover%>" alt="">
+                <div class="right_msg">
+                <span class="msg_title">
+					<%=list[i].serviceTitle%>
+                </span>
+                 <span class="msg_gray">
+                   <%if(list[i].handleWay ==1){%>
+                         获取方式：<span >申请</span>
+                   <%}else if(list[i].handleWay ==2){%>
+                   获取方式：<span >付款</span>
+                   <%}%>
+               </span>
+               <span class="msg_gray">
+                   申请时间<span ><%=list[i].time%></span>
+               </span>
+                </div>
+            </li>
+
+
+        </ul>
+    </div>
+    <%}%>
+
+</script>
+<script>
+    var allResult={};
+    apiready = function() {
+        new datalistModel(addDataToHtml, allServiceUrl,{}, 10, 5, 100, true);
+    }
+    function addDataToHtml(results,append) {
+        if (results) {
+            for (var i = 0; i < results.length; i++) {
+                results[i].time = formatTimeToDay(results[i].time);
+                allResult[results[i].sid] = results[i];
+            }
+            var data = {list: results};
+            var html = template('scriptDiv', data);
+            if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('main').appendChild(div);
+            } else {
+                document.getElementById('main').innerHTML = html;
+            }
+        }
+
+    }
+
+    function openDetail(sid){
+        openNewWindow('servicedetail','./servicedetail.html',allResult[sid])
+    }
+</script>
+</body>
+</html>

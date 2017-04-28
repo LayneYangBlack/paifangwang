@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        body,html{background: #fff;}
+        i{color: red;font-style: normal;}
+        .main{width: 100%;height: auto;float: left;}
+        .main li{width: 95%;height: 55px;float: left;border-bottom: 1px solid #eaeaea;margin-left: 5%;}
+        .main li span{display: block; float: left;text-align: left;line-height:45px;width: 30%;color: #333;height: 55px;}
+        .main li input{float:left ;text-align: left;line-height:normal;width: 70%;height: 30px;margin-top: 12.5px;}
+        .btn{height: 43px;width: 90%;margin: 20px 5% 20px 5%;background: #eb3e2e;line-height: 43px;
+            color: #fff; float: left;  text-align: center;font-size: 16px;border-radius: 10px;}
+        sup{color: red;}
+        .text{display: block;  width: 94%;margin-left: 5%; height: 100px; border: 1px solid #eee;}
+        .submit{width: 100px;color:#fc8274;  height: 38px;  line-height: 38px;  text-align: center;  border: 1px solid #eee;  float: left;  margin-top: 15px;  margin-left: 10%;  border-radius: 6px;  }
+        .recet{width: 100px;color:#9A9A9A;  height: 38px;  line-height: 38px;  text-align: center;  border: 1px solid #eee;  float: right;  margin-top: 15px;  margin-right: 10%;  border-radius: 6px;  }
+        .icon{ width: 50px;  height: 50px;  position: fixed;  right: 5%;top:70%;}
+    </style>
+</head>
+<body>
+<div class="main mp_10">
+    <li><span>公司名称<sup>*</sup></span><input id="name" type="text" placeholder="带*的为必填" /></li>
+    <li><span>所在城市<sup>*</sup></span><input id="city" type="text" placeholder="带*的为必填" /></li>
+    <li><span>地址<sup>*</sup></span><input id="address" type="text" placeholder="带*的为必填" /></li>
+    <li><span>联系人<sup>*</sup></span><input id="contact" type="text" placeholder="带*的为必填" /></li>
+    <li><span>手机号码<sup>*</sup></span><input type="text" id="contactPhone" placeholder="带*的为必填" /></li>
+    <li><span>电话号码<sup>*</sup></span><input type="text"  id="telephone" placeholder="带*的为必填" /></li>
+    <li><span>公司介绍<sup>*</sup></span><input type="text" id="introduce" placeholder="带*的为必填" /></li>
+    <span style="margin-left: 5%;line-height: 30px">优势自述<sup>*</sup></span>
+
+   <textarea class="text" id="desc"></textarea>
+    <button class="submit" onclick="submit()">提交</button>
+    <button class="recet" onclick="clean()">重置</button>
+    <div style="width: 100%;height: 20px;clear: both;"></div>
+</div>
+<img src="../icon/asker.png" class="icon" alt="">
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script>
+    var allResult = {};
+    var name = document.getElementById('name');
+    var address = document.getElementById('address');
+    var contact = document.getElementById('contact');
+    var contactPhone = document.getElementById('contactPhone');
+    var telephone = document.getElementById('telephone');
+    var desc = document.getElementById('desc');
+    var introduce = document.getElementById('introduce');
+    var city = document.getElementById('city');
+    city.onclick = function(){
+        var json = {};
+        json.type = 1;
+        openNewWindow('cityList','./cityList.html',json)
+    }
+    function showCity(cit){
+        city.value = cit;
+    }
+    document.getElementsByClassName('submit')[0].onclick = function(){
+        if(isBlack(name.value)){
+            toast("请输入公司名称");
+            return;
+        }else {
+            allResult.name = name.value;
+        }
+        if(isBlack(address.value)){
+            toast("请输入地址");
+            return;
+        }else {
+            allResult.address = address.value;
+        }
+        if(isBlack(contact.value)){
+            toast("请输入联系人姓名");
+            return;
+        }else {
+            allResult.contact = contact.value;
+        }
+        if(isBlack(contactPhone.value)){
+            toast("请输入手机号码");
+            return;
+        }else {
+            allResult.contactPhone = contactPhone.value;
+        }
+        if(isBlack(telephone.value)){
+            toast("请输入电话号码");
+            return;
+        }else {
+            allResult.telephone = telephone.value;
+        }
+        if(isBlack(introduce.value)){
+            toast("请输入公司介绍");
+            return;
+        }else {
+            allResult.introduce = introduce.value;
+        }
+        if(isBlack(city.value)){
+            toast("请选择城市");
+            return;
+        }else {
+            allResult.city = city.value;
+        }
+        ajaxGetWithProgress(cooperatUrl,allResult,function(ret,err){
+            if(isNotBlack(ret)){
+//                alert(JSON.stringify(ret))
+                 toast("提交成功");
+                // var t = setTimeout("closeWin()",500);
+            }
+        })
+
+
+    }
+        apiready = function(){
+
+        }
+
+</script>
+
+</html>

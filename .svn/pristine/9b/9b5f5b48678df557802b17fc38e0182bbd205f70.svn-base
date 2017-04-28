@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/commonWindow.css" />
+	<style>
+		html {
+			width: 100%;
+			height: 100%;
+			background: #fff;
+		}
+
+		body {
+			background: #fff;
+			width: 100%; /*height: 100%;*/
+			min-height: 100%;
+		}
+
+		* {
+			/*去掉输入框的边框*/
+			outline: 0;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		#item{
+			background-color: #ffffff;
+		    margin:0 auto;width: 90%;
+		}
+		ul {
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: flex;
+			height: 40px;
+		}
+		li {
+			-webkit-box-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
+			height: 40px;
+			text-align: center;
+		}
+		.mid-blank {
+			height: 5%;
+			width: 100%;
+		}
+		.sendCode {
+			float: right;
+			width: 40%;
+			text-align: center;
+			margin-right: 3%;
+			margin-top: 5px;
+		}
+
+
+		.questiona{
+			height: 48px;
+			color: #ffffff;
+			text-align: center;
+			background-color: #39bc30;
+			line-height: 52px;
+			font-size: 18px;
+			width: 90%;
+			margin: 0 auto;
+			border-radius: 5px;
+		}
+
+		#notice,#notice2{
+			/*position: fixed;*/
+			height: 30px;
+			color: #9E9E9E;
+			text-align: center;
+			margin-bottom:10px;
+			line-height: 30px;
+			font-size: 14px;
+			width: 100%;
+			/*bottom: 50px;*/
+		}
+		.tip{
+			color: #D6D6D6;
+			font-size: 12px;
+			height: 50px;
+			line-height: 1.5rem;
+			padding: 0 5% ;
+			margin-top: 15px;
+			float: left;;
+		}
+		.moren{
+			width: 50%;
+			/*background: url(../../icon/thph.png) no-repeat;*/
+			background-color: #FF9900;
+			background-position: -84px -42px;
+			height:40px;;
+			float: left;
+			text-align: center;
+			line-height:40px;
+			font-size: 16px;
+			color: #fff;
+			position: relative;
+		}
+		.this{
+			width: 50%;
+			background-color: #CCCCCC;
+			height:40px;
+			float: left;
+			text-align: center;
+			line-height:40px;
+			font-size: 16px;
+		}
+		#denglu{
+			overflow: hidden;
+			height: 3.5rem;
+			background: #f1f2f3;
+			color: #fff;
+		}
+		#button,#button1{
+			display:block;
+			width: 7rem;
+			margin:3rem auto 2rem auto;
+			text-align:center;
+			height: 2rem;
+			line-height:2rem;
+			border-radius: 2rem;
+			font-size:18px;;
+			color: #999999;
+			outline: none;
+			background: #f2f3f5;
+			border: 1px solid #eaeaea;
+		}
+
+		#check_butt,#check_butt2{
+			vertical-align: middle;
+			margin-bottom: 5px;
+			margin-right: 5px;
+			width: 20px;
+			}
+
+
+		.time{    border-radius: 5px;float:right;width:100px;height: 36px;line-height: 36px;
+			text-align: center;color: #39BD2F;font-size: 14px;margin-top: 3px;border:1px solid #39bd2f;}
+		#nr1,#userResister{width: 100%;height: 1rem;float: left;}
+		#tel{font-size: 18px;margin-left: 7px;
+		}
+		input::-webkit-input-placeholder {
+			color:    #eaeaea;
+		}
+		input:-moz-placeholder {
+			color:    #eaeaea;
+		}
+		.header{
+			width: 100%;
+            height:46px;
+            background-color: #39bc30;
+            display: flex;
+			display: -webkit-flex;
+            justify-content: center;
+			-webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items:center;
+            color: #FFFFFF;
+            font-size: 18px;
+            }
+            .item{
+            	display: flex;
+				display: -webkit-flex;
+            	border-bottom: 1px #F1F2F3 solid;
+            	align-items: center;
+				-webkit-align-items:center;
+            	height: 56px;
+            }
+            #notice{   margin-bottom: 20px;  margin-top: 10px; height: 30px;  color: #9E9E9E; text-align: left;    margin-left: 8%;    font-size: 14px;  width: 90%;}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="main">
+		<div class="header">
+			手机登录
+		</div>
+		<div id="item">
+			<div class="item">
+				<img width="30px"  src="../../image/phone.png">
+				<!--<img width="14px" style="vertical-align:-14px;" src="../../icon/t_phone.png">-->
+				<input id="tel" type="number"  placeholder="请输入手机号码" value=""/>
+			</div>
+			<div class="item">
+				<div style="float: left;width: 60%;">
+					<div style="margin-top: 10px;">
+						<img width="30px" style="vertical-align: middle;" src="../../icon/codeNum.png">
+						<!--<img width="20px" style="vertical-align: middle;height: 18px;" src="../../icon/t_pass.png">-->
+						<input id="code" style="width: 70%;vertical-align: -3px;font-size: 18px;" type="number" style="text-indent: 5px;font-size: 16px;" placeholder="请输入验证码"  value=""/>
+					</div>
+					<!--<div style="width: 167%;height: 1px;border-bottom: 1px solid #F0F0F0;margin-top: 15px;"></div>-->
+				</div>
+				<div id="sms" onclick="sms()" class="time"  >
+					获取验证码
+				</div>
+			</div>
+		</div>
+	</div>
+		<div  id="notice" tapmode="itemOn" >
+    <input id="ipt" type="checkbox"> <a>阅读并同意<span style="color:#39BD2F">《用户服务协议》</span></a>
+	</div>
+		<div id="userButton" class="questiona" tapmode="itemOn" onclick="login('user')">登录</div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+
+<script>
+		apiready = function(){
+			var tel = document.getElementById('tel').value;
+			var code = document.getElementById('code').value;
+		}
+
+
+
+
+ /***********************点击登录**********************************/
+    document.getElementById("userButton").onclick= function (){
+        var tel = document.getElementById('tel').value;
+        var code = document.getElementById('code').value;
+		var imgButt=0;
+		var ipt=document.getElementById("ipt");
+		ipt.onclick=function(){
+			if(imgButt==0){
+				imgButt=1;
+			}else{
+				imgButt=0;
+			}
+		};
+        if(!checkMobileNum(tel)){
+            toast("手机号码不正确");
+            return;
+        }
+
+        if(isBlack(code)){
+            toast("验证码不正确");
+            return;
+        }
+		if(imgButt = 0){
+			toast("你还没有同意协议");
+			return;
+		}
+        api.showProgress();
+        var params = {
+            phone : tel,
+            authCode : code
+//            type:1
+        };
+
+        ajaxGet(userLoginUrl,params,function(ret,err) {
+            alert(JSON.stringify(err));
+            api.hideProgress();
+            if (ret && ret.id) {
+                var user = ret;
+
+//                setUserInfo(user);
+//                cleanDb(function (ret, err) {
+//                    setUserInfo(user);
+//                    api.execScript({
+//                        name: rootWindowName,
+//                        script: 'reloadHtml();'
+//                    });
+//                    closeWin();
+//                    bindPush();
+//                });
+                api.execScript({
+                    name: rootWindowName,
+                    script: 'reloadHtml();'
+                });
+                closeWin();
+            } else {
+                var msg = "出错了，请稍后。";
+                if (ret && ret.msg) {
+                    msg = ret.msg;
+                }
+                api.toast({
+                    msg: msg
+                }); 
+            }
+        })
+    };
+    /***********************点击登录**********************************/
+        //点击跳转注册
+//    document.getElementsByClassName("submit2")[0].onclick=function(){
+//        alert(66);
+//        openNewWindow("register","./register.html")
+//    };
+
+    /********************获取验证码*******************/
+    var flag=true;
+    document.getElementById("sms").onclick=
+        function register(){
+        if(!flag){
+            return;
+        }
+        flag = false;
+        var tel = $api.byId('tel').value;
+        if(!checkMobileNum(tel)){
+            toast("手机号码不正确");
+            return;
+        }
+        ajaxGet(userCreateAuthCodeUrl,{
+            phone : tel
+        },function(ret){
+            if(ret){
+                alert(JSON.stringify(ret));
+                setTime();
+                $api.setStorage(Storage_Sms_Time,new Date().getTime());
+            } else {
+                flag = false;
+                var msg="出错了，请稍后。";
+                if(ret&&ret.msg){
+                    msg=ret.msg;
+                }
+                api.toast({
+                    msg :msg
+                });
+            }
+        });
+    }
+    /********************获取验证码*******************/
+
+    /*******************倒计时****************************/
+    function setTime(){
+        var time;
+        var sms = document.getElementById('sms');
+        sms.style.backgroundColor = '#fff';
+        time=time||60;
+        sms.innerHTML = time+"s";
+        var codeInterval =  setInterval(function(){
+            if(time > 0){
+                time--;
+                sms.innerHTML =time+"s";
+            }else{
+                sms.style.backgroundColor = "#fff";
+                sms.innerHTML = "获取";
+                clearInterval(codeInterval);
+            }
+        },1000)
+    }
+    /*******************倒计时****************************/
+
+
+
+
+
+</script>
+</html>

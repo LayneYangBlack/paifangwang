@@ -1,0 +1,150 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的提醒</title>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/demo.css">
+    <style>
+	    html,body{}
+       	body{
+       		width: 100%;
+			font-size: 14px;
+			background-color: #EFEFEF;
+       	}
+
+		.item{
+			width: 100%;
+			height: 80px;
+			background-color: #fff;
+			margin-top: 5px;
+			padding-top: 20px;
+		}
+		.img{
+            width: 85px;
+			height: 60px;
+			float: left;
+			margin-left: 20px;
+		}
+		.item span{
+			line-height: 18px;
+		}
+		.house_name,.time{
+			font-size: 16px;
+		}
+		.time{color: red;}
+    </style>
+</head>
+<body style="display: block">
+	<div id="main">
+		<!--<div class="item">-->
+			<!--<img src="../icon/images.png" class="img" alt="">-->
+			<!--<div style="float: right;width: 60%;margin-right:5%;">-->
+				<!--<span class="house_name">幸福里2栋1单元[法拍房]</span><br>-->
+				<!--<span class="time" style="margin-top:6px;">08月19日10:00</span><span style="margin-top:6px;">结束</span>-->
+                <!--<div>看房期</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	</div>
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/html" id="scriptDiv">
+	<%for(var i=0;i< list.length;i++ ){%>
+            <div class="item" onclick="openDetail('<%=list[i].hid%>')">
+                <img src="../icon/images.png" class="img" alt="">
+                <div style="float: right;width: 60%;margin-right:5%;">
+                    <span class="house_name"><%=list[i].houseName%></span>
+                        <% if(list[i].type ==1){%>
+                            [ <span>法拍房</span>]
+                        <%}else if(list[i].type ==2){%>
+                                [<span>投资房</span>]
+                            <%}else if(list[i].type ==3){%>
+                               [ <span>名企房</span>]
+                            <%}else if(list[i].type ==4){%>
+                                [<span>一口价</span>]
+                            <%}else if(list[i].type ==5){%>
+                                [<span>投资房直播</span>]
+                            <%}else if(list[i].type ==6){%>
+                                [<span>法拍房直播</span>]
+                            <%}else if(list[i].type ==7){%>
+                               [ <span>名企房直播</span>]
+                            <%}
+                            %>
+                    <br>
+                    <span class="time" style="margin-top:6px;"><%=list[i].houseEndTime%></span><span style="margin-top:6px;">结束</span>
+                    <%if( list[i].houseStatus ==1){%>
+                        <div style="color:#39bc30;">看房期</div>
+                    <%}else if(list[i].houseStatus ==2){%>
+                        <div style="color: red">竞拍中</div>
+                    <%}else if(list[i].houseStatus ==3){%>
+                    <div style="color: #9A9A9A">已结束</div>
+                    <%}else if(list[i].houseStatus ==4){%>
+                    <div style="color: #9A9A9A">中止</div>
+                    <%}
+                    %>
+                </div>
+            </div>
+			<%}%>
+		</script>
+<script>
+	apiready =function(){
+		new datalistModel(addDataToHtml,myAlarmUrl,{},10,5,100,true);
+	}
+    var allResult ={};
+	function addDataToHtml(results,append){
+		if(results){
+			alert(JSON.stringify(results));
+			for (var i=0; i<results.length;i++){
+				results[i].houseEndTime = formatTimeToDate(results[i].houseEndTime);
+                //alert(results[i].endTime);
+                allResult =results[i];
+			}
+			var data = {list:results};
+			var html =template("scriptDiv",data);
+            document.getElementById('main').innerHTML = html;
+		}
+	}
+    function openDetail(id){
+        if (allResult.type ==1){
+            allResult.id = id;
+            allResult.url = lawAuctionDetailUrl;
+            allResult.submit = submitEnsureGoldUrl;
+            allResult.ensureGoldLoadUrl = ensureGoldLoadUrl;
+            openNewWindow('auction_detail','auction_detail.html',allResult);
+        }else if(allResult.type ==2){
+            allResult.id = id;
+            allResult.url = investmentDetailUrl;
+            allResult.submitUrl = investmentEnsureGoldUrl;
+            allResult.ensureGoldLoadUrl = investmentensureGoldLoadUrl;
+            openNewWindow('auction_detail','auction_detail.html',allResult);
+        }else if(allResult.type ==3){
+            allResult.id = id;
+            allResult.name = allResult.houseName;
+            openNewWindow('e_room_detail','./e_room_detail.html',allResult);
+        }else  if(allResult.type ==4){
+            allResult.id = id;
+            allResult.url=onePriceDetailUrl;
+            openNewWindow('fangc_detail','./fangc_detail.html',allResult);
+
+        }
+    }
+</script>
+</body>
+</html>

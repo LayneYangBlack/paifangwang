@@ -1,0 +1,126 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分享</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <style>
+        body{font-family: '微软雅黑'}
+        .all{width:100%;height:auto;background: #fff;}
+        .all-center{width:90%;height:100%;margin: 0 auto;}
+        .top{width:100%;height:22px;font-size: 10px;color:#999;line-height: 22px;margin:0 0 0 5%;border-bottom: 1px solid #ececec;position: fixed;left:0;top:0;background: #fff}
+        .imageul{width:100%;height:135px;}
+        .imageul li {width:100%;height:85%;border-bottom: 1px solid #ececec;padding: 10px 0px}
+        .imgdiv{width:50%;height:115px;float:left;overflow: hidden;}
+        .imgdiv img{height:100%;border: 1px solid #f8f8f8;}
+        .imgtext{width:45%;height:100%;float:right;}
+        .imgtext h2{padding: 2px 0 4px;font-size: 15px;line-height: 1;color: #3c3f46;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;margin:0;}
+        .imgtext strong{color:#df3031;font-size: 12px;font-weight: bold}
+        .h-price{margin-top: 10px}
+        .h-gray{margin-top: 5px;font-size: 11px;line-height: 12px;padding: 3px 0;color: #83868f;}
+        .text-tatleleft{float:left;}
+    </style>
+</head>
+<body>
+<div class="all">
+    <div class="top">本页提及面积，无特殊说明均指建筑面积</div>
+    <div style="width:100%;height:22px"></div>
+    <div class="all-center">
+        <ul class="imageul" id="imgUl">
+            <li>
+                <div class="imgdiv" >
+                    <img src="../image/banner.jpg">
+                </div>
+                <div class="imgtext">
+                    <h2>
+                        <p class="text-tatleleft">户型标题</p>
+                    </h2>
+                    <p class="h-gray">户型描述</p>
+                </div>
+
+            </li>
+            <li>
+                <div class="imgdiv" >
+                    <img src="../image/banner.jpg">
+                </div>
+                <div class="imgtext">
+                    <h2>
+                        <p class="text-tatleleft">户型标题</p>
+                    </h2>
+                    <p class="h-gray">户型描述</p>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/html" id="scriptDiv">
+    <%for(var i = 0;i<list.length;i++){%>
+        <li>
+            <div class="imgdiv" onclick="seeImg('<%=i%>')">
+                <img src="<%=list[i].picture%>" style="<%=list[i].style%>">
+            </div>
+            <div class="imgtext">
+                <h2>
+                    <p class="text-tatleleft"><%=list[i].title%></p>
+                </h2>
+                <p class="h-gray"><%=list[i].desc%></p>
+            </div>
+        </li>
+    <%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript">
+    var userInfo = null;
+    var picListArr = [];
+    apiready = function () {
+        var imgList = api.pageParam;
+        // alert(JSON.stringify(imgList))
+        for(var i=0;i<imgList.length;i++){
+            picListArr.push(imgList[i].picture)
+            var picList = imgList[i].picture;
+            var width = api.winWidth*0.9*0.5;
+            var height = 115;
+            var obj = getImgSizeBySize(picList,width,height);
+            imgList[i].style = obj.style;
+            //  (JSON.stringify(ret[i].style));
+        }
+        var data = {list: imgList};
+        var html = template('scriptDiv', data);
+        document.getElementById('imgUl').innerHTML = html;
+        var houseImagesList = [];
+        
+            
+    };
+    function seeImg(index){
+        var photoBrowser = api.require('photoBrowser');
+        photoBrowser.open({
+            images:picListArr,
+            activeIndex:index,
+            placeholderImg: '../icon/default@1x.png',
+            bgColor: '#000'
+        }, function(ret, err) {
+            if (ret) {
+                if(ret.eventType == "click"){
+                    photoBrowser.close();
+                }else{
+
+                }
+            } else {
+                // alert(JSON.stringify(err));
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>经纪人详情</title>
+		<style type="text/css">
+            * {
+                -webkit-touch-callout:none;
+                -webkit-user-select:none;
+                -khtml-user-select:none;
+                -moz-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                -webkit-tap-highlight-color:transparent;
+            }
+			 html{
+            width: 100%;
+            font-family: 黑体;
+
+        }
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #EFEFEF;
+        }
+        .broker_header{
+        	background-color: #fff;
+        	border-bottom: 1px solid #F2F2F2;
+        	width: 90%;
+        	height: 174px;
+        	padding: 5%;
+            overflow: hidden;
+        }
+        .header_pho{
+        	width: 69px;
+        	height: 69px;
+        	float: left;
+        }
+        .broker_name{line-height: 25px;margin-left: 15px;}
+        .company_name{color: #999;line-height: 25px;margin-left:15px ;}
+        .broker_msg{display: block;width: 100%;height: 30px;line-height:30px;color: #999999;clear: both;}
+		.middle_box{color: #999;border-bottom: 1px #F2F2F2 solid;padding-left:20px;height: 43px;line-height: 43px;}
+		  .anchor_list{
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .content_title{
+            list-style: none;
+            width: 100%;
+            height: 100px;
+
+        }
+        .content_title li{
+            width: 33%;
+            text-align: center;
+            padding: 3% 0;
+            border-right: 1px solid #ECECEC;
+            float: left;
+            font-size: 14px;
+        }
+        .item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;
+        }
+        .item:first-child{margin-top: 10px;}
+        .item_first{
+            font-size: 16px;
+            height: 49px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+             
+        }
+        .item_list{
+            width: 100%;
+            
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+             height: 30px;
+           line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 14px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 25px;
+            line-height: 25px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999999;
+            font-size: 14px;
+        }
+        .yello_price{color: #f6aa2d;    float: right;}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="broker_header">
+    				<img class="header_pho" src="../image/head_photo.png"/>
+                <div style="width:90%;height:69px;">
+    				<span class="broker_name">
+                        默默 
+                        <img style="width: 15px;" src="../icon/broker_ico.png"/>
+                    </span><br />
+
+    				<span class="company_name">北京链家房地产公司</span>
+                    <div style="clear:both"></div>
+                </div>
+                <div style="clear:both"></div>
+
+				<span class="broker_msg" style="margin-top:10px;">手机号:<span id="broker_phone">131313131313</span></span>
+				<span class="broker_msg">邮箱:<span id="broker_email">123123@qq.com</span></span>
+				<span class="broker_msg">地址:<span id="broker_address">北京市海淀区中关村</span></span>
+			</div>
+			<div class="middle_box">他的房源</div>
+		</div>
+	</body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/template-native.js"></script>
+    <script type="text/javascript" src="../script/kv.js"></script>
+    <script type="text/javascript" src="../script/user.js"></script>
+    <script type="text/javascript" src="../script/data.js"></script>
+    <script type="text/javascript" src="../script/util.js"></script>
+    <script type="text/javascript" src="../script/apiCloud.js"></script>
+    <script type="text/javascript" src="../script/public.js"></script>
+    <script type="text/javascript" src="../script/echo.min.js"></script>
+    <script>
+        apiready = function(){
+
+        }
+    </script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>直播详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+</head>
+<body>
+<div style="width:100%;height:220px;"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+    var hidEgid = {};
+    var window_width;
+    var flag = true;
+    var sentJson = {};
+    var result = {};
+    var playStatus;
+	apiready = function () {
+		initFrameInWin(api.pageParam);
+         window_width = api.winWidth;
+        result = api.pageParam;
+        ajaxGetWithProgress(result.liveLoadUrl,{hid:result.id},function(ret,err){
+            if(isNotBlack(ret)){
+                // alert(JSON.stringify(ret))
+               
+                hidEgid.hid = ret.id;
+                hidEgid.egid = ret.egid;
+                hidEgid.ensureGold = ret.ensureGold;
+                var obj = api.require('playModule');
+                obj.play({
+                     pageType:'.;',
+                    rect:
+                    {   x: 0,
+                        y :0,
+                        w : api.winWidth,
+                        h: 220
+                    },
+                    fixedOn: api.frameName,
+                    title: 'test',
+                    url: ret.liveStreamPlayUrl,
+                    defaultBtn: true,
+                    enableFull : false
+                }, function(ret, err) {
+
+                });
+                sentJson = ret;
+                sentJson.bidPagerUrl = result.bidPagerUrl
+                playStatus = ret.status;
+            }else{
+                alert(JSON.stringify(err))
+            }
+        });
+    };
+    //打开分享
+    function openShare(){
+        openFrame("share","./html/share.html",{},0,0);
+    }
+</script>
+</html>

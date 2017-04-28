@@ -1,0 +1,318 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+     <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/demo.css">
+    <style>
+	    html,body{background-color: #fff;}
+	    .top img{
+	    	width: 100%;
+	    	height: 120px;
+	    }
+	   .bg{	   	
+	   		display: none;
+	   		width: 100%;
+	   		height: 100%;
+	   		background: #000;
+	   		opacity: 0.3;
+	   		position: fixed;
+	   		top:0;
+	   		left: 0;
+	   		z-index: 1;
+	   	}
+	    #gradet li{
+	   		border-left: 1px solid #ebebeb;
+	   	}	   	
+	   	.item{
+            /*margin-top: 10px;*/
+            background-color: #FFFFFF;
+            width: 100%;
+            border-top: 1px solid #ECECEC;         
+        }
+         
+        .item_list{
+            width: 100%;
+            
+            border-top: 1px solid #ECECEC;
+        }
+        .item_list li{
+            width:100%;
+            height:130px;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+
+            border-top: 1px solid #ECECEC;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .content_title,.item_list li:last-child{
+            border-style: none;
+        }
+
+        .item_list2 li{
+            width: 33%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .item_list3 li{
+            width: 49.6%;
+            height: 50px;
+            font-size: 14px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ECECEC;
+            border-right: 1px solid #ECECEC;
+            float: left;
+        }
+
+        .nav_bottom li{
+            width: 20%;
+            height: 50px;
+            font-size: 13px;
+            float: left;
+            display: flex;
+            padding-top: 30px;
+            justify-content: center;
+        }
+        .left_img{
+            width: 40%;height: 100px; margin-left: 10px;
+            float: left;
+        }  
+        .right_msg{
+            float: right;
+            width: 55%;
+            height: 100px;
+            padding: 10px;
+        }
+        .msg_title{
+            width: 100%;
+            display: inline-block;
+            max-height: 30px;
+           	line-height: 16px;
+            font-size: 14px;
+            overflow:hidden ;
+            text-overflow: ellipsis;
+            /*white-space: nowrap;*/
+        }
+        .price{
+            display: block;
+            height: 16px;
+            line-height: 16px;
+            color: red;
+            font-size: 14px;
+            margin-top:5px;
+        }
+        .price_num{
+            font-size: 16px;
+        }
+        .msg_gray{
+            height: 18px;
+            line-height: 18px;
+            display: block;
+            color: #999999;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        div.screening{
+        	top: 100px;
+        }
+        .Moreul,.Sortul,.Brandul{
+		    position:absolute;
+		    left: -200%;
+		    top: 165px;
+		    width: 100%;
+		    height: auto;
+		    z-index: 1;
+		    -webkit-transition-duration: 0.4s;
+		    background: #fff;		    
+		}
+		
+		.grade-eject ul li,.Brandul li,.Moreul li{
+			width: 100%;
+			height: 50px;
+			font-size: 14px;
+			line-height: 50px;
+			background: #fff;
+			border: none.;
+			border-bottom: 1px solid #ebebeb;
+			text-align: inherit;
+			text-indent: 30px;
+			padding: 0;
+		}
+		.grade-eject li span,.Brandul li span,.Moreul li span{
+			float: right;
+			margin-right: 15px;
+		}
+		body .screening ul li{
+			width:32.6%;
+			/*border: 1px solid red;*/
+		}
+		.grade-eject::before{
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 25%;
+			border-bottom: 10px solid #fff;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+		
+		.Brandul::before{
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 56%;
+			border-bottom: 10px solid #fff;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+		.place{
+			width:50%;
+			height: 200px;
+			background: #f4f4f4;
+		}
+		.topTitle1,.topTitle2,.topTitle3{
+			height: 3rem;
+			width: 70%;
+			overflow: hidden;
+			text-align: center;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+    </style>
+</head>
+<body style="display: block" id="body">
+<div id="main">
+
+	<!-- <div class="item">
+		<ul class="item_list">
+			<li>
+				<img class="left_img" src="../icon/images.png" alt="">
+				<div class="right_msg">
+		                <span class="msg_title">
+		                        幸福里2栋1单元 1002房
+		                </span>
+		               <span class="price">
+		                    起拍价 <span class="price_num">121</span>万
+		               </span>
+		               <span class="msg_gray">
+		                   出价:  <span >1</span>
+		               </span>
+		               <span class="msg_gray">
+		                   预计<span >6月30日</span>结束
+		               </span>
+				</div>
+			</li>
+		</ul>
+	</div> -->
+</div>
+
+<script type="text/javascript"  src="../script/mui.min.js"></script>
+<script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/jquery-1.8.1.min.js"></script>
+<script id="houseItems" type="text/html">
+	<%for(var i = 0;i < list.length; i++){%>
+	<div class="item" onclick="openAuction('<%=list[i].id%>')">
+		<ul class="item_list">
+			<li>
+				<img class="left_img" onerror="this.src='../icon/default@1x.png' " src="<%=list[i].cover%>" alt="">
+				<div class="right_msg">
+					<span class="msg_title">
+						<%=list[i].name%>
+					</span>
+				   	<span class="price">
+						起拍价 ￥<span class="price_num"><%=list[i].reservePrice%></span>
+				   	</span>
+				   	<span class="msg_gray">
+					   出价:￥
+						<%if(list[i].currentPrice == 0){%>
+					   <span ><%=list[i].reservePrice%></span>
+					   <%} else {%>
+					   <span ><%=list[i].currentPrice%></span>
+					   <%}%>
+				   	</span>
+				   	<span class="msg_gray">
+					   预计<span ><%=list[i].endTime%></span>结束
+				   	</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<%}%>
+</script>
+<script>
+	var allResult ={};
+	apiready = function(){
+		var pageParm = api.pageParam;
+		new datalistModel(addDataToHtml,unitHousePagerUrl,pageParm,10,5,100,true);
+	}
+
+	function addDataToHtml(results,append){
+		// alert(JSON.stringify(results))
+		if(results){
+			for(var i=0;i<results.length;i++){
+				results[i].endTime = formatTimeToDay(results[i].endTime);
+				allResult[results[i].id]=results[i];
+			}
+		}
+		var data = {list: results};
+		var html = template('houseItems',data);
+
+		if (append) {
+			var div = document.createElement("div");
+			div.innerHTML = html;
+			document.getElementById('main').appendChild(div);
+		} else {
+			document.getElementById('main').innerHTML = html;
+		}
+
+	}
+	//点击进详情页
+	function openAuction(Hid){
+		var jJson = {};
+		jJson.id = Hid;
+		jJson.url = lawAuctionDetailUrl;
+		jJson.submit = submitEnsureGoldUrl;
+    	jJson.ensureGoldLoadUrl = ensureGoldLoadUrl;
+    	jJson.bidurl = lawAuctionHouseUrl;
+    	jJson.bidPagerUrl = lawAuctionHouseBidPager;
+		jJson.startAlarmUrl = startAlarmUrl;
+		jJson.cancelStartAlarmUrl =cancelStartAlarmUrl;
+		jJson.endAlarmUrl = endAlarmUrl;
+		jJson.cancelEndAlarmUrl = cancelEndAlarmUrl;
+		openNewWindow('auction_detail','auction_detail.html',jJson);
+	}
+
+</script>
+</body>
+</html>

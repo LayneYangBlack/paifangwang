@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no" />
+    <title>直播详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/mui.css" />
+    <style type="text/css">
+    	#live{width: 100%;height: 220px;}
+    	.tabList{position: relative;}
+    	 #move{
+	    	width: 27.67%;height: 2px;
+	    	background: #39bc30;position: absolute;
+	    	bottom: 0;
+	    	border-radius: 2px;
+	    }
+    	#live_list{
+	    	overflow: hidden;
+	    	border: 1px solid #efefef;
+	    	background: #fff;
+	    }
+	    #live_list li{
+	    	height: 38px;
+	    	width:33%;
+	    	float: left;
+	    	text-align: center;
+	    	line-height: 38px;
+	    	font-size: 16px;
+	    	color: #565656;
+	    }
+	     #box_bottom{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    	z-index: 999;
+    }
+    #input_box{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    }
+    .input{width:200px;padding-left:10px;height: 35px;background-color: #fff;font-size: 14px;outline:none;border:none;}
+    .img_span{width: 35px;height: 35px;background-color: #fff;display: flex;align-items: center;justify-content: center;}
+   	 #bg_1{
+            display: block;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+            display: none;
+        }
+        #show_1{
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            height: 200px;
+            z-index: 1002;
+            overflow: auto;
+            display: none;
+            background-color: #FFF;
+        }
+        .button_cancel{
+            width: 50%;
+            background-color: #f1f2f3;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 43px;
+            font-size: 16px;
+            float: left;
+            position: absolute;
+            bottom: 0;
+        }	
+        .button_firm{
+            width: 50%;
+            background-color: #80CD82;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 43px;
+            font-size: 16px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            color: #FFFFFF;
+        }
+        #live{position: relative;overflow: hidden;}
+      	#video {width:100%;height:100%;display: none;position: absolute;left:0;top:0;}
+        #liveImg{display: block;width:100%;height:100%;}
+		.bottom{width: 100%;height: 64px;display: flex;display: -webkit-box;display:-webkit-flex;align-items: center;-webkit-align-items: center;-webkit-box-align:center;justify-content: center;-webkit-justify-content: center;-webkit-box-pack:center;position: fixed;bottom: 0;    background-color: #fff;z-index: 10}
+		.button{background-color: red;color: #fff;    width: 90%;height: 39px;border: none;border-radius: 5px;font-size: 16px;}
+		#playbutton{position: absolute;left:43%;top:36%;display: block; width:75px;height:75px;background: url(../icon/playButton.png) no-repeat 0px 0px;z-index: 100}
+		#closeVideo{position: absolute;left:8px;top:13px;width:36px;height:36px;}
+    </style>
+</head>
+<body>
+<div id="main">
+	<div id="live" >
+		<!-- <video id="video" src="" controls="controls"></video>
+		<img id="liveImg" src="../icon/images.png" alt=""> 
+		<span id="playbutton" onclick="playLive()"></span> -->
+		<img id="closeVideo" src="../icon/back.png">
+	</div>
+	<div id="live2"></div>
+	<div class="tabList">
+		<ul id="live_list">
+			<li style="color: #39bc30;" onclick="switchFrameGroupIndex(0)" >拍卖信息</li>
+			<li onclick="switchFrameGroupIndex(1)">出价记录</li>
+			<li onclick="switchFrameGroupIndex(2)">在线聊天</li>
+		</ul>
+		<div id="move" style="width:33.33%"></div>
+	</div>
+	<div id="input_box" style="display: none;">
+		<span class="img_span" onclick="priceShow()">
+			<img style="width:20px;height: 20px;" src="../icon/Shape.png"/>
+		</span>	
+		<input class="input" type="text" placeholder="我也说一句..." />
+		<button style="color: #39BD2F;font-weight: bold;height: 35px;" id="" class="mui-btn" style="padding: 7px 12px;">发送</button>
+	</div>
+	<div id="box_bottom" style="display: none;">
+		<span class="img_span" onclick="talkShow()">
+			<img style="width:20px;height: 20px;" src="../icon/forum.png"/>
+		</span>			
+		<div class="mui-numbox" id="addNum" >
+			<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+			<input style="color: #39BD2F; font-weight: bold;background-color: #fff;" id="box" class="mui-input-numbox" type="number" />
+			<button style="color: #39BD2F;font-weight: bold;" class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+		</div>
+			<button style="color: #39BD2F;font-weight: bold;height: 35px;" id="btn" onclick="confirm()" class="mui-btn" style="padding: 7px 12px;">
+				出价
+			</button>
+	</div>
+</div>
+<div id="main1"></div>
+<button ></button>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<%if((list.status == 1 || list.status == 2) && list.inEnsureGold == false && list.apply == false){%>
+	<div class="bottom" onclick="openPayPages()">
+		<button class="button" id="ensureGoldBtn">报名交保证金</button>
+	</div>
+	<%}else if(list.status == 3){%>
+	<div class="bottom" >
+		<button class="button" id="ensureGoldBtn">已结束</button>
+	</div>
+	<%}else if(list.apply == false && (list.status == 2 || list.status == 1) && list.inEnsureGold == true){%>
+	<div class="bottom" onclick="openPayPagesTrue()">
+		<button class="button" id="ensureGoldBtn">去支付</button>
+	</div>
+	<%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	var hidEgid = {};
+	var talkIput = document.getElementById('input_box');
+	var priceBox = document.getElementById('box_bottom');
+  	var window_width;
+  	var flag = true;
+  	var sentJson = {};
+  	var result = {};
+  	var playStatus;
+	var fullFlag = true;
+	var unFunllFlag = false;
+    apiready = function(){
+        window_width = api.winWidth;
+        result = api.pageParam;
+		var playModule = api.require('playModule');
+        ajaxGetWithProgress(result.liveLoadUrl,{hid:result.id},function(ret,err){
+            if(isNotBlack(ret)){
+				// alert(JSON.stringify(ret))
+            	document.getElementById('addNum').setAttribute("data-numbox-step",ret.incrementPrice)
+            	hidEgid.hid = ret.id;
+            	hidEgid.egid = ret.egid;
+            	hidEgid.ensureGold = ret.ensureGold;
+            	
+    			// document.getElementById('video').src = ret.liveStreamPlayUrl;
+				// document.getElementById('liveImg').src = '../icon/images.png';
+            	sentJson = ret;
+            	sentJson.bidPagerUrl = result.bidPagerUrl;
+            	playStatus = ret.status;
+            	if(ret.apply == true && ret.status == 2){
+					// talkIput.style.display = "flex";
+					priceBox.style.display = "flex";
+				}
+				if(ret.currentPrice == 0){
+					document.getElementById('box').value = ret.reservePrice; 
+				}else{
+					document.getElementById('box').value = ret.currentPrice;
+				}
+				if(flag == true){
+						var body = document.getElementsByTagName('body')[0];
+			            var scr = document.createElement('script');//创建一个script节点
+			            scr.setAttribute('src','../script/mui.min.js'); //给script节点添加路径
+			            body.appendChild(scr);
+			            flag = false;
+	            }else{
+
+	            }
+            	var data = {list: ret};
+				var html = template('scriptDiv1', data);
+				document.getElementById('main1').innerHTML = html;
+				api.openFrameGroup ({
+		             name: 'unitRoomGroup',
+		             background:'#fff',
+		             scrollEnabled:true,
+		             rect : {
+		                 x : 0,
+		                 y : 260,
+		                 w : 'auto',
+		                 h : api.winHeight - 260-67
+		             },
+		             index:0,
+		             frames: [{
+		                 name: 'roolist',
+		                 url: 'liveDetail_auctionMsg.html',
+		                 bgColor :'rgba(246,246,246,1)',
+		                 pageParam:sentJson
+		             },{
+		             	 name: 'roolist1',
+		                 url: 'liveDetail_priceMsg.html',
+		                 bgColor :'rgba(246,246,246,1)',
+		                 pageParam:sentJson
+		             },{
+		                  name: 'roolist2',
+		                 url: 'liveDetail_talkMsg.html',
+		                 bgColor :'rgba(246,246,246,1)',  
+		                 pageParam:sentJson
+		             }
+		             ]
+		         }, function(ret, err){
+		            	switchFrameCallback(ret.index);
+						setInterval(function(){
+						playModule.isFullScreen(function(ret, err) {
+							if(ret && ret.status && fullFlag){
+								api.setFrameGroupAttr({
+									name: 'unitRoomGroup',
+									hidden: true
+								});
+								api.setFrameAttr({
+									name: 'returnVideo',
+									hidden: true
+								});
+								fullFlag = false;
+								unFunllFlag = true;
+							}else if(ret && !ret.status && unFunllFlag){
+								fullFlag = true;
+								unFunllFlag = false;
+								api.setFrameGroupAttr({
+									name: 'unitRoomGroup',
+									hidden: false
+								});
+								api.setFrameAttr({
+									name: 'returnVideo',
+									hidden: false
+								});
+							}
+						});
+					},100)
+
+					api.addEventListener({
+						name: 'keyback'
+					}, function (ret, err) {
+						playModule.isFullScreen(function(ret, err) {
+							if(ret && ret.status){
+								playModule.unfull(function(ret, err) {
+
+								});
+							}else{
+								closeWin()
+							}
+						});
+
+					});
+		         });
+            }else{
+                alert(JSON.stringify(err))
+            }
+//        	openFrame('aaa','./liveDetail_auctionMsg.html',ret,260,57)
+//        	openFrame('bbb','./liveDetail_priceMsg.html',ret,260,57)
+//        	openFrame('ccc','./liveDetail_talkMsg.html',ret,260,57)
+        	// openFrame('aaa','./aaa.html',ret,0,api.winHeight-220)
+
+			playModule.play({
+                pageType:'Window',
+                rect:
+                {   x: 0,
+                    y :0,
+                    w : api.winWidth,
+                    h: 220
+                },
+                fixedOn: api.frameName,
+                title: 'test',
+                url: ret.liveStreamPlayUrl,
+                defaultBtn: true,
+                enableFull : false
+            }, function(ret, err) {
+				openReturnVideo()
+            });
+        });
+
+        // document.getElementById('live2').style.width = api.winHeight + "px";
+       
+    };
+    document.getElementById('closeVideo').onclick = function(){
+    	closeWin();
+    }
+
+
+	function openReturnVideo(){
+		var xValue = 8;
+		api.openFrame({
+			name : "returnVideo",
+			url : "./returnVideo.html",
+			pageParam : {},
+			rect : {
+				x : xValue,
+				y : 13,
+				w : 36,
+				h :36
+			},
+
+			bounces : false,
+			opaque : false,
+			//bgColor:'#EDEDED',
+			bgColor : 'rgba(0 , 0, 0, 0)',
+			allowEdit : true,
+			vScrollBarEnabled : true,
+			showProgress : false,
+			hScrollBarEnabled : false,
+			reload:true
+		});
+	}
+    function openPayPages(){
+
+		var promise = {};
+		promise.hid = hidEgid.hid;
+		promise.fee = hidEgid.ensureGold;
+		promise.egid = hidEgid.egid;
+		promise.submitUrl = result.submitUrl;
+		user = getUserInfo();
+		if(user.attestIdCard != 2){
+			ajaxGetWithProgress(userLoadUrl,{},function(ret,err){
+				if(isNotBlack(ret)){
+					if(ret.attestIdCard != 2){
+						dialogBox = api.require('dialogBox');
+						showDialog('未实名认证','您的实名认证还没有通过，是否先去认证？','取消','去认证',function(){
+							openNewWindow('auth','./auth.html')
+						})
+					}else{
+						ret.fee = hidEgid.ensureGold;
+						ret.hid = hidEgid.hid;
+						ret.egid = hidEgid.egid;
+						ret.submitUrl = result.submitUrl;
+						ret.ensureGoldLoadUrl = result.submitEnsureGoldUrl;
+						// alert(JSON.stringify(ret))
+						openNewWindow('payPages','./payPages.html',ret);
+					}
+				}else{
+					alert(JSON.stringify(err))
+				};
+			})
+		}else{
+			openNewWindow('payPages','./payPages.html',promise);
+
+		}
+	}
+	function openPayPagesTrue(){
+		var promise = {};
+		promise.hid = hidEgid.hid;
+		promise.fee = hidEgid.ensureGold;
+		promise.egid = hidEgid.egid;
+		promise.submitUrl = result.submitUrl;
+		openNewWindow('payPages','./payPages.html',promise);
+	}
+    function switchFrameGroupIndex(index){
+        _index=index;
+	    api.setFrameGroupIndex({
+            name : "unitRoomGroup",
+            index : index,
+            scroll : true
+        });
+    }
+    function switchFrameCallback(index){
+        var width = (window_width / 3) * index;
+        var lis=document.querySelector("#live_list").querySelectorAll("li");
+        $api.css(document.getElementById("move"), "-webkit-transform:translate(" + width + "px,0)");
+        for(var i=0;i<lis.length;i++){
+            if(i==index){
+            	lis[i].style.color="#39bc30";
+                
+            }else{
+                lis[i].style.color="#000";
+            }
+        }
+    }
+	function talkShow(){
+		var talkIput = document.getElementById                                                                                                 ('input_box');
+		var priceBox = document.getElementById('box_bottom');
+		talkIput.style.display = "flex";
+		priceBox.style.display = "none";
+	}
+	function priceShow(){
+		var talkIput = document.getElementById('input_box');
+		var priceBox = document.getElementById('box_bottom');
+		talkIput.style.display = "none";
+		priceBox.style.display = "flex";
+	}
+//弹出框
+var nowPrice = document.getElementById('nowPrice');
+function confirm(){
+	var price =document.getElementById('box').value;
+	if(sentJson.currentPrice == 0){
+		if(price <= sentJson.reservePrice){
+			toast('低于或等于当前价不能出价');
+		}else{
+			dialogBox = api.require('dialogBox');
+			showDialog('出价','确定出价吗？','取消','确定',function(){
+				var newCurrentPrice={};
+				newCurrentPrice.hid = sentJson.id;
+				newCurrentPrice.price = price;
+				ajaxGetWithProgress(result.bidUrl,newCurrentPrice,function(ret,err){
+					if(ret){
+						var t = setTimeout("toast('出价成功')",1100)
+						ajaxGetWithProgress(result.liveLoadUrl,{hid:result.id},function(ret,err){
+							if(ret){
+								api.execScript({
+									name:'live_detail',
+						            frameName: 'roolist',
+						            script:  'reloadPrice('+JSON.stringify(ret)+')'
+						        });
+						        api.execScript({
+									name:'live_detail',
+						            frameName: 'roolist1',
+						            script:  'reloadPrice()'
+						        });
+							}
+						})
+					}
+				})
+			})
+		}
+	}else{
+		if(price <= sentJson.currentPrice){
+			toast('低于或等于当前价不能出价');
+		}else{
+			dialogBox = api.require('dialogBox');
+			showDialog('出价','确定出价吗？','取消','确定',function(){
+				var newCurrentPrice={};
+				newCurrentPrice.hid = sentJson.id;
+				newCurrentPrice.price = price;
+				ajaxGetWithProgress(result.bidUrl,newCurrentPrice,function(ret,err){
+					if(ret){
+						var t = setTimeout("toast('出价成功')",1100)
+						ajaxGetWithProgress(result.liveLoadUrl,{hid:result.id},function(ret,err){
+							if(ret){
+								api.execScript({
+									name:'live_detail',
+						            frameName: 'roolist',
+						            script:  'reloadPrice('+JSON.stringify(ret)+')'
+						        });
+								api.execScript({
+									name:'live_detail',
+						            frameName: 'roolist1',
+						            script:  'reloadPrice()'
+						        });
+									
+						         
+							}
+						})
+					}
+				})
+			})
+		}
+	}
+};
+</script>
+</html>

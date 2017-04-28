@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>e选房房源</title>
+		 <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		 <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		 <style type="text/css">
+		 	.house_list{
+		 		width:100%;
+		 		background-color: #FFFFFF;
+		 	}
+		 	.house_list li{
+				width: 94%;
+				min-height: 100px;
+				padding: 3%;
+		 		display: flex;
+		 		justify-content: space-between;
+				display:-webkit-flex;
+				display:-webkit-box;
+				-webkit-justify-content: space-between;
+		 		    border-bottom: 1px solid #f2f2f2;
+		 	}
+		 	.plot{
+		 		font-weight: bold;
+				display: block;
+		 	}
+		 	.logo{
+
+		 		height:20px ;
+		 		border-radius: 5px;
+		 		
+		 		text-align: center;
+		 		margin-left: 10px;
+		 	}
+		 	.list_box{
+		 		width: 80%;
+		 		height: 100%;
+		 	}
+		 	.plot,.address,.num,.time{line-height: 1.5rem;display: flex;align-items: center;}
+		 	.address{}
+		 	.num{color: #FC6061;display: block;}
+		 	.time{color: #999999;}
+		 	.process{width: 60px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: red;margin-top: 10px;}	
+		 	.opening{width: 70px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #FF9D22;margin-top: 10px;} 
+		 	.over{width: 60px;border-radius: 4px;  text-align: center;   height: 20px;line-height: 20px;color: #FFFFFF;background-color: #ccc;margin-top: 10px;}	
+		 </style>
+	</head>
+	<body>
+		<div id="main">
+			<!--<ul class="house_list">-->
+				<!--<li>-->
+					<!--<div class="list_box">-->
+						<!--<span class="plot">泽云 幸福里</span>-->
+						<!--<span class="address">[亦庄-大兴]亦庄经济开发区东路</span>-->
+						<!--<span class="num">房源数<span id="house_num">140</span></span>-->
+						<!--<span class="time">结束时间 <span id="over_time">2016-09-09  12:00</span></span>-->
+					<!--</div>-->
+					<!--<span class="process">-->
+					<!--进行中-->
+				<!--</span>-->
+				<!--</li>-->
+
+			<!--</ul>-->
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/user.js"></script>
+	<script type="text/javascript" src="../script/util.js"></script>
+	<script type="text/javascript" src="../script/kv.js"></script>
+	<script type="text/javascript" src="../script/apiCloud.js"></script>
+	<script type="text/javascript" src="../script/public.js"></script>
+	<script type="text/javascript" src="../script/template-native.js"></script>
+	<script type="text/javascript" src="../script/data.js"></script>
+	<script type="text/javascript" src="../script/init.js"></script>
+	<script type="text/html" id="scriptDiv">
+		<%for(var i= 0; i< list.length;i++){%>
+				<ul class="house_list">
+					<li>
+						<div class="list_box" onclick="openEdetail('<%=list[i].id%>')">
+							<span class="plot"><%=list[i].name%></span>
+							<span class="address"><%=list[i].address%></span>
+							<span class="num">房源数<span id="house_num"><%=list[i].houseNum%></span></span>
+							<span class="time">结束时间 <span id="over_time"><%=list[i].endTime%></span></span>
+						</div>
+							<span class="process">
+							<%=list[i].statusName%>
+						</span>
+					</li>
+				</ul>
+				<%}%>
+
+	</script>
+	<script>
+		var results={};
+		apiready = function(){
+			var data = api.pageParam;
+			//alert(JSON.stringify(data));
+			var address = data.address;
+			//alert(JSON.stringify(data));
+			ajaxGetWithProgress(houseSourceUrl,{enterpriseHousesId:data.id},function(ret,err){
+				if(ret){
+					for(var i=0;i<ret.length;i++){
+						results[ret[i].id] = ret[i];
+						ret[i].endTime = formatTimeToDate(ret[i].endTime);
+					}
+					var data = {list: ret};
+					var html = template('scriptDiv',data);
+					document.getElementById('main').innerHTML = html;
+				}
+			})
+		}
+		function openEdetail(id){
+			openNewWindow('e_change_detail','e_change_detail.html',results[id])
+		}
+	</script>
+</html>

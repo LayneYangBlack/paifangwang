@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no" />
+		<title>楼盘详情</title>
+		  <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+		  <link rel="stylesheet" href="../css/mui.css">
+		  <link rel="stylesheet" type="text/css" href="../css/swiper-3.3.1.min.css"/>
+		<style type="text/css">
+		body{background-color: #EFEFEF;}
+		#over_time{z-index: 3;}
+		.title_content{width:100%;height: 9rem;background-color: #FFFFFF;border-bottom: 1px solid #F2F2F2;}
+		.title_item{width: 100%;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: space-between;}
+		#title_address{width: 70%;padding:10px 20px;font-weight: bold;}
+		.over_prompt{width:30%;font-size: 14px;margin-top: 10px;margin-right: 2%;text-align: center;border-left: 1px #F2F2F2 solid;}
+		.price_now{margin:1% 20px;}
+		.price_num{color: red;}
+		.many_people{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: flex-start;-webkit-justify-content:flex-start;color:#999999;padding-left: 20px;    align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;height: 30px;}
+		.many_people li{line-height: 20px;margin-right:10px ;}
+		.more{background-color:#fff;width:100%;height: 43px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content:space-between;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;color: #39BD2F;margin-bottom: 8px;}
+		.right_icon{ width: 20px;height: 20px;   margin-right: 20px;}
+		.rectangle{display:inline-block;width: 5px;height: 15px;background-color: #39BD2F;margin-right: 10px;}
+		.item_introduce{width: 92%;background-color: #fff;padding: 4% 4%  2% 4%;margin-bottom: 8px;}
+		.item_title{color: #999999;}
+		.item_verticle{display:block;width: 100%;margin-top: 5px;}
+		#pack_up{width: 100%;height: 30px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;}
+		#pack_down{width: 100%;height: 30px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;display: none;}
+		.hide_item{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;color:#999999;  align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;height: 30px;}
+		.hide_title{white-space: nowrap;width: 20%;}
+		.hide_verticle{color: #5B5B5B;margin-left: 10px;width: 80%;}
+		.house_style{width: 115px;height: 115px;border: 1px solid #F2F2F2;    margin-bottom: 5px;}
+		.swiper-container {
+        width: 100%;
+        height: 175px;
+/*        margin: 10px auto;*/
+    		}
+    		 .swiper-slide {
+        text-align: center;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .style_list{display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;flex-direction: column;text-align: left;}
+    .style_list span{line-height: 20px;}
+    .comment_content{width: 100%;min-height: 66px;font-size:14px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;justify-content: space-between;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;}
+	.comment_name{color: #999;}	
+	.content_broker{width: 92%;padding:0 4%;height: 55px;background-color:#fff;margin:10px 0;font-size:14px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;
+justify-content: space-between;border-bottom: 1px #F2F2F2 solid;}
+	.broker_name{display: block;}
+	.broker_list{    display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;flex-direction: column;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;}
+	.broker_img{width: 20px;height: 20px;}
+	.bottom{width: 100%;height: 70px;display: flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;align-items: center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;justify-content: center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;position: fixed;bottom: 0;    background-color: #efefef;z-index: 999;}
+	.button1{background-color:#F5A823;     font-size: 16px;   border: none;color: #fff;width: 49%;height:58px;border-right: 1px solid #F2F2F2;text-align: center;}
+	.button2{background-color:#42a927;      font-size: 16px;  border: none;color: #fff;width: 49%;height:58px;border-right: 1px solid #F2F2F2;text-align: center;}
+		#live{width: 100%;height: 220px;}
+	.address{display: block;margin-top: 6px;}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+	<!--轮播块-->
+	<!--<div id="slider" class="mui-slider" >-->
+    <!--<div class="mui-slider-group mui-slider-loop">-->
+        <!--&lt;!&ndash; 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) &ndash;&gt;-->
+        <!--<div class="mui-slider-item mui-slider-item-duplicate">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 第一张 &ndash;&gt;-->
+        <!--<div class="mui-slider-item">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 第二张 &ndash;&gt;-->
+        <!--<div class="mui-slider-item">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 第三张 &ndash;&gt;-->
+        <!--<div class="mui-slider-item">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 第四张 &ndash;&gt;-->
+        <!--<div class="mui-slider-item">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) &ndash;&gt;-->
+        <!--<div class="mui-slider-item mui-slider-item-duplicate">-->
+            <!--<a href="#">-->
+                <!--<img src="../image/banner.jpg">-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="mui-slider-indicator">-->
+        <!--<div class="mui-indicator mui-active"></div>-->
+        <!--<div class="mui-indicator"></div>-->
+        <!--<div class="mui-indicator"></div>-->
+        <!--<div class="mui-indicator"></div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;轮播结束&ndash;&gt;-->
+		<!--<div class="title_content">-->
+			<!--<div class="title_item">-->
+				<!--<span id="title_address">-->
+					<!--泽云幸福里1栋1单元1003房-->
+					<!--<span class="address">-->
+					<!--泽云幸福里1栋1单元1003房-->
+					<!--</span>-->
+				<!--</span>-->
+
+				<!--<span class="over_prompt" onclick=""><img style="width: 40px;" src="../icon/address.png"/><br />地图位置</span>-->
+			<!--</div>-->
+			<!--<div class="price_now">-->
+				<!--<span class="price_num">均价<strong>￥5000元</strong><strong>/平</strong></span>-->
+			<!--</div>-->
+			<!--<span class="many_people">-->
+				<!--开发商<span style="color: #5B5B5B;margin-left: 10px;">万科房地产开发公司</span>-->
+			<!--</span>-->
+		<!--</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                 -->
+		<!--<div class="more">-->
+			<!--<span style="margin: 0 auto;">查看更多</span><img class="right_icon" src="../icon/icon_right_normal.png" alt="" />-->
+		<!--</div>-->
+		<!--<div class="item_introduce">-->
+			<!--<span class="rectangle"></span><span class="item_title">项目介绍</span>-->
+			<!--<span class="item_verticle">环境、配套、交通也趋于成熟。幸福里9月份中旬预计推出1、2、3号楼</span>-->
+		<!--</div>-->
+		<!--<div class="item_introduce">-->
+			<!--<span class="rectangle"></span><span class="item_title">周边配套</span>-->
+			<!--<span class="item_verticle">大学：人民大学、清华大学、北京外国语大学</span>-->
+			<!--<span class="item_verticle">中小学：北大附中、清华附中、八一中学</span>-->
+			<!--<span class="item_verticle">幼儿园：红黄蓝幼儿园</span>-->
+			<!--<span id="pack_up" onclick="openHideBox()"><img style="width: 20px;height:20px;" src="../icon/down.png"/></span>-->
+			<!--<span id="pack_down"style="display: none;" onclick="closeShowBox()"><img style="width: 20px;height:20px;" src="../icon/up.png"/></span>-->
+			<!--<div id="hide_box" style="display: none;">-->
+				<!--<span class="hide_item">-->
+				<!--<span class="hide_title">交房时间:</span><span class="hide_verticle">2016-03-03</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">物业类型:</span><span class="hide_verticle">住宅</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">装修情况:</span><span class="hide_verticle">精装修</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">楼盘位置:</span><span class="hide_verticle">四环至五环</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">开发商:</span><span class="hide_verticle">北京国奥韵兴置地有限公司</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">产权年限:</span><span class="hide_verticle">70年</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">物业公司:</span><span class="hide_verticle">北京仕邦博睿物业管理有限责任公司</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">建筑类型:</span><span class="hide_verticle">高层</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">车位配比:</span><span class="hide_verticle">1:1</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">规划户数:</span><span class="hide_verticle">1070户</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">容积率:</span><span class="hide_verticle">住宅2.5</span>-->
+			<!--</span>-->
+			<!--<span class="hide_item">-->
+				<!--<span class="hide_title">绿化率:</span><span class="hide_verticle">30%</span>-->
+			<!--</span>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;">-->
+			<!--<span class="rectangle"></span><span class="item_title">户型介绍</span>-->
+				<!--</div>-->
+			<!--<div class="item_introduce">-->
+			  <!--<div class="swiper-container">-->
+		        <!--<div class="swiper-wrapper">-->
+		            <!--<div class="swiper-slide">-->
+		            	<!--<span class="style_list">-->
+		            		<!--<img class="house_style" src="../image/houseA.png"/>-->
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	<!--</span>-->
+		            <!--</div>-->
+		            <!--<div class="swiper-slide">-->
+		            	<!--<span class="style_list">-->
+		            		<!--<img class="house_style" src="../image/houseA.png"/>-->
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	<!--</span>-->
+		            <!--</div>-->
+		            <!--<div class="swiper-slide">-->
+		            	<!--<span class="style_list">-->
+		            		<!--<img class="house_style" src="../image/houseA.png"/>-->
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	<!--</span>-->
+		            <!--</div>-->
+		            <!--<div class="swiper-slide">-->
+		            	<!--<span class="style_list">-->
+		            		<!--<img class="house_style" src="../image/houseA.png"/>-->
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	<!--</span>-->
+		            <!--</div>-->
+		            <!--<div class="swiper-slide">-->
+		            	<!--<span class="style_list">-->
+		            		<!--<img class="house_style" src="../image/houseA.png"/>-->
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	<!--</span>-->
+		            <!--</div>-->
+        		<!--</div>-->
+        <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="swiper-pagination"></div>&ndash;&gt;-->
+    	<!--</div>-->
+		<!--</div>-->
+		<!--<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;">-->
+			<!--<span class="rectangle"></span><span class="item_title">最新动态</span>-->
+				<!--</div>-->
+		<!--<div class="item_introduce" style="border-bottom: 2px solid #F2F2F2;">-->
+					<!--<span class="item_verticle">幸福里9月份中旬预计推出1、2、3号楼</span>-->
+					<!--<span class="item_verticle" style="color: #999999;">幸福里9月份中旬预计推出1、2、3号楼幸福里9月份中旬预计推出1、2、3号楼幸福里9月份中旬预计推出1、2、3号楼幸福里9月份中旬预计推出1、2、3号楼</span>-->
+					<!--<div class="more" style="margin: 0;">-->
+					<!--<span style="margin: 0 auto;">动态详情</span>-->
+					<!--</div>-->
+				<!--</div>-->
+		<!--<div class="item_introduce" style="margin: 0;border-bottom: 2px solid #F2F2F2;">-->
+			<!--<span class="rectangle"></span><span class="item_title">用户评论</span>-->
+			<!--<div class="comment_content">-->
+				<!--<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png">-->
+				<!--<span style="width: 85%;display: block;">-->
+					<!--<span class="comment_name">张女士</span><br />-->
+				<!--<span class="comment">这地段真不错阿斯达啊爱谁爱谁爱谁啊啊阿斯达斯</span>-->
+				<!--</span>			-->
+			<!--</div>-->
+			<!--<div class="comment_content">-->
+				<!--<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png">-->
+				<!--<span style="width: 85%;display: block;">-->
+					<!--<span class="comment_name">张女士</span><br />-->
+				<!--<span class="comment">这地段真不错阿斯达啊爱谁爱谁爱谁啊啊阿斯达斯</span>-->
+				<!--</span>			-->
+			<!--</div>-->
+				<!--</div>	-->
+		<!--<div class="more" style="margin: 0;">-->
+			<!--<span style="margin: 0 auto;">全部评论(<span id="comment_num">22条</span>)</span>-->
+		<!--</div>-->
+		<!--<div class="content_broker">-->
+			<!--<img style="width: 30px;height:30px;" src="../icon/images.png"/onclick="openNewWindow('broker_detail','broker_detail_body.html')">-->
+			<!--<span style="width: 30%;"><span class="broker_name">张山</span><span class="borker_phoneNum">13131313131</span></span>-->
+			<!--<span class="broker_list"><img class="broker_img" src="../icon/phone.png"/>电话</span>-->
+			<!--<span class="broker_list"><img class="broker_img" src="../icon/message.png"/>短信</span>-->
+			<!--<span class="broker_list"><img class="broker_img" src="../icon/msg.png"/>交流</span>-->
+			<!--<span class="broker_list"><img class="broker_img" src="../icon/talk.png"/>讨论</span>-->
+		<!--</div>-->
+		<!--<div style="width: 100%;height: 70px;float: left;"></div>-->
+		<!--<div class="bottom">-->
+			<!--<button class="button1" onclick="openNewWindow('e_change','e_change.html')">e选房</button>-->
+			<!--<button class="button2" onclick="openNewWindow('famous_enterprise','famous_enterprise.html')">专场拍卖</button>-->
+		<!--</div>-->
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script src="../script/swiper-3.3.1.min.js" type="text/javascript" ></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+	<script type="text/html" id="scriptDiv">
+		<div id="slider" class="mui-slider" >
+			<div class="mui-slider-group mui-slider-loop">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="../image/banner.jpg">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<!--轮播结束-->
+		<div class="title_content">
+			<div class="title_item">
+				<span id="title_address">
+					<%=list.name%>
+					<span class="address">
+					<%=list.address%>
+				</span>
+				</span>
+
+				<span class="over_prompt" onclick=""><img style="width: 40px;" src="../icon/address.png"/><br />地图位置</span>
+			</div>
+			<div class="price_now">
+				<span class="price_num">均价<strong>￥<%=list.averagePrice%>元</strong><strong>/平</strong></span>
+			</div>
+			<span class="many_people">
+				开发商<span style="color: #5B5B5B;margin-left: 10px;"><%=list.enterpriseName%></span>
+			</span>
+		</div>
+		<div class="more">
+			<span style="margin: 0 auto;">查看更多</span><img class="right_icon" src="../icon/icon_right_normal.png" alt="" />
+		</div>
+		<div class="item_introduce">
+			<span class="rectangle"></span><span class="item_title">项目介绍</span>
+			<span class="item_verticle"><%=list.introduce%></span>
+		</div>
+		<div class="item_introduce">
+			<span class="rectangle"></span><span class="item_title">周边配套</span>
+			<span class="item_verticle">大学：人民大学、清华大学、北京外国语大学</span>
+			<span class="item_verticle">中小学：北大附中、清华附中、八一中学</span>
+			<span class="item_verticle">幼儿园：红黄蓝幼儿园</span>
+			<span id="pack_up" onclick="openHideBox()"><img style="width: 20px;height:20px;" src="../icon/down.png"/></span>
+			<span id="pack_down"style="display: none;" onclick="closeShowBox()"><img style="width: 20px;height:20px;" src="../icon/up.png"/></span>
+			<div id="hide_box" style="display: none;">
+				<span class="hide_item">
+				<span class="hide_title">交房时间:</span><span class="hide_verticle">2016-03-03</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">物业类型:</span><span class="hide_verticle">住宅</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">装修情况:</span><span class="hide_verticle">精装修</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">楼盘位置:</span><span class="hide_verticle">四环至五环</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">开发商:</span><span class="hide_verticle">北京国奥韵兴置地有限公司</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">产权年限:</span><span class="hide_verticle">70年</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">物业公司:</span><span class="hide_verticle">北京仕邦博睿物业管理有限责任公司</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">建筑类型:</span><span class="hide_verticle">高层</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">车位配比:</span><span class="hide_verticle">1:1</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">规划户数:</span><span class="hide_verticle">1070户</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">容积率:</span><span class="hide_verticle">住宅2.5</span>
+			</span>
+			<span class="hide_item">
+				<span class="hide_title">绿化率:</span><span class="hide_verticle">30%</span>
+			</span>
+			</div>
+		</div>
+		<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;">
+			<span class="rectangle"></span><span class="item_title">户型介绍</span>
+		</div>
+		<div class="item_introduce">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="../image/houseA.png"/>
+							<span><%=list.houseTypeIntroduce%></span>
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	</span>
+					</div>
+					<div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="../image/houseA.png"/>
+							<span><%=list.houseTypeIntroduce%></span>
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	</span>
+					</div>
+					<div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="../image/houseA.png"/>
+							<span ><%=list.houseTypeIntroduce%></span>
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	</span>
+					</div>
+					<div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="../image/houseA.png"/>
+							<span><%=list.houseTypeIntroduce%></span>
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	</span>
+					</div>
+					<div class="swiper-slide">
+		            	<span class="style_list">
+		            		<img class="house_style" src="../image/houseA.png"/>
+							<span><%=list.houseTypeIntroduce%></span>
+		            		<!--<span >A户型</span>-->
+		            		<!--<span style="font-size: 14px;color: #999999;">2室2厅1卫 86平</span>-->
+		            	</span>
+					</div>
+				</div>
+				<!-- Add Pagination -->
+				<!--<div class="swiper-pagination"></div>-->
+			</div>
+		</div>
+		<div class="item_introduce" style="margin: 0;border-bottom: 1px solid #F2F2F2;">
+			<span class="rectangle"></span><span class="item_title">最新动态</span>
+		</div>
+		<div class="item_introduce" style="border-bottom: 2px solid #F2F2F2;">
+			<!--<span class="item_verticle">幸福里9月份中旬预计推出1、2、3号楼</span>-->
+			<span class="item_verticle" style="color: #999999;"><%=list.dynamic%></span>
+			<div class="more" style="margin: 0;">
+				<span style="margin: 0 auto;">动态详情</span>
+			</div>
+		</div>
+		<div class="item_introduce" style="margin: 0;border-bottom: 2px solid #F2F2F2;">
+			<span class="rectangle"></span><span class="item_title">用户评论</span>
+			<div class="comment_content">
+				<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png">
+				<span style="width: 85%;display: block;">
+					<span class="comment_name">张女士</span><br />
+				<span class="comment">这地段真不错阿斯达啊爱谁爱谁爱谁啊啊阿斯达斯</span>
+				</span>
+			</div>
+			<div class="comment_content">
+				<img style="width: 30px;height:30px;border-radius: 100px;" src="../icon/zhoumo.png">
+				<span style="width: 85%;display: block;">
+					<span class="comment_name">张女士</span><br />
+				<span class="comment">这地段真不错阿斯达啊爱谁爱谁爱谁啊啊阿斯达斯</span>
+				</span>
+			</div>
+		</div>
+		<div class="more" style="margin: 0;">
+			<span style="margin: 0 auto;">全部评论(<span id="comment_num">22条</span>)</span>
+		</div>
+		<div class="content_broker">
+			<img style="width: 30px;height:30px;" src="../icon/images.png"onclick="openNewWindow('broker_detail','broker_detail_body.html')">
+			<span style="width: 30%;"><span class="broker_name">张山</span><span class="borker_phoneNum">13131313131</span></span>
+			<span class="broker_list"><img class="broker_img" src="../icon/phone.png"/>电话</span>
+			<span class="broker_list"><img class="broker_img" src="../icon/message.png"/>短信</span>
+			<span class="broker_list"><img class="broker_img" src="../icon/msg.png"/>交流</span>
+			<span class="broker_list"><img class="broker_img" src="../icon/talk.png"/>讨论</span>
+		</div>
+		<div style="width: 100%;height: 70px;float: left;"></div>
+		<div class="bottom">
+			<button class="button1" onclick="openEhouse('<%=list.id%>')">e选房</button>
+			<button class="button2" onclick="openSell()">专场拍卖</button>
+		</div>
+
+
+	</script>
+<script type="text/javascript">
+
+	var eid={};
+	var results;
+
+	apiready = function(){
+
+			var data = api.pageParam;
+		 eid.enterpriseHousesId =data.id;
+		ajaxGetWithProgress(famousDetailUrl,eid,function(ret,err){
+			if(isNotBlack(ret)){
+				results = ret;
+
+
+
+
+				var data = {list: ret};
+				var html = template('scriptDiv', data);
+				document.getElementById('main').innerHTML = html;
+				mui.init({
+//				swipeBack:true //启用右滑关闭功能
+				});
+				var slider = mui("#slider");
+				slider.slider({
+					interval:2000
+				});
+				//
+				//swiper动画
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					slidesPerView: 2,
+					paginationClickable: true,
+					spaceBetween: 30,
+					freeMode: true
+				});
+			}
+		})
+	}
+
+	function openHideBox(){
+		var hideButton = document.getElementById('pack_up');
+		var showButton =document.getElementById('pack_down');
+		var hideBox = document.getElementById('hide_box');
+		hideBox.style.display = "block";
+		hideButton.style.display = "none";
+		showButton.style.display = "flex";
+	}
+	function closeShowBox(){
+		var hideButton = document.getElementById('pack_up');
+		var showButton =document.getElementById('pack_down');
+		var hideBox = document.getElementById('hide_box');
+		hideBox.style.display = "none";
+		hideButton.style.display = "flex";
+		showButton.style.display = "none";
+	}
+	function openEhouse(id){
+		openNewWindow('e_change','e_change.html',results);
+	}
+	function openSell(){
+
+		openNewWindow('famous_enterprise','./famous_enterprise.html',results)
+	}
+</script>
+
+</html>

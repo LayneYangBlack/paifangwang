@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>热词搜索头</title>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/demo.css">
+    <link rel="stylesheet" href="../css/mui.css">
+    <style type="text/css">
+        body{font-family:"黑体";}
+        .awards_num{
+            background-color: #020202;
+
+        }
+        #topbar{height:42px;}
+        .rightInfo{
+            height:31px;
+            position:absolute;
+            top:6px;
+            right:5px;
+            margin-right:5px;
+            font-size:12px;
+            line-height:31px;
+            background-color:#020202;
+            color:#ffffff;
+            padding:0 5px;
+        }
+        .search{width:100%;height:auto;padding-top: 8px;}
+        .search-center{width:90%;margin:0 auto;margin-top: 10px;padding-bottom: 10px}
+        .search-center>p {font-size: 12px;color:#9E9E9E;}
+        .newli{padding:0 3% 0 3%;height:35px;width:15%;border:1px solid #e4e4e4;border-radius: 20px;float:left;margin-left:3%;margin-top: 10px;font-size: 14px;color:#5B5B5B;text-align: center;line-height: 35px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+        .hot>p{width:100%;height:40px;font-size: 14px;color:#9e9e9e;line-height: 40px;text-align: center;border-top:1px solid #F2F2F2;margin-top: 10px}
+        #history{background:url(../icon/delete@2x.png)no-repeat right 0px;background-size: 4%}
+        #historyDiv{display: block;}
+        #searchBar{border-bottom:none !important;}
+        ul li:last-child{margin-bottom: 0 !important;}
+        #keyWord{width: 100%;height:25px;outline: 0px;font-size:14px;border-radius:12px;background-color:#ececec;text-indent:9%;background-image:url(../icon/seach.png);background-repeat:  no-repeat;background-position:  6px 5px;background-size: 5% }
+        .back{margin-left:5%;margin-top:15px;float:left;background-size:50%;width: 8px;height: 13.8px;background-image: url('../icon/arrow_m.png');background-position: 1px 1px;background-repeat: no-repeat;}
+    </style>
+</head> 
+<body>
+<div id="topbar" class="topbar_info">
+    
+    <div id="searchBar" style="width:100%;position: fixed;background-color: #fff;height: 43px;border-bottom: 1px solid #F2F2F2;z-index: 10;left: 0;right: 0;bottom: auto;top: 0;">
+			<div style="float:left;margin-left: 20px;line-height: 45px;width: 80%;">
+                <form action="">
+	    			<input id="keyWord" type="text" placeholder="请输入'测试'进行搜索 " value="" />
+                </form>
+			</div>
+			<div style="width:10%;float: right;margin-right:3%;color:#39bc30;line-height:48px;font-size:14px" onclick = "searchWord()">
+				搜索
+			</div>
+		</div>
+</div>
+
+        
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+    var search;
+    //获取后台的热词
+    apiready = function(){
+        search = api.pageParam;
+    }
+    document.getElementById('keyWord').onfocus = function(){
+         api.closeFrame({
+            name: 'search_body'
+        });
+    }
+    function searchWord (){
+        var searchJson = {};
+        var word = document.getElementById('keyWord');
+        searchJson.word = word.value;
+        // alert(JSON.stringify(searchJson))
+        openFrame("search_body","./search_body.html",searchJson,44,0);
+    };
+</script> 
+</html>

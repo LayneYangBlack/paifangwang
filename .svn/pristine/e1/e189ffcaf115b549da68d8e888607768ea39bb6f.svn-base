@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>直播详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/mui.css" />
+	<title>直播出价记录</title>
+	<style type="text/css">
+		 #box_bottom{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    }
+    #input_box{
+    	width: 100%;
+    	height: 57px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: space-around;
+    	position: fixed;
+    	bottom: 0;background-color: #F2F2F2;
+    }
+    .img_span{width: 35px;height: 35px;background-color: #fff;display: flex;align-items: center;justify-content: center;}
+	.price_list{width: 100%;}
+	.price_list li{width: 100%;height: 87px;display: flex;align-items: center;border-bottom: 1px solid #EFEFEF;}
+	.img{width: 49px;height: 49px;border-radius: 100%;}
+	.comment_content{width: 86%;padding:0 7%;height: 66px;font-size:14px;display: flex;align-items: center;justify-content: space-between;}
+	.price_num{color: red;float: left;margin-right: 10px;}
+	.first_price{color: #F5A823;line-height: 22px;background: url(../icon/Fill_114.png) no-repeat 0px 0px;background-size:26%;padding-left:23px;}
+	.out_price{align-items: center;}
+	.ID,.time,.out_price{color: #999999;font-size: 14px;}
+	.time{float: right;}
+	</style>
+</head>
+<body>
+	<div id="main">
+	<!-- 	<ul class="price_list">
+			<li>
+				<div class="comment_content">
+					<img class="img" src="../image/head_photo.png" alt="" />
+					<div style="width: 85%;">
+						<span class="price_num">￥66,000</span>
+						<span class="first_price">本轮最高</span><br />
+					<span class="ID">ID: <span>1200</span></span> <span class="time">19:00</span>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="comment_content">
+				<img class="img" src="../image/head_photo.png" alt="" />
+					<div style="width: 85%;display: block;">
+						<span class="price_num">￥66,000</span><span class="out_price">出局</span><br />
+						<span class="ID">ID: <span>1200</span></span> <span class="time">19:00</span>
+					</div>			
+			</div>
+			</li>
+			
+		</ul> -->
+</div>
+<script id="scriptDiv1" type="text/html">
+	<ul class="price_list">
+		<li>
+			<div class="comment_content">
+				<div style="width: 85%;margin-left: 4%;"">
+					<span class="price_num">￥<%=list[0].price%></span>
+					<span class="first_price">本轮最高</span><br />
+				<span class="ID">ID: <span><%=list[0].userName%></span></span> <span class="time"><%=list[0].time%></span>
+				</div>
+			</div>
+		</li>
+	</ul>
+</script>
+<script id="scriptDiv2" type="text/html">
+	<ul class="price_list">
+	<% for (var i = 0; i < list.length; i ++) { %>
+
+		<li>
+			<div class="comment_content">
+				<span style="width: 85%;display: block;margin-left: 4%;">
+					<span class="price_num">￥<%=list[i].price%></span><span class="out_price">出局</span><br />
+				<span class="ID">ID: <span><%=list[i].userName%></span></span> <span class="time"><%=list[i].time%></span>
+				</span>			
+			</div>
+		</li>
+	<% } %> 
+	</ul>
+</script>
+<script id="scriptDiv3" type="text/html">
+	<ul class="price_list">
+	<% for (var i = 1; i < list.length; i ++) { %>
+			<li>
+				<div class="comment_content">
+					<span style="width: 85%;display: block;margin-left: 4%;">
+						<span class="price_num">￥<%=list[i].price%></span><span class="out_price">出局</span><br />
+						<span class="ID">ID: <span><%=list[i].userName%></span></span> <span class="time"><%=list[i].time%></span>
+					</span>			
+			</div>
+			</li>
+	<% } %> 
+	</ul>
+
+</script>
+</body>
+<script src="../script/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+			mui.init();
+//			document.getElementById("btn").addEventListener('tap', function(event) {
+//				mui.alert('确定出价: ' + document.getElementById("box").value+'吗？', null, "提示");
+//			});
+	apiready = function(){
+		var hid = api.pageParam;
+		new datalistModel(addDataToHtml,liveBidPager,{hid:hid.id},10,5,100,true);
+	}
+	var allResult = {};
+	function addDataToHtml(results,append) {
+		// alert(JSON.stringify(results))
+		if (results && results.length > 0) {
+			for(var i=0;i<results.length;i++){
+				results[i].time = formatTimeToDate1(results[i].time)
+				allResult[results[i].id]=results[i];
+			}
+			var data = {list: results};
+			// alert(JSON.stringify(data))
+			if (append) {
+				var html = template('scriptDiv2',data);
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('main').appendChild(div);
+            } else {
+            	if(data.list.length==1){
+            		var html = template('scriptDiv1',data);
+                	document.getElementById('main').innerHTML = html;
+            	}else if(data.list.length>1){
+            		var html1 = template('scriptDiv1',data);
+                	var html3 = template('scriptDiv3',data);
+                	var html = html1 + html3;
+	                // var div = document.createElement("div");
+	                // div.innerHTML = html;
+	                document.getElementById('main').innerHTML = html;
+            	}
+            	
+            }
+
+		}
+	}
+			var talkIput = document.getElementById('input_box');
+			var priceBox = document.getElementById('box_bottom');
+ 			function talkShow(){
+				talkIput.style.display = "flex";
+				priceBox.style.display = "none";
+			}
+ 			function priceShow(){
+ 				talkIput.style.display = "none";
+				priceBox.style.display = "flex";
+ 			}
+</script>
+</html>

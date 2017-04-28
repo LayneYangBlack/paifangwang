@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+        .all{width:100%;height:auto;background: #fff;position: relative;}
+        .all-center{width:90%;height:100%;margin: 0 auto;}
+        .addd{width: 100%;height: 50px;position: fixed;bottom: 0;background-color: #fff;z-index: 101}
+        .asss{background-color: red;color: #fff;width: 90%;height: 40px;border: none;border-radius: 5px;font-size: 16px;  margin-left:5%;margin-top:5px}
+        img{
+            width: 100%
+        }
+        #main1{z-index:100}
+        .handleway2{width: 100%;height: 50px;position: fixed;bottom:0;background-color: #fff;z-index: 101}
+        .handleway22{width:45%;height:50px;background: red;color:#fff;font-size:16px;border-radius: 5px;}
+    </style>
+</head>
+<body>
+<div class="all">
+    <div class="all-center">
+        <div id="main"></div>
+    </div>
+    <div style="width:100%;height:50px"> </div>
+</div>
+<div id="main1"></div>
+
+</body>
+<script id="scriptDiv1" type="text/html" >
+    <%if(list.get == false){%>
+        <%if(list.inRequest == false){%>
+            <%if(list.handleWay == 1){%>
+            <div class="addd">
+                <button class="asss" onclick="submitAttest('<%=list.id%>')">申请</button>
+            </div>
+            <%} else if(list.handleWay == 2){%>
+            <div class="addd">
+                <button class="asss" onclick="payService()" >支付</button>
+            </div>
+            <%}%>
+        <%}else{%>
+            <%if(list.handleWay == 1){%>
+            <div class="addd">
+                <button class="asss">已提交申请等待审核</button>
+            </div>
+            <%} else if(list.handleWay == 2){%>
+            <div class="handleway2">
+                <button class="handleway22" style="float:left;margin-left:2.5%" onclick="payService()">支付</button>
+                <button class="handleway22" style="float:right;margin-right:2.5%" onclick="canclePay()">取消</button>
+            </div>
+            <%}%>
+        <%}%>
+    <%}else{%>
+         <div class="addd">
+            <button class="asss">已获取该项服务</button>
+        </div>
+    <%}%>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+    var serviceId;
+    var srid;
+	apiready = function () {
+        serviceId = api.pageParam;
+		ajaxGetWithProgress(serviceLoadUrl,{sid:serviceId.id},function(ret,err){
+            if(isNotBlack(ret)){
+                alert(JSON.stringify(ret))
+                srid = ret.srid;
+                var data = {list: ret};
+                var html = template('scriptDiv1',data);
+                document.getElementById('main1').innerHTML = html;
+                document.getElementById('main').innerHTML = ret.content;
+            }else{
+                alert(JSON.stringify(err)) 
+            };
+        })
+	};
+    function submitAttest(id){
+        ajaxGetWithProgress(serviceAttestUrl,{sid:id},function(ret,err){
+            if(isNotBlack(ret)){
+                toast('申请成功');
+            }else{
+                alert(JSON.stringify(err)) 
+            };
+        })
+    };
+    function payService(id){
+        // var payJson = {};
+        // payJson.payType = 1;
+        // payJson.sid = serviceId.id;
+        // ajaxGetWithProgress(serviceSubmitUrl,payJson,function(ret,err){
+        //     if(isNotBlack(ret)){
+        //        alert(JSON.stringify(ret))
+        //     }else{
+        //         alert(JSON.stringify(err)) 
+        //     };
+        // })
+        var sPay = {};
+        sPay.sid = serviceId.id;
+        sPay.fee = serviceId.fee;
+        sPay.srid = srid;
+        openNewWindow('servicePay','./servicePay.html',sPay)
+    }
+</script>
+</html>
